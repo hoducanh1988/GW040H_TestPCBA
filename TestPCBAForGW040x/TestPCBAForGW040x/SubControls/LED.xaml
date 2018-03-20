@@ -1,0 +1,129 @@
+﻿<Window x:Class="TestPCBAForGW040x.SubControls.LED"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestPCBAForGW040x.SubControls"
+        mc:Ignorable="d"
+        Title="LED" Height="300" Width="300" Style="{StaticResource customWindow}" ShowInTaskbar="False">
+    <Window.Resources>
+        <Style x:Key="circleLabel" TargetType="Label">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Border 
+                            BorderBrush="{StaticResource colorBorder}" 
+                            BorderThickness="0.5" 
+                            Background="{TemplateBinding Background}" 
+                            Padding="{TemplateBinding Padding}" 
+                            SnapsToDevicePixels="true" 
+                            CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Border x:Name="mainBorder" Background="{StaticResource colorBackground}" CornerRadius="5">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <!--<Label HorizontalContentAlignment="Left" FontSize="25" FontWeight="Bold">KIỂM TRA LEDs</Label>-->
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Margin="0,0,5,0" Grid.Row="0" Grid.Column="0" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
+                    <Grid>
+                        <Label x:Name="ledPower" MouseDown="Label_MouseDown" Content="{Binding Path=POWERCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=POWERBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED POWER</Label>
+                    </Grid>
+                </Border>
+                <Border Margin="0,0,5,0" Grid.Row="0" Grid.Column="1" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
+                    <Grid>
+                        <Label x:Name="ledPon" MouseDown="Label_MouseDown" Content="{Binding Path=PONCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=PONBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED PON</Label>
+                    </Grid>
+                </Border>
+                <Border Margin="0,0,5,0" Grid.Row="1" Grid.Column="0" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
+                    <Grid>
+                        <Label x:Name="ledInet" MouseDown="Label_MouseDown" Content="{Binding Path=INETCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=INETBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED INET</Label>
+                    </Grid>
+                </Border>
+                <Border Margin="0,0,5,0" Grid.Row="1" Grid.Column="1" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
+                    <Grid>
+                        <Label x:Name="ledWlan" MouseDown="Label_MouseDown" Content="{Binding Path=WLANCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=WLANBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED WLAN</Label>
+                    </Grid>
+                </Border>
+                <Border Margin="0,0,5,0" Grid.Row="2" Grid.Column="0" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
+                    <Grid>
+                        <Label x:Name="ledLan1" MouseDown="Label_MouseDown" Content="{Binding Path=LAN1CONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=LAN1BACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED LAN1</Label>
+                    </Grid>
+                </Border>
+                <Border Margin="0,0,5,0" Grid.Row="2" Grid.Column="1" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
+                    <Grid>
+                        <Label x:Name="ledLan2" MouseDown="Label_MouseDown" Content="{Binding Path=LAN2CONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=LAN2BACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED LAN2</Label>
+                    </Grid>
+                </Border>
+                <Border Margin="0,0,5,0" Grid.Row="3" Grid.Column="0" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
+                    <Grid>
+                        <Label x:Name="ledLan3" MouseDown="Label_MouseDown" Content="{Binding Path=LAN3CONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=LAN3BACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED LAN3</Label>
+                    </Grid>
+                </Border>
+                <Border Margin="0,0,5,0" Grid.Row="3" Grid.Column="1" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
+                    <Grid>
+                        <Label x:Name="ledLan4" MouseDown="Label_MouseDown" Content="{Binding Path=LAN4CONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=LAN4BACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED LAN4</Label>
+                    </Grid>
+                </Border>
+                <Border Margin="0,0,5,0" Grid.Row="4" Grid.Column="0">
+                    <Grid>
+                        <Label x:Name="ledWps" MouseDown="Label_MouseDown" Content="{Binding Path=WPSCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=WPSBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED WPS</Label>
+                    </Grid>
+                </Border>
+                <Border Margin="0,0,5,0" Grid.Row="4" Grid.Column="1">
+                    <Grid>
+                        <Label x:Name="ledLos" MouseDown="Label_MouseDown" Content="{Binding Path=LOSCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=LOSBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED LOS</Label>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Button x:Name="btnXacNhan" Click="btnXacNhan_Click" Margin="0,20,0,0" Height="50" Background="#FF26A69A" FontWeight="Bold">XÁC NHẬN</Button>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
