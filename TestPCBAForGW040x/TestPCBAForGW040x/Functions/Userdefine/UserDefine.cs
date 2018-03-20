@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -124,13 +123,6 @@ namespace TestPCBAForGW040x.Functions {
 
     }
 
-    public class GridTestContent {
-
-        public string ID { get; set; }
-        public string STEPCHECK { get; set; }
-        public string RESULT { get; set; }
-    }
-
     public class TestingInfo : INotifyPropertyChanged {
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -140,6 +132,24 @@ namespace TestPCBAForGW040x.Functions {
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        string _user;
+        public string USER {
+            get { return _user; }
+            set {
+                _user = value;
+                OnPropertyChanged(nameof(USER));
+            }
+        }
+        string _pass;
+        public string PASSWORD {
+            get { return _pass; }
+            set {
+                _pass = value;
+                OnPropertyChanged(nameof(PASSWORD));
+            }
+        }
+
 
         #region layout
         double _width;
@@ -697,7 +707,7 @@ namespace TestPCBAForGW040x.Functions {
             TITLE = Titles.inputMAC;
             CONTENT = "--";
             MAC = "";
-            ELAPSEDTIME = "Thời gian kiểm tra: 00:00:00";
+            ELAPSEDTIME = "Time elapsed 00:00:00";
             LOGUART = "";
             DATAUART = "";
             LOGSYSTEM = "> NHẬP ĐỊA CHỈ MAC:\n";

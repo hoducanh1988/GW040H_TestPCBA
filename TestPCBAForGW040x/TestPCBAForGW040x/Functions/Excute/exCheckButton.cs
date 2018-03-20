@@ -11,14 +11,7 @@ namespace TestPCBAForGW040x.Functions {
             string _error = "";
             try {
                 GlobalData.testingInfo.COLORBUTTON = backGroundColors.wait;
-                //~~~~~~~~~~~~~~~~ Đợi wifi boot complete
-                GlobalData.testingInfo.LOGSYSTEM += "<1/3: Chờ wifi boot complete...\n";
-                if (!wait_DUTWifiBootComplete(out _error)) {
-                    GlobalData.testingInfo.LOGSYSTEM += _error + "\n";
-                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
-                    goto NG;
-                }
-                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+               
                 //~~~~~~~~~~~~~~~~ kiểm tra nút WPS
                 GlobalData.testingInfo.LOGSYSTEM += "<2/3: Kiểm tra nút WPS...\n";
                 if (!check_WPSbutton(out _error)) {

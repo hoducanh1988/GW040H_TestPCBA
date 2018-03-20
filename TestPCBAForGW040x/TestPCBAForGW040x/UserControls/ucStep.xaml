@@ -6,9 +6,10 @@
              xmlns:local="clr-namespace:TestPCBAForGW040x.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="300">
+    
     <Border CornerRadius="5" Background="{StaticResource colorBackground}" BorderBrush="{StaticResource colorBorder}" BorderThickness=".5">
         <StackPanel>
-            
+
         </StackPanel>
     </Border>
 </UserControl>

@@ -16,7 +16,7 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="3"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="20"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <!--title-->
             <Grid Grid.Row="0">
@@ -54,19 +54,20 @@
                     <ColumnDefinition Width="90"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label MouseDown="Label_MouseDown" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="15" FontWeight="SemiBold">KIỂM TRA</Label>
-                <Label MouseDown="Label_MouseDown" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="15" FontWeight="SemiBold">CÀI ĐẶT</Label>
-                <Label MouseDown="Label_MouseDown" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="15" FontWeight="SemiBold">TEST RIÊNG</Label>
+                <Label MouseDown="Label_MouseDown" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="15" FontWeight="SemiBold">TEST ALL</Label>
+                <Label MouseDown="Label_MouseDown" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="15" FontWeight="SemiBold">SETTING</Label>
+                <Label MouseDown="Label_MouseDown" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="15" FontWeight="SemiBold">TEST ONE</Label>
             </Grid>
             <Label x:Name="lblMinus" Margin="5,0,0,0" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Left" Width="90" Background="{StaticResource colorBorder}"></Label>
             <!--content-->
             <Grid Grid.Row="4" Margin="5,10,5,5">
+                <uc:ucLogin x:Name="ucLogin"></uc:ucLogin>
                 <uc:ucStep x:Name="ucStep"></uc:ucStep>
                 <uc:ucSetting x:Name="ucSetting"></uc:ucSetting>
                 <uc:ucTesting x:Name="ucTesting"></uc:ucTesting>
             </Grid>
             <!--statusbar-->
-            <WrapPanel Grid.Row="5" Margin="5,-5,5,0">
+            <WrapPanel Grid.Row="5" Margin="5,0,5,0">
                 <Label VerticalAlignment="Stretch" VerticalContentAlignment="Center" Foreground="{StaticResource colorBorder}">USB_Port=</Label>
                 <Label FontWeight="Bold" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Foreground="{StaticResource colorBorder}" Content="{Binding Path=USBPort, UpdateSourceTrigger=PropertyChanged}"></Label>
                 <Label VerticalAlignment="Stretch" VerticalContentAlignment="Center" Foreground="{StaticResource colorBorder}">, IPUpload=</Label>

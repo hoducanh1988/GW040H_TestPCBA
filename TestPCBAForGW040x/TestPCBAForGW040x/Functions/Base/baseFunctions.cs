@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using TestPCBAForGW040x.SubControls;
 
@@ -30,10 +30,10 @@ namespace TestPCBAForGW040x.Functions {
         private void popupLED() {
             double top, left, width, height;
             double ht = GlobalData.thisLocation.height - 238;
-            top = GlobalData.thisLocation.top + 123 + ht / 3.5;
-            left = GlobalData.thisLocation.left + 11;
-            width = (GlobalData.thisLocation.width * 5) / 6 - 15;
-            height = (ht / 3.5) * 2.5;
+            top = GlobalData.thisLocation.top + 160 + ht / 3.5;
+            left = GlobalData.thisLocation.left + 17;
+            width = GlobalData.thisLocation.width - 35;
+            height = (ht / 3.5) * 2.5 - 72;
             Application.Current.Dispatcher.BeginInvoke(new Action(() => {
                 led = new LED(top, left, width, height);
                 led.ShowDialog();
@@ -325,11 +325,11 @@ namespace TestPCBAForGW040x.Functions {
                     if (GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_3 up") && wlan3) { GlobalData.testingInfo.LOGSYSTEM += "Link State: LAN_3 up\n"; wlan3 = false; GlobalData.loginfo.Lan3 = "PASS"; }
                     if (GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_4 up") && wlan4) { GlobalData.testingInfo.LOGSYSTEM += "Link State: LAN_4 up\n"; wlan4 = false; GlobalData.loginfo.Lan4 = "PASS"; }
 
-                    bool ret = GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_1 up") && 
+                    bool ret = GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_1 up") &&
                                GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_2 up") &&
                                GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_3 up") &&
                                GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_4 up");
-                   
+
                     Thread.Sleep(1000);
                     if (ret) { _flag = true; break; }
                     else {
@@ -352,7 +352,7 @@ namespace TestPCBAForGW040x.Functions {
 
         protected bool confirm_MacAddress(out string _error) {
             GlobalData.testingInfo.TITLE = Titles.confirmMAC;
-            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.shorttime);
+            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime);
             _error = "";
             bool _flag = false;
             try {
@@ -369,11 +369,11 @@ namespace TestPCBAForGW040x.Functions {
                        );
                     while (!GlobalData.testingInfo.LOGUART.Contains(st)) {
                         Thread.Sleep(1000);
-                        if (index >= Timeouts.shorttime) break;
+                        if (index >= Timeouts.verylongtime) break;
                         else index++;
-                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.shorttime - index);
+                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime - index);
                     }
-                    if (index >= Timeouts.shorttime) {
+                    if (index >= Timeouts.verylongtime) {
                         _error = "Request time out";
                         break;
                     }
@@ -395,21 +395,23 @@ namespace TestPCBAForGW040x.Functions {
 
         protected bool setGPONSerialNumber(out string _error) {
             GlobalData.testingInfo.TITLE = Titles.writeGPON;
-            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.shorttime);
+            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime);
             _error = "";
             bool _flag = false;
             try {
                 int index = 0;
                 while (!_flag) {
-                    this.sendDataToDUT(string.Format("prolinecmd gponsn set {0}\n", GEN_SERIAL_ONT(GlobalData.testingInfo.MAC)));
+                    string gponSeri = GEN_SERIAL_ONT(GlobalData.testingInfo.MAC);
+                    this.sendDataToDUT(string.Format("prolinecmd gponsn set {0}\n", gponSeri));
+                    GlobalData.testingInfo.LOGSYSTEM += "Generate GPON serial: " + gponSeri;
                     string st = string.Format("writeflash: total write");
                     while (!GlobalData.testingInfo.LOGUART.Contains(st)) {
                         Thread.Sleep(1000);
-                        if (index >= Timeouts.shorttime) break;
+                        if (index >= Timeouts.verylongtime) break;
                         else index++;
-                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.shorttime - index);
+                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime - index);
                     }
-                    if (index >= Timeouts.shorttime) {
+                    if (index >= Timeouts.verylongtime) {
                         _error = "Request time out";
                         break;
                     }
@@ -425,14 +427,14 @@ namespace TestPCBAForGW040x.Functions {
             }
             END:
             {
-                GlobalData.testingInfo.LOGUART = "";
+                //GlobalData.testingInfo.LOGUART = "";
                 return _flag;
             }
         }
 
         protected bool setMac_forEthernet0(out string _error) {
             GlobalData.testingInfo.TITLE = Titles.writeMAC;
-            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.shorttime);
+            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime);
             _error = "";
             bool _flag = false;
             try {
@@ -449,11 +451,11 @@ namespace TestPCBAForGW040x.Functions {
                         );
                     while (!GlobalData.testingInfo.LOGUART.Contains(st)) {
                         Thread.Sleep(1000);
-                        if (index >= Timeouts.shorttime) break;
+                        if (index >= Timeouts.verylongtime) break;
                         else index++;
-                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.shorttime - index);
+                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime - index);
                     }
-                    if (index >= Timeouts.shorttime) {
+                    if (index >= Timeouts.verylongtime) {
                         _error = "Request time out";
                         break;
                     }
@@ -469,14 +471,14 @@ namespace TestPCBAForGW040x.Functions {
             }
             END:
             {
-                GlobalData.testingInfo.LOGUART = "";
+                //GlobalData.testingInfo.LOGUART = "";
                 return _flag;
             }
         }
 
         protected bool login_toDUT(out string _error) {
             GlobalData.testingInfo.TITLE = Titles.loginDUT;
-            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.normaltime);
+            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime);
             _error = "";
             bool _flag = false;
             try {
@@ -485,27 +487,27 @@ namespace TestPCBAForGW040x.Functions {
                     this.sendDataToDUT("\r\n");
                     while (!GlobalData.testingInfo.LOGUART.Contains("tc login:")) {
                         Thread.Sleep(1000);
-                        if (index >= Timeouts.normaltime) break;
+                        if (index >= Timeouts.verylongtime) break;
                         else index++;
-                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.normaltime - index);
+                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime - index);
                     }
-                    if (index >= Timeouts.normaltime) { _error = "Request time out"; break; }
+                    if (index >= Timeouts.verylongtime) { _error = "Request time out"; break; }
                     this.sendDataToDUT(GlobalData.initSetting.DutUser + "\n");
                     while (!GlobalData.testingInfo.LOGUART.Contains("Password:")) {
                         Thread.Sleep(1000);
-                        if (index >= Timeouts.normaltime) break;
+                        if (index >= Timeouts.verylongtime) break;
                         else index++;
-                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.normaltime - index);
+                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime - index);
                     }
-                    if (index >= Timeouts.normaltime) { _error = "Request time out"; break; }
+                    if (index >= Timeouts.verylongtime) { _error = "Request time out"; break; }
                     this.sendDataToDUT(GlobalData.initSetting.DutPass + "\n");
                     while (!GlobalData.testingInfo.LOGUART.Contains("root login  on `console'")) {
                         Thread.Sleep(1000);
-                        if (index >= Timeouts.normaltime) break;
+                        if (index >= Timeouts.verylongtime) break;
                         else index++;
-                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.normaltime - index);
+                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime - index);
                     }
-                    if (index >= Timeouts.normaltime) {
+                    if (index >= Timeouts.verylongtime) {
                         _error = "Request time out";
                         break;
                     }
@@ -533,18 +535,23 @@ namespace TestPCBAForGW040x.Functions {
             try {
                 int index = 0;
                 while (!_flag) {
-                    string pattern1 = string.Format("cc.c, 5767 h_sec");
-                    string pattern2 = string.Format("cc.c, 5735 h_sec");
-                    if (GlobalData.testingInfo.LOGUART.Contains(pattern1)) {
-                        GlobalData.testingInfo.LOGSYSTEM += pattern1 + "\n";
+                    //string pattern1 = string.Format("cc.c, 5767 h_sec");
+                    //string pattern2 = string.Format("cc.c, 5735 h_sec");
+                    //if (GlobalData.testingInfo.LOGUART.Contains(pattern1)) {
+                    //    GlobalData.testingInfo.LOGSYSTEM += pattern1 + "\n";
+                    //}
+                    //if (GlobalData.testingInfo.LOGUART.Contains(pattern2)) {
+                    //    GlobalData.testingInfo.LOGSYSTEM += pattern2 + "\n";
+                    //}
+                    //if (GlobalData.testingInfo.LOGUART.Contains(pattern1)|| GlobalData.testingInfo.LOGUART.Contains(pattern2)) {
+                    //    _flag = true;
+                    //    break;
+                    //}
+                    if (GlobalData.testingInfo.LOGUART.Contains(completeString.resetPressed)) {
+                        GlobalData.testingInfo.LOGSYSTEM += completeString.resetPressed;
+                        _flag = true; break;
                     }
-                    if (GlobalData.testingInfo.LOGUART.Contains(pattern2)) {
-                        GlobalData.testingInfo.LOGSYSTEM += pattern2 + "\n";
-                    }
-                    if (GlobalData.testingInfo.LOGUART.Contains(pattern1)|| GlobalData.testingInfo.LOGUART.Contains(pattern2)) {
-                        _flag = true;
-                        break;
-                    }
+
                     GlobalData.testingInfo.CONTENT = string.Format("Nhấn nút reset, Timeout:{0}s", Timeouts.extralongtime - index);
                     if (index < Timeouts.extralongtime) { index++; Thread.Sleep(1000); }
                     else { _error = "Request timeout"; break; }
@@ -565,29 +572,35 @@ namespace TestPCBAForGW040x.Functions {
 
         protected bool check_WPSbutton(out string _error) {
             GlobalData.testingInfo.TITLE = Titles.checkNutWPS;
-            GlobalData.testingInfo.CONTENT = string.Format("Nhấn và giữ>15s, Timeout:{0}s", Timeouts.extralongtime);
+            GlobalData.testingInfo.CONTENT = string.Format("Nhấn và giữ, Timeout:{0}s", Timeouts.extralongtime);
             _error = "";
             bool _flag = false;
             try {
                 int index = 0;
-                string actPattern = "";
+                //string actPattern = "";
                 while (!_flag) {
                     //Get actPattern
-                    if(actPattern=="") {
-                        for (int i = 0; i < 10; i++) {
-                            string pattern = string.Format("br0: port {0}(rai0) entering disabled state", i);
-                            if (GlobalData.testingInfo.LOGUART.Contains(pattern)) {
-                                GlobalData.testingInfo.LOGSYSTEM += string.Format("br0: port {0}(rai0) entering disabled state\n", i);
-                                actPattern = pattern;
-                                break;
-                            }
-                        }
-                    }
+                    //if(actPattern=="") {
+                    //for (int i = 0; i < 10; i++) {
+                    //    string pattern = string.Format("br0: port {0}(rai0) entering disabled state", i);
+                    //    if (GlobalData.testingInfo.LOGUART.Contains(pattern)) {
+                    //        GlobalData.testingInfo.LOGSYSTEM += string.Format("br0: port {0}(rai0) entering disabled state\n", i);
+                    //        actPattern = pattern;
+                    //        break;
+                    //    }
+                    //}
+                    //}
                     //Wait WPSbutton Press Fninish
-                    string[] buffer = GlobalData.testingInfo.LOGUART.Split(new string[] { actPattern }, StringSplitOptions.None);
-                    if (buffer.Length == 4) { _flag = true; break; }
+                    //string[] buffer = GlobalData.testingInfo.LOGUART.Split(new string[] { actPattern }, StringSplitOptions.None);
+                    //if (buffer.Length == 4) { _flag = true; break; }
 
-                    GlobalData.testingInfo.CONTENT = string.Format("Nhấn và giữ>15s, Timeout:{0}s", Timeouts.extralongtime - index);
+
+                    if (GlobalData.testingInfo.LOGUART.Contains(completeString.wpsPressed)) {
+                        GlobalData.testingInfo.LOGSYSTEM += completeString.wpsPressed;
+                        _flag = true; break;
+                    }
+
+                    GlobalData.testingInfo.CONTENT = string.Format("Nhấn và giữ, Timeout:{0}s", Timeouts.extralongtime - index);
                     if (index < Timeouts.extralongtime) { index++; Thread.Sleep(1000); }
                     else { _error = "Request timeout"; break; }
                 }
@@ -607,7 +620,7 @@ namespace TestPCBAForGW040x.Functions {
 
         protected bool wait_DUTWifiBootComplete(out string _error) {
             GlobalData.testingInfo.TITLE = Titles.wifibootComplete;
-            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.extralongtime);
+            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.veryextralongtime);
             _error = "";
             bool _flag = false;
             //////////////////////////////////////
@@ -631,18 +644,18 @@ namespace TestPCBAForGW040x.Functions {
                             if (GlobalData.testingInfo.LOGUART.Contains(pattern) == true) {
                                 GlobalData.testingInfo.LOGSYSTEM += string.Format("br0: port {0}(ra0) entering forwarding state\n", i);
                                 ret = true;
-                                GlobalData.testingInfo.LOGUART = ""; //clear log UART
+                                //GlobalData.testingInfo.LOGUART = ""; //clear log UART
                                 break;
                             }
                         }
                         if (ret == true) break;
                         Thread.Sleep(1000);
-                        if (index >= Timeouts.extralongtime) break;
+                        if (index >= Timeouts.veryextralongtime) break;
                         else index++;
-                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.extralongtime - index);
+                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.veryextralongtime - index);
                     }
-                    GlobalData.testingInfo.LOGSYSTEM += string.Format("{0}sec/{1}sec", index, Timeouts.extralongtime);
-                    if (index < Timeouts.extralongtime) _flag = true;
+                    GlobalData.testingInfo.LOGSYSTEM += string.Format("{0}sec/{1}sec", index, Timeouts.veryextralongtime);
+                    if (index < Timeouts.veryextralongtime) _flag = true;
                     else break;
                 }
                 goto END;
@@ -659,7 +672,7 @@ namespace TestPCBAForGW040x.Functions {
 
         protected bool wait_DUTBootComplete(out string _error) {
             GlobalData.testingInfo.TITLE = Titles.bootComplete;
-            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.extralongtime);
+            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.veryextralongtime);
             _error = "";
             bool _flag = false;
             try {
@@ -668,13 +681,24 @@ namespace TestPCBAForGW040x.Functions {
                     bool _end = false;
                     while (!_end) {
                         if (GlobalData.testingInfo.LOGUART.Contains("Please press Enter to activate this console")) break;
+                        bool ret = false;
+                        for (int i = 0; i < 10; i++) {
+                            string pattern = string.Format("br0: port {0}(ra0) entering forwarding state", i);
+                            if (GlobalData.testingInfo.LOGUART.Contains(pattern) == true) {
+                                GlobalData.testingInfo.LOGSYSTEM += string.Format("br0: port {0}(ra0) entering forwarding state\n", i);
+                                ret = true;
+                                //GlobalData.testingInfo.LOGUART = ""; //clear log UART
+                                break;
+                            }
+                        }
+                        if (ret == true) break;
                         Thread.Sleep(1000);
-                        if (index >= Timeouts.extralongtime) break;
+                        if (index >= Timeouts.veryextralongtime) break;
                         else index++;
-                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.extralongtime - index);
+                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.veryextralongtime - index);
                     }
-                    GlobalData.testingInfo.LOGSYSTEM += string.Format("{0}sec/{1}sec", index, Timeouts.extralongtime);
-                    if (index < Timeouts.extralongtime) _flag = true;
+                    GlobalData.testingInfo.LOGSYSTEM += string.Format("{0}sec/{1}sec", index, Timeouts.veryextralongtime);
+                    if (index < Timeouts.veryextralongtime) _flag = true;
                     else break;
                 }
                 goto END;
@@ -718,22 +742,25 @@ namespace TestPCBAForGW040x.Functions {
                         }
                         bool _end = false;
                         while (!_end) {
-                            int t1 = GlobalData.testingInfo.LOGUART.Length;
-                            Thread.Sleep(200);
-                            int t2 = GlobalData.testingInfo.LOGUART.Length;
-                            Thread.Sleep(200);
-                            int t3 = GlobalData.testingInfo.LOGUART.Length;
-                            Thread.Sleep(200);
-                            if (t1 == t2 && t2 == t3) break;
+                            if (GlobalData.testingInfo.LOGUART.Contains(completeString.fwSuccessed)) {
+                                _end = true;
+                                break;
+                            }
+                            if (index >= Timeouts.verylongtime) break;
+                            else index++;
+                            if (index >= Timeouts.verylongtime) { _error = "Request time out."; break; }
+                            Thread.Sleep(1000);
                         }
-                        if (GlobalData.testingInfo.LOGUART.ToUpper().Contains("STARTING THE TFTP DOWNLOAD") &&
-                            GlobalData.testingInfo.LOGUART.ToUpper().Contains("CHECK DATA SUCCESS, PREPARE TO UPLOAD")) {
-                            _flag = true;
-                            break;
-                        }
-                        else {
-                            break;
-                        }
+                        _flag = _end;
+                        break;
+                        //if (GlobalData.testingInfo.LOGUART.ToUpper().Contains("STARTING THE TFTP DOWNLOAD") &&
+                        //    GlobalData.testingInfo.LOGUART.ToUpper().Contains("CHECK DATA SUCCESS, PREPARE TO UPLOAD")) {
+                        //    _flag = true;
+                        //    break;
+                        //}
+                        //else {
+                        //    break;
+                        //}
                     }
                 }
                 goto END;
@@ -885,6 +912,34 @@ namespace TestPCBAForGW040x.Functions {
             }
         }
 
+        private bool online_All_LEDs() {
+            try {
+                //bat den LOS
+                GlobalData.serialPort.Port.WriteLine("echo 1 > /proc/xpon/los_led");
+                Thread.Sleep(100);
+                //bat den WLAN
+                GlobalData.serialPort.Port.WriteLine("iwpriv ra0 set led_setting=00-00-00-00-00-00-00-00");
+                Thread.Sleep(100);
+                //bat den WPS
+                GlobalData.serialPort.Port.WriteLine("iwpriv ra0 set led_setting=01-00-00-00-00-00-00-00");
+                Thread.Sleep(100);
+                //bat den PON
+                GlobalData.serialPort.Port.WriteLine("sys memwl bfbf0204 0x2");
+                Thread.Sleep(100);
+                //Enet
+                //Bật LED INET xanh
+                GlobalData.serialPort.Port.WriteLine("echo \"1 0\" > proc/tc3162/led_internet");
+                Thread.Sleep(1000);
+                //Bật LED INET đỏ
+                GlobalData.serialPort.Port.WriteLine("echo \"0 1\" > proc/tc3162/led_internet");
+                Thread.Sleep(1000);
+
+                return true;
+            }
+            catch {
+                return false;
+            }
+        }
 
         protected bool check_LEDs(out string _error) {
             GlobalData.testingInfo.TITLE = Titles.checkLED;
@@ -896,10 +951,11 @@ namespace TestPCBAForGW040x.Functions {
                 popupLED();
                 //while (!_flag) {
                 GlobalData.ledResult = "";
-                    while (GlobalData.ledResult.Length == 0) {
-                        Thread.Sleep(1000);
-                        if (index >= Timeouts.extralongtime) { _error = "Request time out."; break; }
-                        else index++;
+                while (GlobalData.ledResult.Length == 0) {
+                    online_All_LEDs();
+                    Thread.Sleep(1000);
+                    if (index >= Timeouts.extralongtime) { _error = "Request time out."; break; }
+                    else index++;
                     GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.extralongtime - index);
                 }
                 destroyLED();
@@ -915,8 +971,8 @@ namespace TestPCBAForGW040x.Functions {
                 GlobalData.testingInfo.LOGSYSTEM += string.Format("LOS LED = {0}\n", GlobalData.testingInfo.LOSLED == true ? "PASS" : "FAIL");
                 GlobalData.testingInfo.LOGSYSTEM += string.Format("- Thời gian: {0}sec/{1}sec\n", index, Timeouts.extralongtime);
                 if (index < Timeouts.extralongtime) {
-                        if (GlobalData.ledResult == "PASS") _flag = true;
-                    }
+                    if (GlobalData.ledResult == "PASS") _flag = true;
+                }
                 goto END;
             }
             catch (Exception ex) {

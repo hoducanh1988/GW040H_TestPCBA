@@ -13,12 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TestPCBAForGW040x.UserControls {
+namespace TestPCBAForGW040x.UserControls
+{
     /// <summary>
     /// Interaction logic for ucStep.xaml
     /// </summary>
-    public partial class ucStep : UserControl {
-        public ucStep() {
+    public partial class ucStep : UserControl
+    {
+        public ucStep()
+        {
             InitializeComponent();
         }
     }

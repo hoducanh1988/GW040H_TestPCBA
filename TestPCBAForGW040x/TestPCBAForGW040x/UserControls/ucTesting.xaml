@@ -39,14 +39,14 @@
         </Style>
     </UserControl.Resources>
 
-    <Border x:Name="testBorder" CornerRadius="5" Background="{StaticResource colorBackground}" BorderBrush="{StaticResource colorBorder}" BorderThickness=".5">
+    <Border x:Name="testBorder" CornerRadius="5" Background="White" BorderBrush="{StaticResource colorBorder}" BorderThickness=".5">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="2.5*"/>
                 <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
-            
+
             <!--1.Top-->
             <Grid Grid.Row="0">
                 <StackPanel VerticalAlignment="Bottom" Margin="0,0,0,10">
@@ -75,7 +75,7 @@
                                         <TextBlock Margin="5,0,0,0" Text="TEST" FontWeight="SemiBold"></TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
-                                <Border CornerRadius="5" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                <Border CornerRadius="5" BorderBrush="{StaticResource colorBorder}" BorderThickness="0.5">
                                     <Grid Margin="0,0,0,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"/>
@@ -92,25 +92,25 @@
                                             <ColumnDefinition Width="1.5*"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Label Foreground="Black"  Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="15" Content="NẠP FIRMWARE:"/>
-                                        <Label Foreground="Black" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="15" Content="GHI MAC ADDRESS:"/>
-                                        <Label Foreground="Black" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="15" Content="GHI GPON SERIAL:"/>
-                                        <Label Foreground="Black" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="15" Content="GHI WPS PIN:"/>
-                                        <Label Foreground="Black" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="15" Content="TEST LAN:"/>
-                                        <Label Foreground="Black" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="15" Content="TEST USB:"/>
-                                        <Label Foreground="Black" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="15" Content="TEST NÚT WPS:"/>
-                                        <Label Foreground="Black" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="15" Content="TEST NÚT RESET:"/>
-                                        <Label Foreground="Black" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" FontSize="15" Content="TEST LEDs:"/>
+                                        <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="SemiBold" FontSize="17" Content="NẠP FIRMWARE:"/>
+                                        <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="SemiBold" FontSize="17" Content="GHI GPON SERIAL:"/>
+                                        <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="SemiBold" FontSize="17" Content="GHI WPS PIN:"/>
+                                        <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="SemiBold" FontSize="17" Content="GHI MAC ADDRESS:"/>
+                                        <Label Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="SemiBold" FontSize="17" Content="TEST LAN:"/>
+                                        <Label Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="SemiBold" FontSize="17" Content="TEST USB:"/>
+                                        <Label Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="SemiBold" FontSize="17" Content="TEST LEDs:"/>
+                                        <Label Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="SemiBold" FontSize="17" Content="TEST NÚT WPS:"/>
+                                        <Label Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="SemiBold" FontSize="17" Content="TEST NÚT RESET:"/>
 
-                                        <Label Foreground="{StaticResource colorTextOK}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Content="PASS"/>
-                                        <Label Foreground="{StaticResource colorTextOK}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Content="PASS"/>
-                                        <Label Foreground="{StaticResource colorTextOK}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Content="PASS"/>
-                                        <Label Foreground="{StaticResource colorTextOK}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Content="PASS"/>
-                                        <Label Foreground="{StaticResource colorTextOK}" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Content="PASS"/>
-                                        <Label Foreground="{StaticResource colorTextOK}" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Content="PASS"/>
-                                        <Label Foreground="{StaticResource colorTextOK}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Content="PASS"/>
-                                        <Label Foreground="{StaticResource colorTextOK}" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Content="PASS"/>
-                                        <Label Foreground="{StaticResource colorTextOK}" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Content="PASS"/>
+                                        <Label Margin="0,-5,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="22" Content="--"/>
+                                        <Label Margin="0,-5,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="22" Content="--"/>
+                                        <Label Margin="0,-5,0,0" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="22" Content="--"/>
+                                        <Label Margin="0,-5,0,0" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="22" Content="--"/>
+                                        <Label Margin="0,-5,0,0" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="22" Content="--"/>
+                                        <Label Margin="0,-5,0,0" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="22" Content="--"/>
+                                        <Label Margin="0,-5,0,0" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="22" Content="--"/>
+                                        <Label Margin="0,-5,0,0" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="22" Content="--"/>
+                                        <Label Margin="0,-5,0,0" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="22" Content="--"/>
                                     </Grid>
                                 </Border>
                             </TabItem>
@@ -121,8 +121,8 @@
                                         <TextBlock Margin="5,0,0,0" Text="LOG HỆ THỐNG" FontWeight="SemiBold"></TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
-                                <Border CornerRadius="5" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
-                                    <ScrollViewer x:Name="_scrollViewer">
+                                <Border CornerRadius="5" BorderBrush="{StaticResource colorBorder}" BorderThickness="0.5">
+                                    <ScrollViewer Margin="5" x:Name="_scrollViewer">
                                         <RichTextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" Block.LineHeight="1" Padding="0,5,0,0">
                                             <FlowDocument PageHeight="180">
                                                 <Paragraph>
@@ -140,12 +140,12 @@
                                         <TextBlock Margin="5,0,0,0" Text="LOG UART" FontWeight="SemiBold"></TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
-                                <Border CornerRadius="5" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                <Border CornerRadius="5" BorderBrush="{StaticResource colorBorder}" BorderThickness="0.5">
                                     <ScrollViewer x:Name="_scrollViewer1" Margin="5">
-                                        <RichTextBox BorderThickness="0" IsReadOnly="True" Block.LineHeight="1" Padding="0,5,0,0">
+                                        <RichTextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" Block.LineHeight="1" Padding="0,5,0,0">
                                             <FlowDocument x:Name="fdlogUART" PageHeight="180">
                                                 <Paragraph>
-                                                    <Run Foreground="Black" FontWeight="SemiBold" Text="{Binding DATAUART, Mode=TwoWay}"/>
+                                                    <Run Foreground="Black" FontWeight="Normal" Text="{Binding DATAUART, Mode=TwoWay}"/>
                                                 </Paragraph>
                                             </FlowDocument>
                                         </RichTextBox>
@@ -192,7 +192,8 @@
                     <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
                     <StackPanel Grid.Column="2" x:Name="gridlabelStep" Background="#777777">
-                        --><!--<Label Content="NẠP FIRMWARE: PASS"  Background="{Binding Path=COLORFW, UpdateSourceTrigger=PropertyChanged}" ></Label>
+                        -->
+                <!--<Label Content="NẠP FIRMWARE: PASS"  Background="{Binding Path=COLORFW, UpdateSourceTrigger=PropertyChanged}" ></Label>
                         <Label FontSize="14" FontWeight="SemiBold">GHI DỮ LIỆU</Label>
                         <Label Content="MAC: PASS" Background="{Binding Path=COLORMAC, UpdateSourceTrigger=PropertyChanged}"></Label>
                         <Label Content="GPON: PASS" Background="{Binding Path=COLORLAN, UpdateSourceTrigger=PropertyChanged}"></Label>
@@ -202,18 +203,19 @@
                         <Label Content="USB: PASS" Background="{Binding Path=COLORLED, UpdateSourceTrigger=PropertyChanged}"></Label>
                         <Label Content="Nút WPS: PASS"></Label>
                         <Label Content="Nút Reset: PASS"></Label>
-                        <Label Content="LEDs: PASS"></Label>--><!--
+                        <Label Content="LEDs: PASS"></Label>-->
+                <!--
                     </StackPanel>
                 </Grid>-->
                 <StackPanel Grid.Row="1">
-                    <Grid>
+                    <Grid Margin="5,0,5,0">
                         <TextBlock HorizontalAlignment="Left" FontWeight="SemiBold" Foreground="{StaticResource colorBorder}" Text="{Binding Path=ELAPSEDTIME, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                         <TextBlock HorizontalAlignment="Right" Text="{Binding Path=LOGCOUNTER, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     </Grid>
                     <ProgressBar Height="5" Background="Transparent" BorderThickness="0" Value="{Binding Path=PROGRESSVALUE, UpdateSourceTrigger=PropertyChanged}" Maximum="{Binding Path=PROGRESSTOTAL, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource BackgroundPass}"></ProgressBar>
                 </StackPanel>
             </Grid>
-            
+
             <!--3.End-->
             <StackPanel Grid.Row="2">
                 <Label x:Name="lblstatus" Content="{Binding Path=STATUS, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="65" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-18,0,0">
@@ -225,7 +227,7 @@
                                     <Setter Property="Foreground" Value="Black"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding ElementName=lblstatus, Path=Content}" Value="Waiting">
-                                    <Setter Property="Foreground" Value="Yellow"/>
+                                    <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding ElementName=lblstatus, Path=Content}" Value="PASS">
                                     <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
@@ -240,4 +242,5 @@
             </StackPanel>
         </Grid>
     </Border>
+    
 </UserControl>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +15,5 @@ namespace TestPCBAForGW040x {
         public static LogInfomation loginfo = null;
 
         public static string ledResult = "";
-
-        public static ObservableCollection<GridTestContent> GridContent = new ObservableCollection<GridTestContent>();
     }
 }

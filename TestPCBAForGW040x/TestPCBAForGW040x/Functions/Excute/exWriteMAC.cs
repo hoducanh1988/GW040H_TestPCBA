@@ -131,10 +131,11 @@ namespace TestPCBAForGW040x.Functions
                     GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
                     goto NG; }
                 GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                GlobalData.testingInfo.LOGUART = "";
                 //~~~~~~~~~~~~~~~~ Wait DUT boot completed
                 GlobalData.testingInfo.LOGSYSTEM += "<6/8: Đợi DUT boot complete...\n";
                 GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: Please press Enter to activate this console\n";
-                if (!wait_DUTBootComplete(out _error)) {
+                if (!wait_DUTWifiBootComplete(out _error)) {
                     GlobalData.testingInfo.LOGSYSTEM += _error;
                     GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
                     goto NG; }

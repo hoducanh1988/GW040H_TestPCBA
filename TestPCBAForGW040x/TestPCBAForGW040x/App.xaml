@@ -21,10 +21,10 @@
                     <SolidColorBrush x:Key="OrangePrimary300" Color="#FFFFB74D"/>
                     <SolidColorBrush x:Key="colorTextContent" Color="#FF636363"/>
                     <SolidColorBrush x:Key="colorTextTitle" Color="#FFF5F5F5"/>
-                    <SolidColorBrush x:Key="colorTextNG" Color="#FFFF8F7F"/>
+                    <SolidColorBrush x:Key="colorTextNG" Color="#f44141"/>
                     <SolidColorBrush x:Key="colorTextOK" Color="#FF46e81e"/>
                     <SolidColorBrush x:Key="colorContentOK" Color="#FF4CAF50"/>
-                    <SolidColorBrush x:Key="colorTextWait" Color="#FFF9A825"/>
+                    <SolidColorBrush x:Key="colorTextWait" Color="#f4a941"/>
                     <SolidColorBrush x:Key="colorBorder" Color="#FF039BE5"/>
                     <SolidColorBrush x:Key="colorBackground" Color="#FFEEEEEE"/>
                     <SolidColorBrush x:Key="BackgroundReady" Color="#FFFFFFFF"/>

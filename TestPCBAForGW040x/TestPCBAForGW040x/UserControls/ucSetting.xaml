@@ -54,7 +54,7 @@
                 <TextBox CharacterCasing="Upper" FontSize="13" FontWeight="Bold" Text="{Binding Path=DutUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
                 <Label Content="Mật khẩu:" FontSize="13"></Label>
                 <TextBox CharacterCasing="Upper" FontSize="13" FontWeight="Bold" Text="{Binding Path=DutPass, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
-                <Button Click="Button_Click" Margin="0,20,0,20" Height="40" FontSize="17" Background="{StaticResource colorBorder}" FontWeight="SemiBold">Lưu cài đặt</Button> 
+                <Button Click="Button_Click" Margin="0,20,0,20" Height="40" FontSize="17" Background="{StaticResource colorBorder}" FontWeight="SemiBold">Lưu cài đặt</Button>
                 <!--END-->
             </StackPanel>
         </ScrollViewer>

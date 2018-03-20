@@ -5,6 +5,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace TestPCBAForGW040x.Functions {
@@ -14,6 +16,12 @@ namespace TestPCBAForGW040x.Functions {
         public static SolidColorBrush wait = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFFF7F"));
         public static SolidColorBrush pass = (SolidColorBrush)(new BrushConverter().ConvertFrom("#36E119"));
         public static SolidColorBrush fail = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF9F7F"));
+    }
+
+    public static class completeString {
+        public static string fwSuccessed = "VNPTT-Upload firmware success";
+        public static string wpsPressed = "VNPTT-WPS button is pressed";
+        public static string resetPressed = "VNPTT-RESET button is pressed";
     }
 
     public static class Titles {
@@ -48,6 +56,7 @@ namespace TestPCBAForGW040x.Functions {
     }
 
     public static class Timeouts {
+        public static int veryextralongtime = 240;
         public static int extralongtime = 180;
         public static int verylongtime = 60;
         public static int longtime = 30;

@@ -1,1 +1,1 @@
-tftp -i 192.168.1.12 put D:\G040H\tclinux.bin
+tftp -i 192.168.1.11 put D:\GW040H-Project\G040AC\tclinux.bin

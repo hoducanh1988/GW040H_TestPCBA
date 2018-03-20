@@ -51,23 +51,24 @@ namespace TestPCBAForGW040x.Functions
                     GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
                     goto NG; }
                 GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
-                //~~~~~~~~~~~~~~~~
-                Thread.Sleep(1000);
-                sendDataToDUT("\r");
-                //~~~~~~~~~~~~~~~~
-                GlobalData.testingInfo.LOGSYSTEM += "<6/7: Thiết lập IP mặc định\n";
-                if (!set_Default_IPAddress(out _error)) {
-                    GlobalData.testingInfo.LOGSYSTEM += _error + "\n";
-                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
-                    goto NG; }
-                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
-                //~~~~~~~~~~~~~~~~
-                GlobalData.testingInfo.TITLE = Titles.rebootDUT;
-                GlobalData.testingInfo.LOGSYSTEM += "<7/7: Reset DUT\n";
-                sendDataToDUT("\rgo\r\n");
-                Thread.Sleep(1000);
                 GlobalData.testingInfo.LOGUART = "";
-                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                //~~~~~~~~~~~~~~~~
+                //Thread.Sleep(1000);
+                //sendDataToDUT("\r");
+                //~~~~~~~~~~~~~~~~
+                //GlobalData.testingInfo.LOGSYSTEM += "<6/7: Thiết lập IP mặc định\n";
+                //if (!set_Default_IPAddress(out _error)) {
+                //    GlobalData.testingInfo.LOGSYSTEM += _error + "\n";
+                //    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
+                //    goto NG; }
+                //GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                //~~~~~~~~~~~~~~~~
+                //GlobalData.testingInfo.TITLE = Titles.rebootDUT;
+                //GlobalData.testingInfo.LOGSYSTEM += "<7/7: Reset DUT\n";
+                //sendDataToDUT("\rgo\r\n");
+                //Thread.Sleep(1000);
+                //GlobalData.testingInfo.LOGUART = "";
+                //GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
                 goto OK;
             } catch {
                 goto NG;

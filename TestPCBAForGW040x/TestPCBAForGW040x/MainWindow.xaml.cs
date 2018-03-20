@@ -51,27 +51,32 @@ namespace TestPCBAForGW040x {
             Label l = sender as Label;
             switch (l.Content.ToString()) {
                 case "X": { Application.Current.Shutdown(); break; }
-                case "KIỂM TRA": {
+                case "TEST ALL": {
                         this.lblMinus.Margin = new Thickness(5, 0, 0, 0);
                         ucTesting.Visibility = Visibility.Visible;
                         ucSetting.Visibility = Visibility.Collapsed;
                         ucStep.Visibility = Visibility.Collapsed;
+                        ucLogin.Visibility = Visibility.Collapsed;
                         Canvas.SetZIndex(ucTesting, 1);
                         break;
                     }
-                case "CÀI ĐẶT": {
+                case "SETTING": {
                         this.lblMinus.Margin = new Thickness(185, 0, 0, 0);
                         ucTesting.Visibility = Visibility.Collapsed;
                         ucStep.Visibility = Visibility.Collapsed;
-                        ucSetting.Visibility = Visibility.Visible;
-                        Canvas.SetZIndex(ucSetting, 1);
+                        ucSetting.Visibility = Visibility.Collapsed;
+                        ucLogin.Visibility = Visibility.Visible;
+
+                        //ucSetting.Visibility = Visibility.Visible;
+                        //Canvas.SetZIndex(ucSetting, 1);
                         break;
                     }
-                case "TEST RIÊNG": {
+                case "TEST ONE": {
                         this.lblMinus.Margin = new Thickness(95, 0, 0, 0);
                         ucTesting.Visibility = Visibility.Collapsed;
                         ucSetting.Visibility = Visibility.Collapsed;
                         ucStep.Visibility = Visibility.Visible;
+                        ucLogin.Visibility = Visibility.Collapsed;
                         Canvas.SetZIndex(ucStep, 1);
                         break;
                     }

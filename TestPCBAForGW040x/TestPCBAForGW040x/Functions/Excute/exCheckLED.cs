@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace TestPCBAForGW040x.Functions {
     public class exCheckLED : baseFunctions {
@@ -10,8 +10,27 @@ namespace TestPCBAForGW040x.Functions {
             string _error = "";
             try {
                 GlobalData.testingInfo.COLORLED = backGroundColors.wait;
-                //~~~~~~~~~~~~~~~~
-                GlobalData.testingInfo.LOGSYSTEM += "<1/1: Kiểm tra LEDs...\n";
+                
+                //~~~~~~~~~~~~~~~~ Đợi wifi boot complete
+                //GlobalData.testingInfo.LOGSYSTEM += "<1/3: Chờ wifi boot complete...\n";
+                //if (!wait_DUTWifiBootComplete(out _error)) {
+                //    GlobalData.testingInfo.LOGSYSTEM += _error + "\n";
+                //    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
+                //    goto NG;
+                //}
+                //GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                //~~~~~~~~~~~~~~~~ Đăng nhập vào ONT
+                //Thread.Sleep(1000);
+                //GlobalData.testingInfo.LOGSYSTEM += "<2/3: Login vào DUT...\n";
+                //GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: root login  on `console'\n";
+                //if (!login_toDUT(out _error)) {
+                //    GlobalData.testingInfo.LOGSYSTEM += _error;
+                //    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
+                //    goto NG;
+                //}
+                //GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                //~~~~~~~~~~~~~~~~ Xác nhận LEDs
+                GlobalData.testingInfo.LOGSYSTEM += "<3/3: Kiểm tra LEDs...\n";
                 if (!check_LEDs(out _error)) {
                     GlobalData.testingInfo.LOGSYSTEM += _error + "\n";
                     GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";

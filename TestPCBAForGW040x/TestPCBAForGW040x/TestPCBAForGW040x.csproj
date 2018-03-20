@@ -72,6 +72,9 @@
     <Compile Include="SubControls\LED.xaml.cs">
       <DependentUpon>LED.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ucLogin.xaml.cs">
+      <DependentUpon>ucLogin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucSetting.xaml.cs">
       <DependentUpon>ucSetting.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\ucLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\ucSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,6 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Images\search.png" />
+    <Resource Include="Assets\Images\system.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Icons\PCBA128.ico" />
@@ -215,7 +223,14 @@
     <Resource Include="Assets\Images\OK.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\Images\system.png" />
+    <Resource Include="Assets\Images\go.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\password.png" />
+    <Resource Include="Assets\Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

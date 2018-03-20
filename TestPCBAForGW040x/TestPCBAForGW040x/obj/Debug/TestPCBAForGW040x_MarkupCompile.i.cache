@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\anhho\source\repos\TestPCBA-GW040\TestPCBAForGW040x\TestPCBAForGW040x\obj\Debug\
+D:\GW040H-Project\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAForGW040x\obj\Debug\
 TestPCBAForGW040x
 none
 false
 DEBUG;TRACE
-C:\Users\anhho\source\repos\TestPCBA-GW040\TestPCBAForGW040x\TestPCBAForGW040x\App.xaml
-17-1923790774
+D:\GW040H-Project\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAForGW040x\App.xaml
+181073282452
 
-2447496959
-14-650375172
-Assets\Resources\Button.xaml;Assets\Resources\CheckBox.xaml;Assets\Resources\Combobox.xaml;Assets\Resources\customWindow.xaml;Assets\Resources\DataGrid.xaml;Assets\Resources\Label.xaml;Assets\Resources\Listbox.xaml;Assets\Resources\RadioButton.xaml;Assets\Resources\Slider.xaml;Assets\Resources\TabControl.xaml;Assets\Resources\Textbox.xaml;Assets\Resources\ToggleButton.xaml;MainWindow.xaml;SubControls\LED.xaml;UserControls\ucSetting.xaml;UserControls\ucStep.xaml;UserControls\ucTesting.xaml;
+25-1526897277
+14983496158
+Assets\Resources\Button.xaml;Assets\Resources\CheckBox.xaml;Assets\Resources\Combobox.xaml;Assets\Resources\customWindow.xaml;Assets\Resources\DataGrid.xaml;Assets\Resources\Label.xaml;Assets\Resources\Listbox.xaml;Assets\Resources\RadioButton.xaml;Assets\Resources\Slider.xaml;Assets\Resources\TabControl.xaml;Assets\Resources\Textbox.xaml;Assets\Resources\ToggleButton.xaml;MainWindow.xaml;SubControls\LED.xaml;UserControls\ucLogin.xaml;UserControls\ucSetting.xaml;UserControls\ucStep.xaml;UserControls\ucTesting.xaml;
 
 False
 
