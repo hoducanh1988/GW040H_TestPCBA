@@ -124,61 +124,61 @@ namespace TestPCBAForGW040x.UserControls {
                             //2.Check LAN //24.02
                             if (GlobalData.initSetting.EnableCheckLAN == true) {
                                 GlobalData.testingInfo.LOGSYSTEM += "> CHECK CỔNG LAN-----------\r\n";
-                                this.updateGridTest("03", "Waiting", "");
-                                if (!(new exCheckLAN().Excute(ref message))) {
-                                    this.updateGridTest("03", "FAIL", GlobalData.testingInfo.ERRORCODE);
+                                this.updateGridTest("02", "Waiting", "");
+                                if (!(new exCheckLAN().Excute1(ref message))) {
+                                    this.updateGridTest("02", "FAIL", GlobalData.testingInfo.ERRORCODE);
                                     step = "Check LAN";
                                     goto NG;
                                 }
-                                this.updateGridTest("03", "PASS", "");
+                                this.updateGridTest("02", "PASS", "");
                             }
                             
                             //3.Check USB //24.02
                             if (GlobalData.initSetting.EnableCheckUSB == true) {
                                 GlobalData.testingInfo.LOGSYSTEM += "> CHECK CỔNG USB-----------\r\n";
-                                this.updateGridTest("04", "Waiting", "");
-                                if (!(new exCheckUSB().Excute(ref message))) {
-                                    this.updateGridTest("04", "FAIL", GlobalData.testingInfo.ERRORCODE);
+                                this.updateGridTest("03", "Waiting", "");
+                                if (!(new exCheckUSB().Excute1(ref message))) {
+                                    this.updateGridTest("03", "FAIL", GlobalData.testingInfo.ERRORCODE);
                                     step = "Check USB";
                                     goto NG;
                                 }
-                                this.updateGridTest("04", "PASS", "");
+                                this.updateGridTest("03", "PASS", "");
                             }
                            
                             //4.Check LED //26/02
                             if (GlobalData.initSetting.EnableCheckLED == true) {
                                 GlobalData.testingInfo.LOGSYSTEM += "> CHECK LEDS---------------\r\n";
-                                this.updateGridTest("05", "Waiting", "");
+                                this.updateGridTest("04", "Waiting", "");
                                 if (!(new exCheckLED().Excute(ref message))) {
-                                    this.updateGridTest("05", "FAIL", GlobalData.testingInfo.ERRORCODE);
+                                    this.updateGridTest("04", "FAIL", GlobalData.testingInfo.ERRORCODE);
                                     step = "Check LEDs";
                                     goto NG;
                                 }
-                                this.updateGridTest("05", "PASS", "");
+                                this.updateGridTest("04", "PASS", "");
                             }
                             
                             //5.Check Button //26/02
                             if (GlobalData.initSetting.EnableCheckButton == true) {
                                 GlobalData.testingInfo.LOGSYSTEM += "> CHECK NÚT NHẤN-----------\r\n";
-                                this.updateGridTest("06", "Waiting", "");
+                                this.updateGridTest("05", "Waiting", "");
                                 if (!(new exCheckButton().Excute(ref message))) {
-                                    this.updateGridTest("06", "FAIL", GlobalData.testingInfo.ERRORCODE);
+                                    this.updateGridTest("05", "FAIL", GlobalData.testingInfo.ERRORCODE);
                                     step = "Check BUTTONs";
                                     goto NG;
                                 }
-                                this.updateGridTest("06", "PASS", "");
+                                this.updateGridTest("05", "PASS", "");
                             }
                             
                             //6.Write MAC //23.02
                             if (GlobalData.initSetting.EnableWriteMAC == true) {
                                 GlobalData.testingInfo.LOGSYSTEM += "> GHI SN,GPON,WPS,MAC------\r\n";
-                                this.updateGridTest("02", "Waiting", "");
-                                if (!(new exWriteMAC(GlobalData.testingInfo.MAC).Excute(ref message))) {
-                                    this.updateGridTest("02", "FAIL", GlobalData.testingInfo.ERRORCODE);
+                                this.updateGridTest("06", "Waiting", "");
+                                if (!(new exWriteMAC(GlobalData.testingInfo.MAC).Excute1(ref message))) {
+                                    this.updateGridTest("06", "FAIL", GlobalData.testingInfo.ERRORCODE);
                                     step = "Write MAC";
                                     goto NG;
                                 }
-                                this.updateGridTest("02", "PASS", "");
+                                this.updateGridTest("06", "PASS", "");
                             }
                             
                             goto OK;

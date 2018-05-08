@@ -225,14 +225,14 @@ namespace TestPCBAForGW040x.Functions {
 
         protected bool pingToIPAddress(string IP, out string _error) {
             GlobalData.testingInfo.TITLE = string.Format("PING TO {0}", IP);
-            GlobalData.testingInfo.CONTENT = string.Format("Retry: {0}", Retries.retry);
+            GlobalData.testingInfo.CONTENT = string.Format("Retry: {0}", 10);
             _error = "";
             bool _flag = false;
             int index = 0;
             while (!_flag) {
                 try {
                     index++;
-                    GlobalData.testingInfo.CONTENT = string.Format("Retry: {0}", Retries.retry - index);
+                    GlobalData.testingInfo.CONTENT = string.Format("Retry: {0}", 10 - index);
                     Ping pingSender = new Ping();
                     IPAddress address = IPAddress.Parse(IP);
                     PingReply reply = pingSender.Send(address);
@@ -242,12 +242,13 @@ namespace TestPCBAForGW040x.Functions {
                     }
                     else {
                         _error = reply.Status.ToString();
-                        if (index >= Retries.retry) break;
+                        if (index >= 10) break;
                     }
                 }
                 catch (Exception ex) {
+                    Thread.Sleep(500);
                     _error = ex.ToString();
-                    if (index >= Retries.retry) break;
+                    if (index >= 10) break;
                 }
             }
             return _flag;
@@ -763,8 +764,12 @@ namespace TestPCBAForGW040x.Functions {
                         }
                         bool _end = false;
                         while (!_end) {
+                            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime - index);
                             if (GlobalData.testingInfo.LOGUART.Contains(completeString.fwSuccessed)) {
                                 _end = true;
+                                break;
+                            }
+                            if (GlobalData.testingInfo.LOGUART.Contains(completeString.fwFailed)) {
                                 break;
                             }
                             if (index >= Timeouts.verylongtime) break;

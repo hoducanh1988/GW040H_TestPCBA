@@ -9,6 +9,8 @@ namespace TestPCBAForGW040x.Functions
 {
     public class exWriteMAC : baseFunctions
     {
+        baseFunctionNoLegend ba = new baseFunctionNoLegend();
+
         public string macAddr;
         public exWriteMAC(string _mac) {
             this.macAddr = _mac.ToUpper().Replace(":","");
@@ -165,6 +167,75 @@ namespace TestPCBAForGW040x.Functions
                     GlobalData.testingInfo.ERRORCODE = "Pma0#0006";
                     goto NG; }
                 GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
+                GlobalData.loginfo.WriteMAC = "PASS";
+                goto OK;
+            }
+            catch {
+                goto NG;
+            }
+
+            OK:
+            {
+                GlobalData.testingInfo.COLORMAC = backGroundColors.pass;
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Ghi MAC thành công\r\n\r\n");
+                return true;
+            }
+            NG:
+            {
+                GlobalData.testingInfo.COLORMAC = backGroundColors.fail;
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Ghi MAC thất bại\r\n\r\n");
+                _err = _error;
+                return false;
+            }
+        }
+
+
+        //Write MAC Address
+        public bool Excute1(ref string _err) {
+            GlobalData.testingInfo.CONTENT = "--";
+            string _error = "";
+            try {
+                GlobalData.testingInfo.COLORMAC = backGroundColors.wait;
+                //~~~~~~~~~~~~~~~~ Login DUT
+                GlobalData.testingInfo.TITLE = Titles.loginDUT;
+                GlobalData.testingInfo.LOGSYSTEM += "<1/4: Login vào DUT...\r\n";
+                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: root login  on `console'\r\n";
+                if (!ba.login_toDUT(out _error)) {
+                    GlobalData.testingInfo.LOGSYSTEM += _error;
+                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
+                    GlobalData.testingInfo.ERRORCODE = "Pma0#0002";
+                    goto NG;
+                }
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
+                //~~~~~~~~~~~~~~~~ Set GPON Serial Number
+                GlobalData.testingInfo.TITLE = Titles.writeGPON;
+                GlobalData.testingInfo.LOGSYSTEM += "<2/4: Ghi GPON serial cho DUT...\r\n";
+                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: writeflash: total write\r\n";
+                if (!setGPONSerialNumber(out _error)) {
+                    GlobalData.testingInfo.LOGSYSTEM += _error;
+                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
+                    GlobalData.loginfo.WriteGPON = "FAIL";
+                    GlobalData.testingInfo.ERRORCODE = "Pma0#0003";
+                    goto NG;
+                }
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
+                GlobalData.loginfo.WriteGPON = "PASS";
+                //~~~~~~~~~~~~~~~~ Set WPS Number (pending)
+                GlobalData.testingInfo.TITLE = Titles.writeWPS;
+
+                //~~~~~~~~~~~~~~~~ Set MAC Address
+                GlobalData.testingInfo.TITLE = Titles.writeMAC;
+                GlobalData.testingInfo.LOGSYSTEM += "<4/4: Ghi địa chỉ MAC cho DUT...\r\n";
+                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: new mac addr = {0}:{1}:{2}:{3}:{4}:{5}\r\n";
+                if (!setMac_forEthernet0(out _error)) {
+                    GlobalData.testingInfo.LOGSYSTEM += _error;
+                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
+                    GlobalData.testingInfo.ERRORCODE = "Pma0#0005";
+                    GlobalData.loginfo.WriteMAC = "FAIL";
+                    goto NG;
+                }
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
+                GlobalData.testingInfo.LOGUART = "";
                 GlobalData.loginfo.WriteMAC = "PASS";
                 goto OK;
             }

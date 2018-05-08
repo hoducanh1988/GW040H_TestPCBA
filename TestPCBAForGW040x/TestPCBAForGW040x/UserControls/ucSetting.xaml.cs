@@ -40,6 +40,7 @@ namespace TestPCBAForGW040x.UserControls {
                     }
                 case "Lưu cài đặt": {
                         GlobalData.initSetting.Save();
+                        GlobalData.AddTestCase();
                         MessageBox.Show("Thành công.", string.Format("Lưu cài đặt-[DUT{0}]", GlobalData.initSetting.StationNumber), MessageBoxButton.OK, MessageBoxImage.Information);
                         break;
                     }

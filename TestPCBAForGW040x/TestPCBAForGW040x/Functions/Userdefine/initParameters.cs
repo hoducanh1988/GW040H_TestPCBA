@@ -20,6 +20,7 @@ namespace TestPCBAForGW040x.Functions {
 
     public static class completeString {
         public static string fwSuccessed = "VNPTT-Upload firmware success";
+        public static string fwFailed = "Check data fail, upload failed";
         public static string wpsPressed = "VNPTT-WPS button is pressed";
         public static string resetPressed = "VNPTT-RESET button is pressed";
     }
