@@ -25,16 +25,16 @@
                         <Style TargetType="TextBox">
                             <Setter Property="Text" Value="DUT --"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=StationNumber}" Value="1">
+                                <DataTrigger Binding="{Binding Path=JigNumber}" Value="1">
                                     <Setter Property="Text" Value="DUT #01"/>
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=StationNumber}" Value="2">
+                                <DataTrigger Binding="{Binding Path=JigNumber}" Value="2">
                                     <Setter Property="Text" Value="DUT #02"/>
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=StationNumber}" Value="3">
+                                <DataTrigger Binding="{Binding Path=JigNumber}" Value="3">
                                     <Setter Property="Text" Value="DUT #03"/>
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=StationNumber}" Value="4">
+                                <DataTrigger Binding="{Binding Path=JigNumber}" Value="4">
                                     <Setter Property="Text" Value="DUT #04"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -42,8 +42,9 @@
                     </TextBox.Style>
                 </TextBox>
                 <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <Label Content="Version 1.0.0.0" FontSize="12" Foreground="{StaticResource colorTextTitle}" VerticalAlignment="Center"></Label>
-                    <Label MouseDown="Label_MouseDown" Margin="10,-5,5,0" Foreground="{StaticResource colorTextTitle}" FontSize="20" FontWeight="Bold" ToolTipService.ToolTip="Đóng ứng dụng">X</Label>
+                    <Label MouseDown="Label_MouseDown" Content="Version 1.0.0.0" FontSize="12" Foreground="{StaticResource colorTextTitle}" VerticalAlignment="Center"></Label>
+                    <Label MouseDown="Label_MouseDown" Margin="10,0,0,0" Width="20" HorizontalContentAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="20" FontWeight="Bold" ToolTipService.ToolTip="Help" Padding="0,-5,0,0">?</Label>
+                    <Label MouseDown="Label_MouseDown" Margin="10,0,5,0" Width="20" HorizontalContentAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="20" FontWeight="Bold" ToolTipService.ToolTip="Đóng ứng dụng" Padding="0,-5,0,0">X</Label>
                 </WrapPanel>
             </Grid>
             <Label Grid.Row="1" VerticalAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="24">Tool test PCBA GW040E/AC</Label>
@@ -69,9 +70,11 @@
             <!--statusbar-->
             <WrapPanel Grid.Row="5" Margin="5,0,5,0">
                 <Label VerticalAlignment="Stretch" VerticalContentAlignment="Center" Foreground="{StaticResource colorBorder}">USB_Port=</Label>
-                <Label FontWeight="Bold" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Foreground="{StaticResource colorBorder}" Content="{Binding Path=USBPort, UpdateSourceTrigger=PropertyChanged}"></Label>
-                <Label VerticalAlignment="Stretch" VerticalContentAlignment="Center" Foreground="{StaticResource colorBorder}">, IPUpload=</Label>
-                <Label FontWeight="Bold" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Foreground="{StaticResource colorBorder}" Content="{Binding Path=DutIPUploadFW, UpdateSourceTrigger=PropertyChanged}"></Label>
+                <Label  Margin="-10,0,0,0" HorizontalAlignment="Left" FontWeight="Bold" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Foreground="{StaticResource colorBorder}" Content="{Binding Path=USBPort, UpdateSourceTrigger=PropertyChanged}"></Label>
+                <Label  Margin="-10,0,0,0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Foreground="{StaticResource colorBorder}">, IPUpload=</Label>
+                <Label Margin="-10,0,0,0" FontWeight="Bold" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Foreground="{StaticResource colorBorder}" Content="{Binding Path=DutIPUploadFW, UpdateSourceTrigger=PropertyChanged}"></Label>
+                <Label MouseDown="Label_MouseDown" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Foreground="Yellow">[test]</Label>
+                <Label MouseDown="Label_MouseDown" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Foreground="Yellow">[detail]</Label>
             </WrapPanel>
         </Grid>
     </Border>

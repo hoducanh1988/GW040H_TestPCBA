@@ -60,6 +60,7 @@ namespace TestPCBAForGW040x.Functions {
         public static int extralongtime = 180;
         public static int verylongtime = 60;
         public static int longtime = 30;
+        public static int x15 = 15;
         public static int normaltime = 10;
         public static int shorttime = 3;
     }
@@ -82,13 +83,14 @@ namespace TestPCBAForGW040x.Functions {
 
     public static class initParameters {
 
-        public static List<string> listStation = new List<string>() { "1", "2", "3", "4" };
+        public static List<string> listStation = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        public static List<string> listJig = new List<string>() { "1", "2", "3", "4" };
         public static List<string> listUARTPort = new List<string>();
         public static List<string> listBaudRate = new List<string>() { "-","50","75","110","134","150","200","300","600",
                                                                        "1200","1800","2400","4800","9600",
                                                                        "19200","28800","38400","57600","76800",
                                                                        "115200","230400","460800","576000","921600"};
-        public static List<string> listBarcodeType = new List<string>() {"USB", "UART" };
+        public static List<string> listBarcodeType = new List<string>() { "USB", "UART" };
 
         static initParameters() {
             listUARTPort.Add("-");

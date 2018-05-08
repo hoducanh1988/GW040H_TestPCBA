@@ -8,55 +8,258 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="300">
 
-    <Border CornerRadius="5" Background="{StaticResource colorBackground}" BorderBrush="{StaticResource colorBorder}" BorderThickness=".5">
-        <ScrollViewer Margin="5,5,5,5">
-            <StackPanel Margin="0,0,5,0">
-                <!--COMMON-->
-                <Label FontSize="14" FontWeight="SemiBold" Content="CHUNG:"></Label>
-                <Label Content="Jig test" FontSize="13"></Label>
-                <Image Height="60" Width="60" Margin="100,-50,0,0" Source="/Assets/Images/common.png"></Image>
-                <ComboBox x:Name="cbbStation" FontSize="13" FontWeight="Bold" Text="{Binding Path=StationNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
-                <Label Content="6 kí tự đầu tiên của địa chỉ MAC" FontSize="13"></Label>
-                <TextBox CharacterCasing="Upper" FontSize="13" FontWeight="Bold" Text="{Binding Path=DutMacF6digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ></TextBox>
-                <Label Content="Đường dẫn file Firmware (tclinux.bin)" FontSize="13"></Label>
-                <TextBox CharacterCasing="Upper" FontSize="13" FontWeight="Bold" IsReadOnly="True" Text="{Binding Path=DutFwPath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
-                <Button Click="Button_Click" HorizontalAlignment="Left" Margin="0,5,0,0" Height="28" Width="80" FontSize="13" FontWeight="Normal" >browser</Button>
-                <!--MINUS-->
-                <Label FontSize="15" FontWeight="Bold" Content="-"></Label>
-                <!--UART TO USB-->
-                <Label FontSize="14" FontWeight="SemiBold" Content="BỘ CHUYỂN ĐỔI USB SANG COM:"></Label>
-                <Label Content="Tên cổng COM" FontSize="13"></Label>
-                <Image Height="50" Width="50" Margin="100,-40,0,0" Source="/Assets/Images/USB.png"></Image>
-                <ComboBox x:Name="cbbUSBPort" FontSize="13" FontWeight="Bold" Text="{Binding Path=USBPort, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
-                <Label Content="Tốc độ baud" FontSize="13"></Label>
-                <ComboBox IsEnabled="False" x:Name="cbbUSBBaudRate" FontSize="13" FontWeight="Bold" Text="{Binding Path=USBBaudRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
-                <!--MINUS-->
-                <Label FontSize="15" FontWeight="Bold" Content="-"></Label>
-                <!--BARCODE READER-->
-                <Label FontSize="14" FontWeight="SemiBold" Content="Máy đọc mã vạch:"></Label>
-                <Label Content="Loại máy đọc" FontSize="13"></Label>
-                <Image Height="35" Width="50" Margin="100,-50,0,0" Source="/Assets/Images/barcodescanner.png"></Image>
-                <ComboBox IsEnabled="False" x:Name="cbbBarcodeType" FontSize="13" FontWeight="Bold" Text="{Binding Path=BRType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
-                <Label Content="Tên cổng COM" FontSize="13"></Label>
-                <ComboBox IsEnabled="False" x:Name="cbbBRPort" FontSize="13" FontWeight="Bold" Text="{Binding Path=BRPort, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
-                <Label Content="Tốc độ baud" FontSize="13"></Label>
-                <ComboBox IsEnabled="False" x:Name="cbbBRBaudRate" FontSize="13" FontWeight="Bold" Text="{Binding Path=BRBaudRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
-                <!--MINUS-->
-                <Label FontSize="15" FontWeight="Bold" Content="-"></Label>
-                <!--DUT-->
-                <Label FontSize="14" FontWeight="SemiBold" Content="ONT:"></Label>
-                <Label Content="Địa chỉ IP mặc định:" FontSize="13"></Label>
-                <Image Height="50" Width="50" Margin="100,-50,0,0" Source="/Assets/Images/Modem.png"></Image>
-                <TextBox IsEnabled="False" CharacterCasing="Upper" FontSize="13" FontWeight="Bold" Text="{Binding Path=DutIPdefault, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
-                <Label Content="Địa chỉ IP sử dụng cho upload FW:" FontSize="13"></Label>
-                <TextBox IsEnabled="False" CharacterCasing="Upper" FontSize="13" FontWeight="Bold" Text="{Binding Path=DutIPUploadFW, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
-                <Label Content="Tên:" FontSize="13"></Label>
-                <TextBox CharacterCasing="Upper" FontSize="13" FontWeight="Bold" Text="{Binding Path=DutUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
-                <Label Content="Mật khẩu:" FontSize="13"></Label>
-                <TextBox CharacterCasing="Upper" FontSize="13" FontWeight="Bold" Text="{Binding Path=DutPass, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
-                <Button Click="Button_Click" Margin="0,20,0,20" Height="40" FontSize="17" Background="{StaticResource colorBorder}" FontWeight="SemiBold">Lưu cài đặt</Button>
-                <!--END-->
-            </StackPanel>
-        </ScrollViewer>
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid>
+                            <Border  Name="Border" Margin="0,0,-4,0" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0" >
+                                <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2" RecognizesAccessKey="True"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Panel.ZIndex" Value="100"/>
+                                <Setter TargetName="Border" Property="Background" Value="#43d854" />
+                                <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="#FFEEEEEE" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="Orange" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Border CornerRadius="5" Background="White" BorderBrush="{StaticResource colorBorder}" BorderThickness=".5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <TabControl Margin="5" Grid.Row="0">
+                <TabItem>
+                    <TabItem.Header>
+                        <Grid Height="30">
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Text="Cài đặt hệ thống" FontWeight="SemiBold"/>
+                        </Grid>
+                    </TabItem.Header>
+
+                    <ScrollViewer Margin="5,5,5,5">
+                        <StackPanel Margin="0,0,5,0">
+                            <!--COMMON-->
+                            <Label Foreground="{StaticResource colorBorder}" FontSize="14" FontWeight="Bold" Content="CÀI ĐẶT CHUNG:"></Label>
+                            <Label Content="Trạm test" FontSize="13"></Label>
+                            <Image Height="60" Width="60" Margin="100,-50,0,0" Source="/Assets/Images/common.png"></Image>
+                            <ComboBox x:Name="cbbStation" FontSize="13" FontWeight="Bold" Text="{Binding Path=StationNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
+                            <Label Content="Jig test" FontSize="13"></Label>
+                            <ComboBox x:Name="cbbJig" FontSize="13" FontWeight="Bold" Text="{Binding Path=JigNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
+                            <Label Content="6 kí tự đầu tiên của địa chỉ MAC" FontSize="13"></Label>
+                            <TextBox CharacterCasing="Upper" FontSize="13" FontWeight="Bold" Text="{Binding Path=DutMacF6digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ></TextBox>
+                            <Label Content="Đường dẫn file Firmware (tclinux.bin)" FontSize="13"></Label>
+                            <TextBox CharacterCasing="Upper" FontSize="13" FontWeight="Bold" IsReadOnly="True" Text="{Binding Path=DutFwPath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+                            <Button Click="Button_Click" HorizontalAlignment="Left" Margin="0,5,0,0" Height="28" Width="80" FontSize="13" FontWeight="Normal" >browser</Button>
+                            <!--MINUS-->
+                            <Label FontSize="15" FontWeight="Bold" Content="-"></Label>
+                            <!--UART TO USB-->
+                            <Label Foreground="{StaticResource colorBorder}" FontSize="14" FontWeight="Bold" Content="BỘ CHUYỂN ĐỔI USB SANG COM:"></Label>
+                            <Label Content="Tên cổng COM" FontSize="13"></Label>
+                            <Image Height="50" Width="50" Margin="100,-40,0,0" Source="/Assets/Images/USB.png"></Image>
+                            <ComboBox x:Name="cbbUSBPort" FontSize="13" FontWeight="Bold" Text="{Binding Path=USBPort, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
+                            <Label Content="Tốc độ baud" FontSize="13"></Label>
+                            <ComboBox IsEnabled="False" x:Name="cbbUSBBaudRate" FontSize="13" FontWeight="Bold" Text="{Binding Path=USBBaudRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
+                            <!--MINUS-->
+                            <Label FontSize="15" FontWeight="Bold" Content="-"></Label>
+                            <!--BARCODE READER-->
+                            <Label  Foreground="{StaticResource colorBorder}" FontSize="14" FontWeight="Bold" Content="MÁY ĐỌC MÃ VẠCH:"></Label>
+                            <Label Content="Loại máy đọc" FontSize="13"></Label>
+                            <Image Height="35" Width="50" Margin="100,-50,0,0" Source="/Assets/Images/barcodescanner.png"></Image>
+                            <ComboBox IsEnabled="False" x:Name="cbbBarcodeType" FontSize="13" FontWeight="Bold" Text="{Binding Path=BRType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
+                            <Label Content="Tên cổng COM" FontSize="13"></Label>
+                            <ComboBox IsEnabled="False" x:Name="cbbBRPort" FontSize="13" FontWeight="Bold" Text="{Binding Path=BRPort, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
+                            <Label Content="Tốc độ baud" FontSize="13"></Label>
+                            <ComboBox IsEnabled="False" x:Name="cbbBRBaudRate" FontSize="13" FontWeight="Bold" Text="{Binding Path=BRBaudRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
+                            <!--MINUS-->
+                            <Label FontSize="15" FontWeight="Bold" Content="-"></Label>
+                            <!--DUT-->
+                            <Label  Foreground="{StaticResource colorBorder}" FontSize="14" FontWeight="Bold" Content="CÀI ĐẶT CHO ONT:"></Label>
+                            <Label Content="Địa chỉ IP mặc định:" FontSize="13"></Label>
+                            <Image Height="50" Width="50" Margin="100,-50,0,0" Source="/Assets/Images/Modem.png"></Image>
+                            <TextBox IsEnabled="False" CharacterCasing="Upper" FontSize="13" FontWeight="Bold" Text="{Binding Path=DutIPdefault, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+                            <Label Content="Địa chỉ IP sử dụng cho upload FW:" FontSize="13"></Label>
+                            <TextBox IsEnabled="False" CharacterCasing="Upper" FontSize="13" FontWeight="Bold" Text="{Binding Path=DutIPUploadFW, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+                            <Label Content="Tên:" FontSize="13"></Label>
+                            <TextBox CharacterCasing="Upper" FontSize="13" FontWeight="Bold" Text="{Binding Path=DutUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+                            <Label Content="Mật khẩu:" FontSize="13"></Label>
+                            <TextBox CharacterCasing="Upper" FontSize="13" FontWeight="Bold" Text="{Binding Path=DutPass, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+                            <Label Content="" Margin="0,0,20,0"></Label>
+                            <!--END-->
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem>
+                    <TabItem.Header>
+                        <Grid Height="30">
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Text="Cấu hình bài test" FontWeight="SemiBold"/>
+                        </Grid>
+                    </TabItem.Header>
+                    
+                    <ScrollViewer Margin="5,5,5,5">
+                        <StackPanel Margin="0,0,5,0">
+                            <Grid Height="320" Margin="0,10,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!--ENABLE UPLOAD FIRMWARE-->
+                                <Label Grid.Row="0" Grid.Column="0" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Right">Upload FW</Label>
+                                <ToggleButton Grid.Row="0" Grid.Column="1" x:Name="togfw" Margin="-20,0,0,0" Height="30" Style="{StaticResource iosToggleButton}" IsChecked="{Binding Path=EnableUploadFirmware, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ToggleButton>
+                                <Label Grid.Row="0" Grid.Column="2" FontSize="25" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=togfw, Path=IsChecked}" Value="true">
+                                                    <Setter Property="Content" Value="ON"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource colorContentOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=togfw, Path=IsChecked}" Value="false">
+                                                    <Setter Property="Content" Value="OFF"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+
+                                <!--CHECK LAN-->
+                                <Label Grid.Row="1" Grid.Column="0" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Right">Check LAN</Label>
+                                <ToggleButton Grid.Row="1" Grid.Column="1" x:Name="togckl" Margin="-20,0,0,0" Height="30" Style="{StaticResource iosToggleButton}" IsChecked="{Binding Path=EnableCheckLAN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ToggleButton>
+                                <Label Grid.Row="1" Grid.Column="2" FontSize="25" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=togckl, Path=IsChecked}" Value="true">
+                                                    <Setter Property="Content" Value="ON"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource colorContentOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=togckl, Path=IsChecked}" Value="false">
+                                                    <Setter Property="Content" Value="OFF"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+
+                                <!--CHECK USB-->
+                                <Label Grid.Row="2" Grid.Column="0" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Right">Check USB</Label>
+                                <ToggleButton Grid.Row="2" Grid.Column="1" x:Name="togcku" Margin="-20,0,0,0" Height="30" Style="{StaticResource iosToggleButton}" IsChecked="{Binding Path=EnableCheckUSB, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ToggleButton>
+                                <Label Grid.Row="2" Grid.Column="2" FontSize="25" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=togcku, Path=IsChecked}" Value="true">
+                                                    <Setter Property="Content" Value="ON"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource colorContentOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=togcku, Path=IsChecked}" Value="false">
+                                                    <Setter Property="Content" Value="OFF"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+
+                                <!--CHECK LED-->
+                                <Label Grid.Row="3" Grid.Column="0" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Right">Check LED</Label>
+                                <ToggleButton Grid.Row="3" Grid.Column="1" x:Name="togckle" Margin="-20,0,0,0" Height="30" Style="{StaticResource iosToggleButton}" IsChecked="{Binding Path=EnableCheckLED, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ToggleButton>
+                                <Label Grid.Row="3" Grid.Column="2" FontSize="25" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=togckle, Path=IsChecked}" Value="true">
+                                                    <Setter Property="Content" Value="ON"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource colorContentOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=togckle, Path=IsChecked}" Value="false">
+                                                    <Setter Property="Content" Value="OFF"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+
+                                <!--CHECK BUTTON-->
+                                <Label Grid.Row="4" Grid.Column="0" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Right">Check Button</Label>
+                                <ToggleButton Grid.Row="4" Grid.Column="1" x:Name="togckb" Margin="-20,0,0,0" Height="30" Style="{StaticResource iosToggleButton}" IsChecked="{Binding Path=EnableCheckButton, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ToggleButton>
+                                <Label Grid.Row="4" Grid.Column="2" FontSize="25" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=togckb, Path=IsChecked}" Value="true">
+                                                    <Setter Property="Content" Value="ON"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource colorContentOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=togckb, Path=IsChecked}" Value="false">
+                                                    <Setter Property="Content" Value="OFF"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+
+                                <!--WRITE MAC-->
+                                <Label Grid.Row="5" Grid.Column="0" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Right">Write MAC</Label>
+                                <ToggleButton Grid.Row="5" Grid.Column="1" x:Name="togwm" Margin="-20,0,0,0" Height="30" Style="{StaticResource iosToggleButton}" IsChecked="{Binding Path=EnableWriteMAC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ToggleButton>
+                                <Label Grid.Row="5" Grid.Column="2" FontSize="25" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=togwm, Path=IsChecked}" Value="true">
+                                                    <Setter Property="Content" Value="ON"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource colorContentOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=togwm, Path=IsChecked}" Value="false">
+                                                    <Setter Property="Content" Value="OFF"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+                
+            </TabControl>
+
+            <Button Grid.Row="1" Click="Button_Click" Margin="2,2,2,2"  FontSize="17" Background="{StaticResource colorBorder}" FontWeight="SemiBold">Lưu cài đặt</Button>
+        </Grid>
+        
+        
     </Border>
 </UserControl>

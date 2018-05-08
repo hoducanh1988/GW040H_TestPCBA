@@ -19,28 +19,9 @@ namespace TestPCBAForGW040x.UserControls
     /// <summary>
     /// Interaction logic for ucLogin.xaml
     /// </summary>
-    public partial class ucLogin : UserControl
-    {
-        public ucLogin()
-        {
+    public partial class ucLogin : UserControl {
+        public ucLogin() {
             InitializeComponent();
-            this.DataContext = GlobalData.testingInfo;
-        }
-
-        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e) {
-           if (this.Visibility == Visibility.Visible) {
-                GlobalData.testingInfo.USER = "";
-                GlobalData.testingInfo.USER = "";
-                txtUser.Text = "";
-                txtPass.Password = "";
-                txtUser.Focus();
-            }
-        }
-
-        private void btnGo_Click(object sender, RoutedEventArgs e) {
-            GlobalData.testingInfo.USER = txtUser.Text;
-            GlobalData.testingInfo.PASSWORD = txtPass.Password.ToString();
-            MessageBox.Show(string.Format("{0},{1}", GlobalData.testingInfo.USER, GlobalData.testingInfo.PASSWORD));
         }
     }
 }

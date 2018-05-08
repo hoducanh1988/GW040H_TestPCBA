@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestPCBAForGW040x.SubControls"
         mc:Ignorable="d"
-        Title="LED" Height="300" Width="300" Style="{StaticResource customWindow}" ShowInTaskbar="False">
+        Title="LED" Height="300" Width="300" Style="{StaticResource customWindow}" ShowInTaskbar="False" Topmost="True">
     <Window.Resources>
         <Style x:Key="circleLabel" TargetType="Label">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>

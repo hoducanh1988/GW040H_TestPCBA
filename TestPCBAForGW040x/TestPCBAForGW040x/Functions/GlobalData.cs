@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,5 +16,16 @@ namespace TestPCBAForGW040x {
         public static LogInfomation loginfo = null;
 
         public static string ledResult = "";
+
+        public static ObservableCollection<gridContent> datagridcontent = new ObservableCollection<gridContent>();
+
+        static GlobalData() {
+            GlobalData.datagridcontent.Add(new gridContent() { ID = "01", STEPCHECK = "Nạp Firmware", RESULT = "-", ERROR = "-" });
+            GlobalData.datagridcontent.Add(new gridContent() { ID = "02", STEPCHECK = "Kiểm Tra LAN", RESULT = "-", ERROR = "-" });
+            GlobalData.datagridcontent.Add(new gridContent() { ID = "03", STEPCHECK = "Kiểm Tra USB", RESULT = "-", ERROR = "-" });
+            GlobalData.datagridcontent.Add(new gridContent() { ID = "04", STEPCHECK = "Kiểm Tra LEDs", RESULT = "-", ERROR = "-" });
+            GlobalData.datagridcontent.Add(new gridContent() { ID = "05", STEPCHECK = "Kiểm Tra Nút Nhấn", RESULT = "-", ERROR = "-" });
+            GlobalData.datagridcontent.Add(new gridContent() { ID = "06", STEPCHECK = "Ghi GPON,WPS,MAC", RESULT = "-", ERROR = "-" });
+        }
     }
 }

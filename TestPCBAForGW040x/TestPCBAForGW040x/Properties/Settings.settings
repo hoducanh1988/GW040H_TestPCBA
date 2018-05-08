@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="StationNumber" Type="System.String" Scope="User">
-      <Value Profile="(Default)">2</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="DUT_MacF6digit" Type="System.String" Scope="User">
       <Value Profile="(Default)">A06518:A4F4C2</Value>
@@ -37,6 +37,27 @@
     </Setting>
     <Setting Name="BRBaudRate" Type="System.String" Scope="User">
       <Value Profile="(Default)">-</Value>
+    </Setting>
+    <Setting Name="JigNumber" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="EnableUploadFW" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EnableChkLAN" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EnableChkUSB" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EnableChkLED" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EnableChkButton" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EnableWriteMAC" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

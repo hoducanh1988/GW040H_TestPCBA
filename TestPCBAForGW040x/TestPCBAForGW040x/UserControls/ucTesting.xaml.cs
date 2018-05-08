@@ -26,6 +26,7 @@ namespace TestPCBAForGW040x.UserControls {
         public ucTesting() {
             InitializeComponent();
             this.DataContext = GlobalData.testingInfo;
+            this.datagrid.ItemsSource = GlobalData.datagridcontent;
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 2);
@@ -40,6 +41,29 @@ namespace TestPCBAForGW040x.UserControls {
             timer.Start();
         }
 
+        private void updateGridTest(string _id, string _Result, string _errCode) {
+            App.Current.Dispatcher.Invoke((Action)delegate{
+                foreach (var item in GlobalData.datagridcontent) {
+                    if(item.ID == _id) {
+                        if (_Result !="" && _Result !=string.Empty) item.RESULT = _Result;
+                        if (_errCode !="" && _errCode!=string.Empty) item.ERROR = _errCode;
+                        this.datagrid.Items.Refresh();
+                        break;
+                    }
+                }
+            });
+        }
+
+        private void ResetGridTest() {
+            App.Current.Dispatcher.Invoke((Action)delegate {
+                foreach (var item in GlobalData.datagridcontent) {
+                    item.RESULT = "-";
+                    item.ERROR = "-";
+                    this.datagrid.Items.Refresh();
+                }
+            });
+        }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e) {
             txtMAC.Focus();
         }
@@ -47,9 +71,9 @@ namespace TestPCBAForGW040x.UserControls {
         private void txtMAC_KeyDown(object sender, KeyEventArgs e) {
             if(e.Key == Key.Return) {
                 string subStr = txtMAC.Text.Trim();
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("... MAC=\"{0}\"\n", subStr);
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("... MAC=\"{0}\"\r\n", subStr);
                 if (subStr == string.Empty || subStr == "") {
-                    GlobalData.testingInfo.LOGSYSTEM += string.Format("=> Phán định: FAIL\n", subStr);
+                    GlobalData.testingInfo.LOGSYSTEM += string.Format("=> Phán định: FAIL\r\n", subStr);
                 } else {
                     bool ret = new exWriteMAC(subStr).IsValid();
                     if (ret) {
@@ -63,7 +87,7 @@ namespace TestPCBAForGW040x.UserControls {
                         timer.Tick += ((sd, ev) => {
                             time++;
                             TimeSpan span = new TimeSpan(0, 0, time);
-                            GlobalData.testingInfo.ELAPSEDTIME = string.Format("Time elapsed {0:00}:{1:00}:{2:00}", span.Hours, span.Minutes, span.Seconds);
+                            GlobalData.testingInfo.ELAPSEDTIME = string.Format("Thời gian kiểm tra: {0:00}:{1:00}:{2:00}", span.Hours, span.Minutes, span.Seconds);
                             if (GlobalData.testingInfo.TITLE == Titles.powerON || 
                                 GlobalData.testingInfo.TITLE == Titles.checkNutWPS || 
                                 GlobalData.testingInfo.TITLE == Titles.checkNutReset ||
@@ -82,25 +106,81 @@ namespace TestPCBAForGW040x.UserControls {
                         //start test PCBA
                         Thread t = new Thread(new ThreadStart(() => {
                             string message = "";
+                            string step = "";
                             GlobalData.testingInfo.STATUS = Statuses.wait;
+
                             //1.Upload Firmware //23.02
-                            GlobalData.testingInfo.LOGSYSTEM += "> UPLOAD FIRMWARE----------\n";
-                            if (!(new exUploadFirmware().Excute(ref message))) goto NG;
-                            //2.Write MAC //23.02
-                            GlobalData.testingInfo.LOGSYSTEM += "> GHI SN,GPON,WPS,MAC------\n";
-                            if (!(new exWriteMAC(GlobalData.testingInfo.MAC).Excute(ref message))) goto NG;
-                            //3.Check LAN //24.02
-                            GlobalData.testingInfo.LOGSYSTEM += "> CHECK CỔNG LAN-----------\n";
-                            if (!(new exCheckLAN().Excute(ref message))) goto NG;
-                            //4.Check USB //24.02
-                            GlobalData.testingInfo.LOGSYSTEM += "> CHECK CỔNG USB-----------\n";
-                            if (!(new exCheckUSB().Excute(ref message))) goto NG;
-                            //5.Check LED //26/02
-                            GlobalData.testingInfo.LOGSYSTEM += "> CHECK LEDS---------------\n";
-                            if (!(new exCheckLED().Excute(ref message))) goto NG;
-                            //6.Check Button //26/02
-                            GlobalData.testingInfo.LOGSYSTEM += "> CHECK NÚT NHẤN-----------\n";
-                            if (!(new exCheckButton().Excute(ref message))) goto NG;
+                            if (GlobalData.initSetting.EnableUploadFirmware == true) {
+                                GlobalData.testingInfo.LOGSYSTEM += "> UPLOAD FIRMWARE----------\r\n";
+                                this.updateGridTest("01", "Waiting", "");
+                                if (!(new exUploadFirmware().Excute(ref message))) {
+                                    this.updateGridTest("01", "FAIL", GlobalData.testingInfo.ERRORCODE);
+                                    step = "Upload Firmware";
+                                    goto NG;
+                                }
+                                this.updateGridTest("01", "PASS", "");
+                            }
+                           
+                            //2.Check LAN //24.02
+                            if (GlobalData.initSetting.EnableCheckLAN == true) {
+                                GlobalData.testingInfo.LOGSYSTEM += "> CHECK CỔNG LAN-----------\r\n";
+                                this.updateGridTest("03", "Waiting", "");
+                                if (!(new exCheckLAN().Excute(ref message))) {
+                                    this.updateGridTest("03", "FAIL", GlobalData.testingInfo.ERRORCODE);
+                                    step = "Check LAN";
+                                    goto NG;
+                                }
+                                this.updateGridTest("03", "PASS", "");
+                            }
+                            
+                            //3.Check USB //24.02
+                            if (GlobalData.initSetting.EnableCheckUSB == true) {
+                                GlobalData.testingInfo.LOGSYSTEM += "> CHECK CỔNG USB-----------\r\n";
+                                this.updateGridTest("04", "Waiting", "");
+                                if (!(new exCheckUSB().Excute(ref message))) {
+                                    this.updateGridTest("04", "FAIL", GlobalData.testingInfo.ERRORCODE);
+                                    step = "Check USB";
+                                    goto NG;
+                                }
+                                this.updateGridTest("04", "PASS", "");
+                            }
+                           
+                            //4.Check LED //26/02
+                            if (GlobalData.initSetting.EnableCheckLED == true) {
+                                GlobalData.testingInfo.LOGSYSTEM += "> CHECK LEDS---------------\r\n";
+                                this.updateGridTest("05", "Waiting", "");
+                                if (!(new exCheckLED().Excute(ref message))) {
+                                    this.updateGridTest("05", "FAIL", GlobalData.testingInfo.ERRORCODE);
+                                    step = "Check LEDs";
+                                    goto NG;
+                                }
+                                this.updateGridTest("05", "PASS", "");
+                            }
+                            
+                            //5.Check Button //26/02
+                            if (GlobalData.initSetting.EnableCheckButton == true) {
+                                GlobalData.testingInfo.LOGSYSTEM += "> CHECK NÚT NHẤN-----------\r\n";
+                                this.updateGridTest("06", "Waiting", "");
+                                if (!(new exCheckButton().Excute(ref message))) {
+                                    this.updateGridTest("06", "FAIL", GlobalData.testingInfo.ERRORCODE);
+                                    step = "Check BUTTONs";
+                                    goto NG;
+                                }
+                                this.updateGridTest("06", "PASS", "");
+                            }
+                            
+                            //6.Write MAC //23.02
+                            if (GlobalData.initSetting.EnableWriteMAC == true) {
+                                GlobalData.testingInfo.LOGSYSTEM += "> GHI SN,GPON,WPS,MAC------\r\n";
+                                this.updateGridTest("02", "Waiting", "");
+                                if (!(new exWriteMAC(GlobalData.testingInfo.MAC).Excute(ref message))) {
+                                    this.updateGridTest("02", "FAIL", GlobalData.testingInfo.ERRORCODE);
+                                    step = "Write MAC";
+                                    goto NG;
+                                }
+                                this.updateGridTest("02", "PASS", "");
+                            }
+                            
                             goto OK;
 
                             NG:
@@ -108,16 +188,20 @@ namespace TestPCBAForGW040x.UserControls {
                                 
                                 GlobalData.serialPort.closeSerialPort(out message);
                                 GlobalData.testingInfo.STATUS = Statuses.fail;
-                                GlobalData.testingInfo.LOGSYSTEM += "-----------------------\n";
-                                GlobalData.testingInfo.LOGSYSTEM += "=> Tổng phán định: FAIL\n";
+                                GlobalData.testingInfo.LOGSYSTEM += "-----------------------\r\n";
+                                GlobalData.testingInfo.LOGSYSTEM += "=> Tổng phán định: FAIL\r\n";
                                 Application.Current.Dispatcher.BeginInvoke(new Action(() => {
                                     this.testBorder.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFFFFF"));
                                     timer.Stop();
                                     txtMAC.IsEnabled = true;
+                                    txtMAC.Clear();
                                     txtMAC.Focus();
-                                    txtMAC.SelectAll();
                                 }));
+                                GlobalData.testingInfo.TITLE = string.Format("ONT: {0}", GlobalData.testingInfo.MAC);
+                                GlobalData.testingInfo.CONTENT = string.Format("Lỗi: {0}", step);
                                 GlobalData.loginfo.Save("FAIL", message);
+                                GlobalData.loginfo.SaveSystemLog();
+                                GlobalData.loginfo.SaveUARTLog();
                                 return;
                             }
                             OK:
@@ -126,16 +210,20 @@ namespace TestPCBAForGW040x.UserControls {
                                 GlobalData.testingInfo.CONTENT = "--";
                                 GlobalData.serialPort.closeSerialPort(out message);
                                 GlobalData.testingInfo.STATUS = Statuses.pass;
-                                GlobalData.testingInfo.LOGSYSTEM += "-----------------------\n";
-                                GlobalData.testingInfo.LOGSYSTEM += "=> Tổng phán định: PASS\n";
+                                GlobalData.testingInfo.LOGSYSTEM += "-----------------------\r\n";
+                                GlobalData.testingInfo.LOGSYSTEM += "=> Tổng phán định: PASS\r\n";
                                 Application.Current.Dispatcher.BeginInvoke(new Action(() => {
                                     this.testBorder.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFFFFF"));
                                     timer.Stop();
                                     txtMAC.IsEnabled = true;
+                                    txtMAC.Clear();
                                     txtMAC.Focus();
-                                    txtMAC.SelectAll();
                                 }));
+                                GlobalData.testingInfo.TITLE = string.Format("ONT: {0}", GlobalData.testingInfo.MAC);
+                                GlobalData.testingInfo.CONTENT = string.Format("Sản phẩm là OK");
                                 GlobalData.loginfo.Save("PASS", "--");
+                                GlobalData.loginfo.SaveSystemLog();
+                                GlobalData.loginfo.SaveUARTLog();
                                 return;
                             }
 
@@ -144,7 +232,7 @@ namespace TestPCBAForGW040x.UserControls {
                         t.Start();
                     }
                     else {
-                        GlobalData.testingInfo.LOGSYSTEM += string.Format("=> Phán định: FAIL\n\n", subStr);
+                        GlobalData.testingInfo.LOGSYSTEM += string.Format("=> Phán định: FAIL\r\n\r\n", subStr);
                         txtMAC.Clear();
                     }
                 }
@@ -152,8 +240,10 @@ namespace TestPCBAForGW040x.UserControls {
         }
 
         private void txtMAC_TextChanged(object sender, TextChangedEventArgs e) {
-            if (txtMAC.Text.Length > 0)
+            if (txtMAC.Text.Length > 0) {
                 GlobalData.testingInfo.Initialize();
+                ResetGridTest();
+            }
         }
 
         private void lblTestTitle_MouseDown(object sender, MouseButtonEventArgs e) {
@@ -167,6 +257,10 @@ namespace TestPCBAForGW040x.UserControls {
             //    LED led = new LED(top, left, width, height);
             //    led.ShowDialog();
             //}));
+        }
+
+        private void datagrid_LostFocus(object sender, RoutedEventArgs e) {
+            this.datagrid.UnselectAllCells();
         }
     }
 }

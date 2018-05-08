@@ -6,7 +6,6 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
-using System.Threading;
 using System.Windows;
 using TestPCBAForGW040x.SubControls;
 
@@ -50,7 +49,7 @@ namespace TestPCBAForGW040x.Functions {
             message = "";
             try {
                 GlobalData.serialPort.Port.Write(string.Format("ipaddr {0}\r\n", ipAddress));
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("ipaddr {0}\n", ipAddress);
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("ipaddr {0}\r\n", ipAddress);
                 Thread.Sleep(100);
                 return GlobalData.testingInfo.LOGUART.Contains(string.Format("Change IP address to {0}", ipAddress)) == true ? true : false;
             }
@@ -66,17 +65,17 @@ namespace TestPCBAForGW040x.Functions {
                 string rootPath = System.AppDomain.CurrentDomain.BaseDirectory;
                 GlobalData.testingInfo.LOGSYSTEM += string.Format("<1/3: Ghi dữ liệu '{0}' vào file {1}, ", string.Format("tftp -i {0} put {1}", GlobalData.initSetting.DutIPUploadFW, GlobalData.initSetting.DutFwPath), rootPath + "cmd.txt");
                 System.IO.File.WriteAllText(rootPath + "cmd.txt", string.Format("tftp -i {0} put {1}", GlobalData.initSetting.DutIPUploadFW, GlobalData.initSetting.DutFwPath));
-                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 try {
                     GlobalData.testingInfo.LOGSYSTEM += string.Format("<2/3: Delete file {0}, ", rootPath + "wps.txt");
                     System.IO.File.Delete(rootPath + "wps.txt");
-                    GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                    GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 }
                 catch { }
                 Thread.Sleep(100);
                 GlobalData.testingInfo.LOGSYSTEM += string.Format("<3/3: Call process {0},", rootPath + "RunPowerShell.exe");
                 ProcessStartInfo psi = new ProcessStartInfo(rootPath + "RunPowerShell.exe");
-                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 Thread.Sleep(100);
                 psi.UseShellExecute = true;
                 Thread.Sleep(100);
@@ -86,8 +85,8 @@ namespace TestPCBAForGW040x.Functions {
             }
             catch (Exception ex) {
                 message = ex.ToString();
-                GlobalData.testingInfo.LOGSYSTEM += message + "\n";
-                GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
+                GlobalData.testingInfo.LOGSYSTEM += message + "\r\n";
+                GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
                 return false;
             }
         }
@@ -204,6 +203,26 @@ namespace TestPCBAForGW040x.Functions {
             }
         }
 
+        /// <summary>
+        /// Nhập dữ liệu vào từ mã có giá trị nhỏ nhất tới mã có giá trị lớn nhất
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public string GEN_ERRORCODE(params bool[] data) {
+            if (data.Length > 0) {
+                int i = 0, sum = 0;
+                foreach (var item in data) {
+                    sum += (item == true ? 0 : 1) * ((int)Math.Pow(2, i));
+                    i++;
+                }
+                string s = sum.ToString();
+                int l = s.Length;
+                for (int j = 0; j < 4 - l; j++) { s = "0" + s; }
+                return s;
+            }
+            else return "0000";
+        }
+
         protected bool pingToIPAddress(string IP, out string _error) {
             GlobalData.testingInfo.TITLE = string.Format("PING TO {0}", IP);
             GlobalData.testingInfo.CONTENT = string.Format("Retry: {0}", Retries.retry);
@@ -246,7 +265,7 @@ namespace TestPCBAForGW040x.Functions {
 
         protected bool confirmUSBPort(out string _error) {
             GlobalData.testingInfo.TITLE = Titles.checkUSB;
-            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime);
+            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.x15);
             _error = "";
             bool _flag = false;
             GlobalData.loginfo.Usb2 = "FAIL";
@@ -254,14 +273,14 @@ namespace TestPCBAForGW040x.Functions {
             try {
                 int index = 0;
                 bool showusb2 = true, showusb3 = true;
+                bool usb2 = false;
+                bool usb3 = false;
                 while (!_flag) {
-                    bool usb2 = false;
-                    bool usb3 = false;
                     for (int i = 1; i <= 8; i++) {
                         for (int j = 1; j <= 4; j++) {
                             if (GlobalData.testingInfo.LOGUART.Contains(string.Format("usb {0}-1.{1}: new high speed USB device number", i, j))) {
                                 if (showusb2) {
-                                    GlobalData.testingInfo.LOGSYSTEM += string.Format("usb {0}-1.{1}: new high speed USB device number\n", i, j);
+                                    GlobalData.testingInfo.LOGSYSTEM += string.Format("usb {0}-1.{1}: new high speed USB device number\r\n", i, j);
                                     showusb2 = false;
                                     GlobalData.loginfo.Usb2 = "PASS";
                                 }
@@ -275,7 +294,7 @@ namespace TestPCBAForGW040x.Functions {
                         for (int j = 1; j <= 4; j++) {
                             if (GlobalData.testingInfo.LOGUART.Contains(string.Format("usb {0}-1.{1}: new SuperSpeed USB device number", i, j))) {
                                 if (showusb3) {
-                                    GlobalData.testingInfo.LOGSYSTEM += string.Format("usb {0}-1.{1}: new SuperSpeed USB device number\n", i, j);
+                                    GlobalData.testingInfo.LOGSYSTEM += string.Format("usb {0}-1.{1}: new SuperSpeed USB device number\r\n", i, j);
                                     showusb3 = false;
                                     GlobalData.loginfo.Usb3 = "PASS";
                                 }
@@ -289,16 +308,17 @@ namespace TestPCBAForGW040x.Functions {
                     Thread.Sleep(1000);
                     if (ret) { _flag = true; break; }
                     else {
-                        if (index >= Timeouts.verylongtime) { _error = "Request time out."; break; }
+                        if (index >= Timeouts.x15) { _error = "Request time out."; break; }
                         else index++;
-                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime - index);
+                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.x15 - index);
                     }
                 }
+                GlobalData.testingInfo.ERRORCODE = string.Format("Pus1#{0}", GEN_ERRORCODE(usb2, usb3));
                 goto END;
             }
             catch (Exception ex) {
                 _error = ex.ToString();
-                GlobalData.testingInfo.LOGSYSTEM += _error + "\n";
+                GlobalData.testingInfo.LOGSYSTEM += _error + "\r\n";
                 goto END;
             }
             END:
@@ -309,7 +329,7 @@ namespace TestPCBAForGW040x.Functions {
 
         protected bool confirmLANPort(out string _error) {
             GlobalData.testingInfo.TITLE = Titles.checkLAN;
-            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime);
+            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.x15);
             _error = "";
             bool _flag = false;
             GlobalData.loginfo.Lan1 = "FAIL";
@@ -320,10 +340,10 @@ namespace TestPCBAForGW040x.Functions {
                 int index = 0;
                 bool wlan1 = true, wlan2 = true, wlan3 = true, wlan4 = true;
                 while (!_flag) {
-                    if (GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_1 up") && wlan1) { GlobalData.testingInfo.LOGSYSTEM += "Link State: LAN_1 up\n"; wlan1 = false; GlobalData.loginfo.Lan1 = "PASS"; }
-                    if (GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_2 up") && wlan2) { GlobalData.testingInfo.LOGSYSTEM += "Link State: LAN_2 up\n"; wlan2 = false; GlobalData.loginfo.Lan2 = "PASS"; }
-                    if (GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_3 up") && wlan3) { GlobalData.testingInfo.LOGSYSTEM += "Link State: LAN_3 up\n"; wlan3 = false; GlobalData.loginfo.Lan3 = "PASS"; }
-                    if (GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_4 up") && wlan4) { GlobalData.testingInfo.LOGSYSTEM += "Link State: LAN_4 up\n"; wlan4 = false; GlobalData.loginfo.Lan4 = "PASS"; }
+                    if (GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_1 up") && wlan1) { GlobalData.testingInfo.LOGSYSTEM += "Link State: LAN_1 up\r\n"; wlan1 = false; GlobalData.loginfo.Lan1 = "PASS"; }
+                    if (GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_2 up") && wlan2) { GlobalData.testingInfo.LOGSYSTEM += "Link State: LAN_2 up\r\n"; wlan2 = false; GlobalData.loginfo.Lan2 = "PASS"; }
+                    if (GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_3 up") && wlan3) { GlobalData.testingInfo.LOGSYSTEM += "Link State: LAN_3 up\r\n"; wlan3 = false; GlobalData.loginfo.Lan3 = "PASS"; }
+                    if (GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_4 up") && wlan4) { GlobalData.testingInfo.LOGSYSTEM += "Link State: LAN_4 up\r\n"; wlan4 = false; GlobalData.loginfo.Lan4 = "PASS"; }
 
                     bool ret = GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_1 up") &&
                                GlobalData.testingInfo.LOGUART.Contains("Link State: LAN_2 up") &&
@@ -333,11 +353,12 @@ namespace TestPCBAForGW040x.Functions {
                     Thread.Sleep(1000);
                     if (ret) { _flag = true; break; }
                     else {
-                        if (index >= Timeouts.verylongtime) { _error = "Request time out."; break; }
+                        if (index >= Timeouts.x15) { _error = "Request time out."; break; }
                         else index++;
-                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.verylongtime - index);
+                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.x15 - index);
                     }
                 }
+                GlobalData.testingInfo.ERRORCODE = string.Format("Pla1#{0}", GEN_ERRORCODE(!wlan1, !wlan2, !wlan3, !wlan4));
                 goto END;
             }
             catch (Exception ex) {
@@ -529,7 +550,7 @@ namespace TestPCBAForGW040x.Functions {
 
         protected bool check_Resetbutton(out string _error) {
             GlobalData.testingInfo.TITLE = Titles.checkNutReset;
-            GlobalData.testingInfo.CONTENT = string.Format("Nhấn nút reset, Timeout:{0}s", Timeouts.extralongtime);
+            GlobalData.testingInfo.CONTENT = string.Format("Nhấn nút reset, Timeout:{0}s", Timeouts.longtime);
             _error = "";
             bool _flag = false;
             try {
@@ -538,10 +559,10 @@ namespace TestPCBAForGW040x.Functions {
                     //string pattern1 = string.Format("cc.c, 5767 h_sec");
                     //string pattern2 = string.Format("cc.c, 5735 h_sec");
                     //if (GlobalData.testingInfo.LOGUART.Contains(pattern1)) {
-                    //    GlobalData.testingInfo.LOGSYSTEM += pattern1 + "\n";
+                    //    GlobalData.testingInfo.LOGSYSTEM += pattern1 + "\r\n";
                     //}
                     //if (GlobalData.testingInfo.LOGUART.Contains(pattern2)) {
-                    //    GlobalData.testingInfo.LOGSYSTEM += pattern2 + "\n";
+                    //    GlobalData.testingInfo.LOGSYSTEM += pattern2 + "\r\n";
                     //}
                     //if (GlobalData.testingInfo.LOGUART.Contains(pattern1)|| GlobalData.testingInfo.LOGUART.Contains(pattern2)) {
                     //    _flag = true;
@@ -552,11 +573,11 @@ namespace TestPCBAForGW040x.Functions {
                         _flag = true; break;
                     }
 
-                    GlobalData.testingInfo.CONTENT = string.Format("Nhấn nút reset, Timeout:{0}s", Timeouts.extralongtime - index);
-                    if (index < Timeouts.extralongtime) { index++; Thread.Sleep(1000); }
+                    GlobalData.testingInfo.CONTENT = string.Format("Nhấn nút reset, Timeout:{0}s", Timeouts.longtime - index);
+                    if (index < Timeouts.longtime) { index++; Thread.Sleep(1000); }
                     else { _error = "Request timeout"; break; }
                 }
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("{0}sec/{1}sec\n", index, Timeouts.extralongtime);
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("{0}sec/{1}sec\r\n", index, Timeouts.longtime);
                 goto END;
             }
             catch (Exception ex) {
@@ -572,7 +593,7 @@ namespace TestPCBAForGW040x.Functions {
 
         protected bool check_WPSbutton(out string _error) {
             GlobalData.testingInfo.TITLE = Titles.checkNutWPS;
-            GlobalData.testingInfo.CONTENT = string.Format("Nhấn và giữ, Timeout:{0}s", Timeouts.extralongtime);
+            GlobalData.testingInfo.CONTENT = string.Format("Nhấn và giữ, Timeout:{0}s", Timeouts.longtime);
             _error = "";
             bool _flag = false;
             try {
@@ -584,7 +605,7 @@ namespace TestPCBAForGW040x.Functions {
                     //for (int i = 0; i < 10; i++) {
                     //    string pattern = string.Format("br0: port {0}(rai0) entering disabled state", i);
                     //    if (GlobalData.testingInfo.LOGUART.Contains(pattern)) {
-                    //        GlobalData.testingInfo.LOGSYSTEM += string.Format("br0: port {0}(rai0) entering disabled state\n", i);
+                    //        GlobalData.testingInfo.LOGSYSTEM += string.Format("br0: port {0}(rai0) entering disabled state\r\n", i);
                     //        actPattern = pattern;
                     //        break;
                     //    }
@@ -600,11 +621,11 @@ namespace TestPCBAForGW040x.Functions {
                         _flag = true; break;
                     }
 
-                    GlobalData.testingInfo.CONTENT = string.Format("Nhấn và giữ, Timeout:{0}s", Timeouts.extralongtime - index);
-                    if (index < Timeouts.extralongtime) { index++; Thread.Sleep(1000); }
+                    GlobalData.testingInfo.CONTENT = string.Format("Nhấn và giữ, Timeout:{0}s", Timeouts.longtime - index);
+                    if (index < Timeouts.longtime) { index++; Thread.Sleep(1000); }
                     else { _error = "Request timeout"; break; }
                 }
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("{0}sec/{1}sec\n", index, Timeouts.extralongtime);
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("{0}sec/{1}sec\r\n", index, Timeouts.longtime);
                 goto END;
             }
             catch (Exception ex) {
@@ -627,7 +648,7 @@ namespace TestPCBAForGW040x.Functions {
             for (int i = 0; i < 10; i++) {
                 string pattern = string.Format("br0: port {0}(ra0) entering forwarding state", i);
                 if (GlobalData.testingInfo.LOGUART.Contains(pattern) == true) {
-                    GlobalData.testingInfo.LOGSYSTEM += string.Format("br0: port {0}(ra0) entering forwarding state\n", i);
+                    GlobalData.testingInfo.LOGSYSTEM += string.Format("br0: port {0}(ra0) entering forwarding state\r\n", i);
                     _flag = true;
                     goto END;
                 }
@@ -642,7 +663,7 @@ namespace TestPCBAForGW040x.Functions {
                         for (int i = 0; i < 10; i++) {
                             string pattern = string.Format("br0: port {0}(ra0) entering forwarding state", i);
                             if (GlobalData.testingInfo.LOGUART.Contains(pattern) == true) {
-                                GlobalData.testingInfo.LOGSYSTEM += string.Format("br0: port {0}(ra0) entering forwarding state\n", i);
+                                GlobalData.testingInfo.LOGSYSTEM += string.Format("br0: port {0}(ra0) entering forwarding state\r\n", i);
                                 ret = true;
                                 //GlobalData.testingInfo.LOGUART = ""; //clear log UART
                                 break;
@@ -685,7 +706,7 @@ namespace TestPCBAForGW040x.Functions {
                         for (int i = 0; i < 10; i++) {
                             string pattern = string.Format("br0: port {0}(ra0) entering forwarding state", i);
                             if (GlobalData.testingInfo.LOGUART.Contains(pattern) == true) {
-                                GlobalData.testingInfo.LOGSYSTEM += string.Format("br0: port {0}(ra0) entering forwarding state\n", i);
+                                GlobalData.testingInfo.LOGSYSTEM += string.Format("br0: port {0}(ra0) entering forwarding state\r\n", i);
                                 ret = true;
                                 //GlobalData.testingInfo.LOGUART = ""; //clear log UART
                                 break;
@@ -736,7 +757,7 @@ namespace TestPCBAForGW040x.Functions {
                         if (index >= Timeouts.verylongtime) { _error = "Request time out."; break; }
                         string tmpStr = System.IO.File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "wps.txt");
                         GlobalData.testingInfo.LOGSYSTEM += tmpStr;
-                        if (tmpStr.ToUpper().Contains("ERROR") || tmpStr.Trim().Replace("\n", "").Replace("\r", "") == string.Empty) {
+                        if (tmpStr.ToUpper().Contains("ERROR") || tmpStr.Trim().Replace("\r\n", "").Replace("\r", "") == string.Empty) {
                             _error = tmpStr;
                             break;
                         }
@@ -794,7 +815,7 @@ namespace TestPCBAForGW040x.Functions {
                         break;
                     }
                 }
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("- Retry: {0}/{1}\n", index, Retries.retry);
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("- Retry: {0}/{1}\r\n", index, Retries.retry);
                 goto END;
             }
             catch (Exception ex) {
@@ -855,8 +876,8 @@ namespace TestPCBAForGW040x.Functions {
                         else index++;
                         GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.shorttime - index);
                     }
-                    GlobalData.testingInfo.LOGSYSTEM += "Press any key in 3 secs to enter boot command mode\n";
-                    GlobalData.testingInfo.LOGSYSTEM += string.Format("- Thời gian: {0}sec/{1}sec\n", index, Timeouts.shorttime);
+                    GlobalData.testingInfo.LOGSYSTEM += "Press any key in 3 secs to enter boot command mode\r\n";
+                    GlobalData.testingInfo.LOGSYSTEM += string.Format("- Thời gian: {0}sec/{1}sec\r\n", index, Timeouts.shorttime);
                     int rep = 0;
                     REPEAT:
                     if (!this.accessDUT(out _error)) {
@@ -895,8 +916,8 @@ namespace TestPCBAForGW040x.Functions {
                         if (index >= Timeouts.longtime) { _error = "Request time out."; break; }
                         else index++;
                     }
-                    GlobalData.testingInfo.LOGSYSTEM += string.Format("- Thực tế: LOGUART.length = {0}\n", GlobalData.testingInfo.LOGUART.Length);
-                    GlobalData.testingInfo.LOGSYSTEM += string.Format("- Thời gian: {0}sec/{1}sec\n", index, Timeouts.longtime);
+                    GlobalData.testingInfo.LOGSYSTEM += string.Format("- Thực tế: LOGUART.length = {0}\r\n", GlobalData.testingInfo.LOGUART.Length);
+                    GlobalData.testingInfo.LOGSYSTEM += string.Format("- Thời gian: {0}sec/{1}sec\r\n", index, Timeouts.longtime);
                     if (index < Timeouts.longtime) _flag = true;
                     else break;
                 }
@@ -959,17 +980,27 @@ namespace TestPCBAForGW040x.Functions {
                     GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.extralongtime - index);
                 }
                 destroyLED();
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("POWER LED = {0}\n", GlobalData.testingInfo.POWERLED == true ? "PASS" : "FAIL");
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("PON LED = {0}\n", GlobalData.testingInfo.PONLED == true ? "PASS" : "FAIL");
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("INET LED = {0}\n", GlobalData.testingInfo.INETLED == true ? "PASS" : "FAIL");
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("WLAN LED = {0}\n", GlobalData.testingInfo.WLANLED == true ? "PASS" : "FAIL");
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("LAN1 LED = {0}\n", GlobalData.testingInfo.LAN1LED == true ? "PASS" : "FAIL");
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("LAN2 LED = {0}\n", GlobalData.testingInfo.LAN2LED == true ? "PASS" : "FAIL");
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("LAN3 LED = {0}\n", GlobalData.testingInfo.LAN3LED == true ? "PASS" : "FAIL");
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("LAN4 LED = {0}\n", GlobalData.testingInfo.LAN4LED == true ? "PASS" : "FAIL");
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("WPS LED = {0}\n", GlobalData.testingInfo.WPSLED == true ? "PASS" : "FAIL");
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("LOS LED = {0}\n", GlobalData.testingInfo.LOSLED == true ? "PASS" : "FAIL");
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("- Thời gian: {0}sec/{1}sec\n", index, Timeouts.extralongtime);
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("POWER LED = {0}\r\n", GlobalData.testingInfo.POWERLED == true ? "PASS" : "FAIL");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("PON LED = {0}\r\n", GlobalData.testingInfo.PONLED == true ? "PASS" : "FAIL");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("INET LED = {0}\r\n", GlobalData.testingInfo.INETLED == true ? "PASS" : "FAIL");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("WLAN LED = {0}\r\n", GlobalData.testingInfo.WLANLED == true ? "PASS" : "FAIL");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("LAN1 LED = {0}\r\n", GlobalData.testingInfo.LAN1LED == true ? "PASS" : "FAIL");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("LAN2 LED = {0}\r\n", GlobalData.testingInfo.LAN2LED == true ? "PASS" : "FAIL");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("LAN3 LED = {0}\r\n", GlobalData.testingInfo.LAN3LED == true ? "PASS" : "FAIL");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("LAN4 LED = {0}\r\n", GlobalData.testingInfo.LAN4LED == true ? "PASS" : "FAIL");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("WPS LED = {0}\r\n", GlobalData.testingInfo.WPSLED == true ? "PASS" : "FAIL");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("LOS LED = {0}\r\n", GlobalData.testingInfo.LOSLED == true ? "PASS" : "FAIL");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("- Thời gian: {0}sec/{1}sec\r\n", index, Timeouts.extralongtime);
+                GlobalData.testingInfo.ERRORCODE = string.Format("Ple1#{0}", GEN_ERRORCODE(GlobalData.testingInfo.LOSLED,
+                                                                                           GlobalData.testingInfo.WPSLED,
+                                                                                           GlobalData.testingInfo.LAN4LED,
+                                                                                           GlobalData.testingInfo.LAN3LED,
+                                                                                           GlobalData.testingInfo.LAN2LED,
+                                                                                           GlobalData.testingInfo.LAN1LED,
+                                                                                           GlobalData.testingInfo.WLANLED,
+                                                                                           GlobalData.testingInfo.INETLED,
+                                                                                           GlobalData.testingInfo.PONLED,
+                                                                                           GlobalData.testingInfo.POWERLED));
                 if (index < Timeouts.extralongtime) {
                     if (GlobalData.ledResult == "PASS") _flag = true;
                 }

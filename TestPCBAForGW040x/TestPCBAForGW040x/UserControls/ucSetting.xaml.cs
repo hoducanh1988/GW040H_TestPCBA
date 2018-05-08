@@ -11,6 +11,7 @@ namespace TestPCBAForGW040x.UserControls {
 
         private void InitializeItemSource() {
             cbbStation.ItemsSource = initParameters.listStation;
+            cbbJig.ItemsSource = initParameters.listJig;
             cbbUSBPort.ItemsSource = initParameters.listUARTPort;
             cbbUSBBaudRate.ItemsSource = initParameters.listBaudRate;
             cbbBarcodeType.ItemsSource = initParameters.listBarcodeType;

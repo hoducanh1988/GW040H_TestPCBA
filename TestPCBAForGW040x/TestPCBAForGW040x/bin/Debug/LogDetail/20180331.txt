@@ -1,0 +1,223 @@
+> NHẬP ĐỊA CHỈ MAC:
+... MAC="A4F4C2909090"
+... KIỂM TRA
+<1/4: Chiều dài kí tự MAC
+- Tiêu chuẩn = 12
+- Thực tế = 12
+=> PASS>
+<2/4: 6 kí tự đầu của MAC
+- Tiêu chuẩn = A4F4C2||A06518
+- Thực tế = A4F4C2
+=> PASS>
+<3/4: Định dạng kí tự MAC
+Tiêu chuẩn = [0-9,A-F]
+- Thực tế = True
+=> PASS>
+<4/4: Mở cổng COM
+- Tiêu chuẩn = True
+- Thực tế = True
+=> PASS>
+...Phán định: Địa chỉ MAC hợp lệ
+
+> UPLOAD FIRMWARE----------
+<1/7: Chờ bật nguồn DUT
+- Tiêu chuẩn: LOGUART.length>0
+- Thực tế: LOGUART.length = 133
+- Thời gian: 2sec/30sec
+=> PASS>
+<2/7: Truy nhập vào Uboot
+Press any key in 3 secs to enter boot command mode
+- Thời gian: 2sec/3sec
+=> PASS>
+<3/7: Thiết lập IP nạp firmware
+ipaddr 192.168.1.11
+- Retry: 0/3
+=> PASS>
+<4/7: Kiểm tra kết nối mạng tới ONT
+=> PASS>
+<5/7: Nạp firmware
+<1/3: Ghi dữ liệu 'tftp -i 192.168.1.11 put D:\G040H\tclinux.bin' vào file C:\Users\Acer4738Z\Desktop\TestPCBAForGW040x-31.03.2018(15h31')\TestPCBAForGW040x\bin\Debug\cmd.txt, => PASS>
+<2/3: Delete file C:\Users\Acer4738Z\Desktop\TestPCBAForGW040x-31.03.2018(15h31')\TestPCBAForGW040x\bin\Debug\wps.txt, => PASS>
+<3/3: Call process C:\Users\Acer4738Z\Desktop\TestPCBAForGW040x-31.03.2018(15h31')\TestPCBAForGW040x\bin\Debug\RunPowerShell.exe,=> PASS>
+Transfer successful: 10569537 bytes in 19 second(s), 556291 bytes/s
+
+=> PASS>
+...Phán định: Nạp firmware thành công
+
+> GHI SN,GPON,WPS,MAC------
+<1/8: Đợi DUT boot complete...
+- Tiêu chuẩn: Please press Enter to activate this console
+43sec/240sec=> PASS>
+<2/8: Login vào DUT...
+- Tiêu chuẩn: root login  on `console'
+Request time out=> FAIL>
+...Phán định: Ghi MAC thất bại
+
+-----------------------
+=> Tổng phán định: FAIL
+
+> NHẬP ĐỊA CHỈ MAC:
+... MAC="A4F4C2909090"
+... KIỂM TRA
+<1/4: Chiều dài kí tự MAC
+- Tiêu chuẩn = 12
+- Thực tế = 12
+=> PASS>
+<2/4: 6 kí tự đầu của MAC
+- Tiêu chuẩn = A4F4C2||A06518
+- Thực tế = A4F4C2
+=> PASS>
+<3/4: Định dạng kí tự MAC
+Tiêu chuẩn = [0-9,A-F]
+- Thực tế = True
+=> PASS>
+<4/4: Mở cổng COM
+- Tiêu chuẩn = True
+- Thực tế = True
+=> PASS>
+...Phán định: Địa chỉ MAC hợp lệ
+
+> UPLOAD FIRMWARE----------
+<1/7: Chờ bật nguồn DUT
+- Tiêu chuẩn: LOGUART.length>0
+- Thực tế: LOGUART.length = 406
+- Thời gian: 2sec/30sec
+=> PASS>
+<2/7: Truy nhập vào Uboot
+Press any key in 3 secs to enter boot command mode
+- Thời gian: 2sec/3sec
+=> PASS>
+<3/7: Thiết lập IP nạp firmware
+ipaddr 192.168.1.11
+- Retry: 0/3
+=> PASS>
+<4/7: Kiểm tra kết nối mạng tới ONT
+=> PASS>
+<5/7: Nạp firmware
+<1/3: Ghi dữ liệu 'tftp -i 192.168.1.11 put D:\G040H\tclinux.bin' vào file C:\Users\Acer4738Z\Desktop\TestPCBAForGW040x-31.03.2018(15h31')\TestPCBAForGW040x\bin\Debug\cmd.txt, => PASS>
+<2/3: Delete file C:\Users\Acer4738Z\Desktop\TestPCBAForGW040x-31.03.2018(15h31')\TestPCBAForGW040x\bin\Debug\wps.txt, => PASS>
+<3/3: Call process C:\Users\Acer4738Z\Desktop\TestPCBAForGW040x-31.03.2018(15h31')\TestPCBAForGW040x\bin\Debug\RunPowerShell.exe,=> PASS>
+Transfer successful: 10569537 bytes in 19 second(s), 556291 bytes/s
+
+=> PASS>
+...Phán định: Nạp firmware thành công
+
+> GHI SN,GPON,WPS,MAC------
+<1/8: Đợi DUT boot complete...
+- Tiêu chuẩn: Please press Enter to activate this console
+42sec/240sec=> PASS>
+<2/8: Login vào DUT...
+- Tiêu chuẩn: root login  on `console'
+=> PASS>
+<3/8: Ghi GPON serial cho DUT...
+- Tiêu chuẩn: writeflash: total write
+Generate GPON serial: VNPT01212121=> PASS>
+<5/8: Ghi địa chỉ MAC cho DUT...
+- Tiêu chuẩn: new mac addr = {0}:{1}:{2}:{3}:{4}:{5}
+=> PASS>
+<6/8: Đợi DUT boot complete...
+- Tiêu chuẩn: Please press Enter to activate this console
+br0: port 6(ra0) entering forwarding state
+105sec/240sec=> PASS>
+<7/8: Login vào DUT...
+- Tiêu chuẩn: root login  on `console'
+=> PASS>
+<8/8: Xác nhận địa chỉ MAC...
+- Tiêu chuẩn: Link encap:Ethernet  HWaddr {0}:{1}:{2}:{3}:{4}:{5}
+=> PASS>
+...Phán định: Ghi MAC thành công
+
+> CHECK CỔNG LAN-----------
+<1/1: Kiểm tra cổng LAN...
+Link State: LAN_1 up
+Link State: LAN_2 up
+Request time out.
+=> FAIL>
+...Phán định: Check LAN thất bại
+
+-----------------------
+=> Tổng phán định: FAIL
+
+> NHẬP ĐỊA CHỈ MAC:
+... MAC="A4F4C2909090"
+... KIỂM TRA
+<1/4: Chiều dài kí tự MAC
+- Tiêu chuẩn = 12
+- Thực tế = 12
+=> PASS>
+<2/4: 6 kí tự đầu của MAC
+- Tiêu chuẩn = A4F4C2||A06518
+- Thực tế = A4F4C2
+=> PASS>
+<3/4: Định dạng kí tự MAC
+Tiêu chuẩn = [0-9,A-F]
+- Thực tế = True
+=> PASS>
+<4/4: Mở cổng COM
+- Tiêu chuẩn = True
+- Thực tế = True
+=> PASS>
+...Phán định: Địa chỉ MAC hợp lệ
+
+> UPLOAD FIRMWARE----------
+<1/7: Chờ bật nguồn DUT
+- Tiêu chuẩn: LOGUART.length>0
+- Thực tế: LOGUART.length = 1958
+- Thời gian: 1sec/30sec
+=> PASS>
+<2/7: Truy nhập vào Uboot
+Press any key in 3 secs to enter boot command mode
+- Thời gian: 3sec/3sec
+=> PASS>
+<3/7: Thiết lập IP nạp firmware
+ipaddr 192.168.1.11
+- Retry: 0/3
+=> PASS>
+<4/7: Kiểm tra kết nối mạng tới ONT
+=> PASS>
+<5/7: Nạp firmware
+<1/3: Ghi dữ liệu 'tftp -i 192.168.1.11 put D:\G040H\tclinux.bin' vào file C:\Users\Acer4738Z\Desktop\TestPCBAForGW040x-31.03.2018(15h31')\TestPCBAForGW040x\bin\Debug\cmd.txt, => PASS>
+<2/3: Delete file C:\Users\Acer4738Z\Desktop\TestPCBAForGW040x-31.03.2018(15h31')\TestPCBAForGW040x\bin\Debug\wps.txt, => PASS>
+<3/3: Call process C:\Users\Acer4738Z\Desktop\TestPCBAForGW040x-31.03.2018(15h31')\TestPCBAForGW040x\bin\Debug\RunPowerShell.exe,=> PASS>
+Transfer successful: 10569537 bytes in 19 second(s), 556291 bytes/s
+
+=> PASS>
+...Phán định: Nạp firmware thành công
+
+> GHI SN,GPON,WPS,MAC------
+<1/8: Đợi DUT boot complete...
+- Tiêu chuẩn: Please press Enter to activate this console
+43sec/240sec=> PASS>
+<2/8: Login vào DUT...
+- Tiêu chuẩn: root login  on `console'
+=> PASS>
+<3/8: Ghi GPON serial cho DUT...
+- Tiêu chuẩn: writeflash: total write
+Generate GPON serial: VNPT01212121=> PASS>
+<5/8: Ghi địa chỉ MAC cho DUT...
+- Tiêu chuẩn: new mac addr = {0}:{1}:{2}:{3}:{4}:{5}
+=> PASS>
+<6/8: Đợi DUT boot complete...
+- Tiêu chuẩn: Please press Enter to activate this console
+br0: port 6(ra0) entering forwarding state
+104sec/240sec=> PASS>
+<7/8: Login vào DUT...
+- Tiêu chuẩn: root login  on `console'
+=> PASS>
+<8/8: Xác nhận địa chỉ MAC...
+- Tiêu chuẩn: Link encap:Ethernet  HWaddr {0}:{1}:{2}:{3}:{4}:{5}
+=> PASS>
+...Phán định: Ghi MAC thành công
+
+> CHECK CỔNG LAN-----------
+<1/1: Kiểm tra cổng LAN...
+Link State: LAN_2 up
+Link State: LAN_4 up
+Link State: LAN_3 up
+Request time out.
+=> FAIL>
+...Phán định: Check LAN thất bại
+
+-----------------------
+=> Tổng phán định: FAIL
+

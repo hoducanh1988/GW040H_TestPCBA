@@ -12,12 +12,12 @@ namespace TestPCBAForGW040x.Functions {
             try {
                 GlobalData.testingInfo.COLORLAN = backGroundColors.wait;
                 //~~~~~~~~~~~~~~~~ Confirm LAN Port
-                GlobalData.testingInfo.LOGSYSTEM += "<1/1: Kiểm tra cổng LAN...\n";
+                GlobalData.testingInfo.LOGSYSTEM += "<1/1: Kiểm tra cổng LAN...\r\n";
                 if (!confirmLANPort(out _error)) {
-                    GlobalData.testingInfo.LOGSYSTEM += _error + "\n";
-                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
+                    GlobalData.testingInfo.LOGSYSTEM += _error + "\r\n";
+                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
                     goto NG; }
-                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 //~~~~~~~~~~~~~~~~
                 goto OK;
             } catch {
@@ -26,13 +26,13 @@ namespace TestPCBAForGW040x.Functions {
             OK:
             {
                 GlobalData.testingInfo.COLORLAN = backGroundColors.pass;
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Check LAN thành công\n\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Check LAN thành công\r\n\r\n");
                 return true;
             }
             NG:
             {
                 GlobalData.testingInfo.COLORLAN = backGroundColors.fail;
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Check LAN thất bại\n\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Check LAN thất bại\r\n\r\n");
                 _err = _error;
                 return false;
             }

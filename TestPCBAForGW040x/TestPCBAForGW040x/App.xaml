@@ -8,13 +8,14 @@
             <ResourceDictionary.MergedDictionaries>
                 
                 <!--MaterialDesignThemes-->
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />-->
                 
                 <!--Controls resource-->
                 <ResourceDictionary Source="Assets/Resources/customWindow.xaml"/>
                 <ResourceDictionary Source="Assets/Resources/Textbox.xaml"/>
                 <ResourceDictionary Source="Assets/Resources/Button.xaml"/>
+                <ResourceDictionary Source="Assets/Resources/ToggleButton.xaml"/>
                 
                 <!--Color resources-->
                 <ResourceDictionary>

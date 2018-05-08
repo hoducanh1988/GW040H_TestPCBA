@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Functions\Base\baseFunctionNoLegend.cs" />
     <Compile Include="Functions\Base\baseFunctions.cs" />
     <Compile Include="Functions\Excute\exCheckButton.cs" />
     <Compile Include="Functions\Excute\exCheckLAN.cs" />
@@ -71,6 +72,9 @@
     <Compile Include="Functions\Userdefine\UserDefine.cs" />
     <Compile Include="SubControls\LED.xaml.cs">
       <DependentUpon>LED.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubControls\LOGIN.xaml.cs">
+      <DependentUpon>LOGIN.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ucLogin.xaml.cs">
       <DependentUpon>ucLogin.xaml</DependentUpon>
@@ -147,6 +151,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="SubControls\LED.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubControls\LOGIN.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -231,6 +239,12 @@
   <ItemGroup>
     <Resource Include="Assets\Images\password.png" />
     <Resource Include="Assets\Images\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\Help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\manual.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

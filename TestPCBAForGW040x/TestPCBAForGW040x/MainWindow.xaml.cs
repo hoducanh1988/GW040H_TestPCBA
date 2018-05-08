@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace TestPCBAForGW040x {
 
         //calculate startup location
         void _calStartupLocation() {
-            double x = 0.25 * (int.Parse(GlobalData.initSetting.StationNumber) - 1);
+            double x = 0.25 * (int.Parse(GlobalData.initSetting.JigNumber) - 1);
             GlobalData.thisLocation.top = 0;
             GlobalData.thisLocation.left = SystemParameters.WorkArea.Width * x;
             GlobalData.thisLocation.width = SystemParameters.WorkArea.Width * 0.25;
@@ -47,10 +48,42 @@ namespace TestPCBAForGW040x {
             this.DataContext = GlobalData.initSetting;
         }
 
+        //Distructor MainWindow
+        ~MainWindow() {
+            string message = "";
+            GlobalData.serialPort.closeSerialPort(out message);
+        }
+
         private void Label_MouseDown(object sender, MouseButtonEventArgs e) {
             Label l = sender as Label;
             switch (l.Content.ToString()) {
                 case "X": { Application.Current.Shutdown(); break; }
+                case "[test]": {
+                        Process.Start("explorer.exe", string.Format("{0}Log",System.AppDomain.CurrentDomain.BaseDirectory));
+                        break;
+                    }
+                case "[detail]": {
+                        Process.Start("explorer.exe", string.Format("{0}LogDetail", System.AppDomain.CurrentDomain.BaseDirectory));
+                        break;
+                    }
+                case "Version 1.0.0.0": {
+                        if (GlobalData.testingInfo.DEVELOPER < 10) GlobalData.testingInfo.DEVELOPER++;
+                        else GlobalData.testingInfo.DEVELOPER = 0;
+                        break;
+                    }
+                case "?": {
+                        if (l.Foreground != Brushes.Lime) {
+                            l.Foreground = Brushes.Lime;
+                            this.Cursor = Cursors.Help;
+                            GlobalData.testingInfo.HELP = true;
+                        }
+                        else {
+                            l.Foreground = Brushes.White;
+                            this.Cursor = Cursors.Arrow;
+                            GlobalData.testingInfo.HELP = false;
+                        }
+                        break;
+                    }
                 case "TEST ALL": {
                         this.lblMinus.Margin = new Thickness(5, 0, 0, 0);
                         ucTesting.Visibility = Visibility.Visible;
@@ -65,10 +98,17 @@ namespace TestPCBAForGW040x {
                         ucTesting.Visibility = Visibility.Collapsed;
                         ucStep.Visibility = Visibility.Collapsed;
                         ucSetting.Visibility = Visibility.Collapsed;
-                        ucLogin.Visibility = Visibility.Visible;
-
-                        //ucSetting.Visibility = Visibility.Visible;
-                        //Canvas.SetZIndex(ucSetting, 1);
+                        ucLogin.Visibility = Visibility.Collapsed;
+                        LOGIN login = new LOGIN();
+                        login.ShowDialog();
+                        if (GlobalData.testingInfo.USER=="admin" && GlobalData.testingInfo.PASSWORD == "vnpt") {
+                            ucSetting.Visibility = Visibility.Visible;
+                            Canvas.SetZIndex(ucSetting, 1);
+                        } else {
+                            ucLogin.Visibility = Visibility.Visible;
+                            Canvas.SetZIndex(ucLogin, 1);
+                        }
+                        
                         break;
                     }
                 case "TEST ONE": {
@@ -91,6 +131,7 @@ namespace TestPCBAForGW040x {
         private void Border_MouseDown(object sender, MouseButtonEventArgs e) {
             //this.DragMove();
         }
+
 
         //private void Label_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e) {
         //    MessageBox.Show("w");

@@ -6,10 +6,907 @@
              xmlns:local="clr-namespace:TestPCBAForGW040x.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="300">
-    
-    <Border CornerRadius="5" Background="{StaticResource colorBackground}" BorderBrush="{StaticResource colorBorder}" BorderThickness=".5">
-        <StackPanel>
 
-        </StackPanel>
+    <Border CornerRadius="5" Background="{StaticResource colorBackground}" BorderBrush="{StaticResource colorBorder}" BorderThickness=".5">
+        <TabControl SelectionChanged="TabControl_SelectionChanged" Margin="2" BorderThickness="0" Background="{StaticResource colorBackground}">
+          
+            <!--Upload Firmware-->
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="01. Upload FW" FontWeight="SemiBold"/>
+                </TabItem.Header>
+                <Border Background="{StaticResource colorBackground}" CornerRadius="0,0,5,5" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                    <StackPanel Margin="10,20,10,5">
+                        <Button Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnReadFW" Click="btnReadFW_Click" FontSize="15" Margin="0,5,0,0" Height="30" Content="Đọc Firmware Version">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip x:Name="ttReadFW" Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC ĐỌC FW:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Click nút 'Đọc Firmware Version'</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                      
+                        <Button Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnUpFW" Click="btnUpFW_Click" FontSize="15" Margin="0,5,0,0" Height="30" Content="Nạp Firmware">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC NẠP FW:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối dây LAN, USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Click nút 'Nạp Firmware'</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Phần mềm tự động nạp FW cho ONT</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <RichTextBox x:Name="rtbFW" Foreground="Black" FontWeight="SemiBold" Margin="0,10,0,0" Height="250" Background="{StaticResource colorBackground}" IsReadOnly="True" BorderThickness="0" Block.LineHeight="1" Padding="0,5,0,0">
+                        </RichTextBox>
+                        <Label Foreground="{StaticResource colorTextNG}" FontWeight="SemiBold" Content="Kết quả:"/>
+                        <Label Margin="0,-20,0,0" x:Name="lblFWResult" HorizontalContentAlignment="Center" FontSize="60" FontWeight="Bold" Content="--">
+                            <Label.Style>
+                                <Style TargetType="Label">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=lblFWResult, Path=Content}" Value="PASS">
+                                            <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=lblFWResult, Path=Content}" Value="FAIL">
+                                            <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=lblFWResult, Path=Content}" Value="--">
+                                            <Setter Property="Foreground" Value="Black"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=lblFWResult, Path=Content}" Value="Waiting">
+                                            <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                        <Label Margin="0,-10,0,0" Foreground="{StaticResource colorTextNG}" x:Name="lblFWMessage" FontSize="17" Content="--" HorizontalContentAlignment="Center"></Label>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+
+            <!--Write MAC-->
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="02. Write MAC" FontWeight="SemiBold"/>
+                </TabItem.Header>
+                <Border CornerRadius="0,0,5,5" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                    <StackPanel Margin="10,20,10,5">
+                        <Label Foreground="{StaticResource colorTextNG}" FontWeight="SemiBold">Nhập địa chỉ MAC:</Label>
+                        <TextBox x:Name="txtMAC" Margin="0,0,0,5" FontSize="17" FontWeight="Bold" CharacterCasing="Upper" Height="30" VerticalContentAlignment="Center"></TextBox>
+                        <Button Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnWriteMAC" Click="MAC_btnWrite_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Ghi địa chỉ MAC">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC KIỂM TRA GHI/ĐỌC MAC,GPON,WPS:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Nhập địa chỉ MAC</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 5. Click nút ghi MAC,GPON,WPS hoặc đọc MAC,GPON,WPS</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnReadMAC" Click="MAC_btnRead_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Đọc địa chỉ MAC">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC KIỂM TRA GHI/ĐỌC MAC,GPON,WPS:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Nhập địa chỉ MAC</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 5. Click nút ghi MAC,GPON,WPS hoặc đọc MAC,GPON,WPS</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Visibility="Collapsed" Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnWriteGPON" Click="MAC_btnWrite_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Ghi mã GPON SN">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC KIỂM TRA GHI/ĐỌC MAC,GPON,WPS:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Nhập địa chỉ MAC</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 5. Click nút ghi MAC,GPON,WPS hoặc đọc MAC,GPON,WPS</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Visibility="Collapsed" Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnReadGPON" Click="MAC_btnRead_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Đọc mã GPON SN">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC KIỂM TRA GHI/ĐỌC MAC,GPON,WPS:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Nhập địa chỉ MAC</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 5. Click nút ghi MAC,GPON,WPS hoặc đọc MAC,GPON,WPS</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Visibility="Collapsed" Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnWriteWPS" Click="MAC_btnWrite_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Ghi mã WPS PIN">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC KIỂM TRA GHI/ĐỌC MAC,GPON,WPS:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Nhập địa chỉ MAC</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 5. Click nút ghi MAC,GPON,WPS hoặc đọc MAC,GPON,WPS</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Visibility="Collapsed" Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnReadWPS" Click="MAC_btnRead_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Đọc mã WPS PIN">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC KIỂM TRA GHI/ĐỌC MAC,GPON,WPS:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Nhập địa chỉ MAC</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 5. Click nút ghi MAC,GPON,WPS hoặc đọc MAC,GPON,WPS</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <RichTextBox x:Name="rtbMAC" Foreground="Black" FontWeight="SemiBold" Margin="0,10,0,0" Height="150" Background="{StaticResource colorBackground}" IsReadOnly="True" BorderThickness="0" Block.LineHeight="1" Padding="0,5,0,0">
+                        </RichTextBox>
+                        <Label Margin="0,-20,0,0" x:Name="lblMACResult" HorizontalContentAlignment="Center" FontSize="60" FontWeight="Bold" Content="--">
+                            <Label.Style>
+                                <Style TargetType="Label">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=lblMACResult, Path=Content}" Value="PASS">
+                                            <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=lblMACResult, Path=Content}" Value="FAIL">
+                                            <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=lblMACResult, Path=Content}" Value="--">
+                                            <Setter Property="Foreground" Value="Black"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=lblMACResult, Path=Content}" Value="Waiting">
+                                            <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                        <Label Margin="0,-10,0,0" Foreground="{StaticResource colorTextNG}" x:Name="lblMACMessage" FontSize="17" Content="--" HorizontalContentAlignment="Center"></Label>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+            
+            <!--Check LAN-->
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="03. Check LAN" FontWeight="SemiBold"/>
+                </TabItem.Header>
+                <Border CornerRadius="0,0,5,5" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                    <StackPanel Margin="10,20,10,5">
+                        <Button Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnCheckLAN" Click="btnCheckLAN_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Kiểm tra cổng LAN">
+                            <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                        <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                        <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip x:Name="ttCheckLAN" Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC KIỂM TRA CỔNG LAN:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Kết nối dây LAN vào 4 cổng LAN của ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 5. Click nút 'Kiểm tra cổng LAN'</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <RichTextBox x:Name="rtbLAN" Foreground="Black" FontWeight="SemiBold" Margin="0,10,0,0" Height="170" Background="{StaticResource colorBackground}" IsReadOnly="True" BorderThickness="0" Block.LineHeight="1" Padding="0,5,0,0">
+                        </RichTextBox>
+                        <Label Foreground="{StaticResource colorTextNG}" Margin="0,5,0,0" FontWeight="SemiBold" Content="Kết quả kiểm tra cổng LAN:"/>
+                        <StackPanel Margin="0,5,0,0">
+                            <WrapPanel>
+                                <Label FontSize="15" FontWeight="Bold">PORT 1:</Label>
+                                <Label x:Name="lblLAN1" FontSize="15" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN1, Path=Content}" Value="PASS">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN1, Path=Content}" Value="FAIL">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN1, Path=Content}" Value="--">
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN1, Path=Content}" Value="Waiting">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <Label FontSize="15" FontWeight="Bold">PORT 2:</Label>
+                                <Label x:Name="lblLAN2" FontSize="15" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN2, Path=Content}" Value="PASS">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN2, Path=Content}" Value="FAIL">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN2, Path=Content}" Value="--">
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN2, Path=Content}" Value="Waiting">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <Label FontSize="15" FontWeight="Bold">PORT 3:</Label>
+                                <Label x:Name="lblLAN3" FontSize="15" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN3, Path=Content}" Value="PASS">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN3, Path=Content}" Value="FAIL">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN3, Path=Content}" Value="--">
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN3, Path=Content}" Value="Waiting">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <Label FontSize="15" FontWeight="Bold">PORT 4:</Label>
+                                <Label x:Name="lblLAN4" FontSize="15" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN4, Path=Content}" Value="PASS">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN4, Path=Content}" Value="FAIL">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN4, Path=Content}" Value="--">
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLAN4, Path=Content}" Value="Waiting">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <Label FontSize="15" FontWeight="Bold">PHÁN ĐỊNH TỔNG:</Label>
+                                <Label x:Name="lblLANTotal" FontSize="15" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=lblLANTotal, Path=Content}" Value="PASS">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLANTotal, Path=Content}" Value="FAIL">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLANTotal, Path=Content}" Value="--">
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblLANTotal, Path=Content}" Value="Waiting">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                            </WrapPanel>
+                            <!--<Label FontWeight="SemiBold" Content="Thông báo lỗi:"/>
+                            <Label Margin="0,0,0,0" Foreground="{StaticResource colorTextNG}" x:Name="lblLANMessage" FontSize="13" Content="" HorizontalContentAlignment="Left"></Label>-->
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+
+            <!--Check USB-->
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="04. Check USB" FontWeight="SemiBold"/>
+                </TabItem.Header>
+                <Border CornerRadius="0,0,5,5" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                    <StackPanel Margin="10,20,10,5">
+                        <Button Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnCheckUSB" Click="btnCheckUSB_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Kiểm tra cổng USB">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip x:Name="ttCheckUSB" Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC KIỂM TRA USB:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Kết nối USB HUB đã cắm USB2.0 và USB3.0 vào ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 5. Click nút 'Kiểm tra cổng USB'</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <RichTextBox x:Name="rtbUSB" Foreground="Black" FontWeight="SemiBold" Margin="0,10,0,0" Height="170" Background="{StaticResource colorBackground}" IsReadOnly="True" BorderThickness="0" Block.LineHeight="1" Padding="0,5,0,0">
+                        </RichTextBox>
+                        <Label Foreground="{StaticResource colorTextNG}" Margin="0,5,0,0" FontWeight="SemiBold" Content="Kết quả kiểm tra cổng USB:"/>
+                        <StackPanel Margin="0,5,0,0">
+                            <WrapPanel>
+                                <Label FontSize="15" FontWeight="Bold">PORT USB2.0:</Label>
+                                <Label x:Name="lblUSB2" FontSize="15" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=lblUSB2, Path=Content}" Value="PASS">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblUSB2, Path=Content}" Value="FAIL">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblUSB2, Path=Content}" Value="--">
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblUSB2, Path=Content}" Value="Waiting">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <Label FontSize="15" FontWeight="Bold">PORT USB3.0:</Label>
+                                <Label x:Name="lblUSB3" FontSize="15" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=lblUSB3, Path=Content}" Value="PASS">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblUSB3, Path=Content}" Value="FAIL">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblUSB3, Path=Content}" Value="--">
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblUSB3, Path=Content}" Value="Waiting">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <Label FontSize="15" FontWeight="Bold">PHÁN ĐỊNH TỔNG:</Label>
+                                <Label x:Name="lblUSBTotal" FontSize="15" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=lblUSBTotal, Path=Content}" Value="PASS">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblUSBTotal, Path=Content}" Value="FAIL">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblUSBTotal, Path=Content}" Value="--">
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblUSBTotal, Path=Content}" Value="Waiting">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                            </WrapPanel>
+                            <!--<Label FontWeight="SemiBold" Content="Thông báo lỗi:"/>
+                            <Label Margin="0,0,0,0" Foreground="{StaticResource colorTextNG}" x:Name="lblUSBMessage" FontSize="13" Content="" HorizontalContentAlignment="Left"></Label>-->
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+            
+            <!--Check LEDs-->
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="05. Check LEDs" FontWeight="SemiBold"/>
+                </TabItem.Header>
+                <Border CornerRadius="0,0,5,5" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                    <StackPanel Margin="10,20,10,5">
+                        
+                        <Button Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnLedPON" Click="btnLED_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Bật LED PON         ">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC BẬT LED:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Click nút 'Bật LED PON' để bật đèn PON của ONT</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnLedINETX" Click="btnLED_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Bật LED INET xanh">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC BẬT LED:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Click nút 'Bật LED INET' để bật đèn INET của ONT</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnLedINETD" Click="btnLED_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Bật LED INET đỏ    ">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC BẬT LED:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Click nút 'Bật LED INET' để bật đèn INET của ONT</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnLedWLAN" Click="btnLED_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Bật LED WLAN      ">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC BẬT LED:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Click nút 'Bật LED WLAN' để bật đèn WLAN của ONT</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnLedWPS" Click="btnLED_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Bật LED WPS         ">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC BẬT LED:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Click nút 'Bật LED WPS' để bật đèn WPS của ONT</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnLedLOS" Click="btnLED_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Bật LED LOS          ">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC BẬT LED:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Click nút 'Bật LED LOS' để bật đèn LOS của ONT</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+
+                        <RichTextBox x:Name="rtbLED" Foreground="Black" FontWeight="SemiBold" Margin="0,10,0,0" Height="200" Background="{StaticResource colorBackground}" IsReadOnly="True" BorderThickness="0" Block.LineHeight="1" Padding="0,5,0,0">
+                        </RichTextBox>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+            
+            <!--Check Button-->
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="06. Check Buttons" FontWeight="SemiBold"/>
+                </TabItem.Header>
+                <Border CornerRadius="0,0,5,5" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                    <StackPanel Margin="10,20,10,5">
+                        <Button Foreground="White" FontWeight="SemiBold" Background="#333333" x:Name="btnCheckButton" Click="btnCheckButton_Click"  FontSize="15" Margin="0,5,0,0" Height="30" Content="Kiểm tra nút nhấn">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="true">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="120000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=HELP}" Value="false">
+                                            <Setter Property="ToolTipService.ShowDuration" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.ToolTip>
+                                <ToolTip x:Name="ttCheckButton" Background="Transparent" BorderThickness="0">
+                                    <Border CornerRadius="5" Background="#0b4213" BorderBrush="{StaticResource colorBorder}" BorderThickness="1">
+                                        <StackPanel Margin="5">
+                                            <TextBlock Foreground="White" FontWeight="Bold">TRÌNH TỰ THAO TÁC KIỂM TRA NÚT NHẤN:</TextBlock>
+                                            <TextBlock></TextBlock>
+                                            <TextBlock Foreground="White">Bước 1. Kết nối USB debug giữa PC và ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 2. Bật nguồn ONT</TextBlock>
+                                            <TextBlock Foreground="White">Bước 3. Chờ đến khi đèn WLAN của ONT sáng màu xanh</TextBlock>
+                                            <TextBlock Foreground="White">Bước 4. Nhấn nút và giữ WPS của ONT khoảng 2s</TextBlock>
+                                            <TextBlock Foreground="White">Bước 5. Nhấn nút và giữ Reset của ONT khoảng 2s</TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Label Margin="0,5,0,0" x:Name="lblButtonLegend" FontSize="17" FontWeight="SemiBold" Foreground="Red" HorizontalContentAlignment="Center"></Label>
+                        <RichTextBox x:Name="rtbButton" Foreground="Black" FontWeight="SemiBold" Margin="0,10,0,0" Height="200" Background="{StaticResource colorBackground}" IsReadOnly="True" BorderThickness="0" Block.LineHeight="1" Padding="0,5,0,0">
+                        </RichTextBox>
+                        <Label Foreground="{StaticResource colorTextNG}" Margin="0,5,0,0" FontWeight="SemiBold" Content="Kết quả kiểm tra nút nhấn:"/>
+                        <StackPanel Margin="0,5,0,0">
+                            <WrapPanel>
+                                <Label FontSize="15" FontWeight="Bold">NÚT WPS:</Label>
+                                <Label x:Name="lblWPS" FontSize="15" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=lblWPS, Path=Content}" Value="PASS">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblWPS, Path=Content}" Value="FAIL">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblWPS, Path=Content}" Value="--">
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblWPS, Path=Content}" Value="Waiting">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <Label FontSize="15" FontWeight="Bold">NÚT RESET:</Label>
+                                <Label x:Name="lblReset" FontSize="15" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=lblReset, Path=Content}" Value="PASS">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblReset, Path=Content}" Value="FAIL">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblReset, Path=Content}" Value="--">
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblReset, Path=Content}" Value="Waiting">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <Label FontSize="15" FontWeight="Bold">PHÁN ĐỊNH TỔNG:</Label>
+                                <Label x:Name="lblButtonTotal" FontSize="15" FontWeight="Bold">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=lblButtonTotal, Path=Content}" Value="PASS">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblButtonTotal, Path=Content}" Value="FAIL">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblButtonTotal, Path=Content}" Value="--">
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=lblButtonTotal, Path=Content}" Value="Waiting">
+                                                    <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                            </WrapPanel>
+                            <!--<Label FontWeight="SemiBold" Content="Thông báo lỗi:"/>
+                            <Label Margin="0,0,0,0" Foreground="{StaticResource colorTextNG}" x:Name="lblButtonMessage" FontSize="13" Content="" HorizontalContentAlignment="Left"></Label>-->
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+            
+        </TabControl>
     </Border>
 </UserControl>

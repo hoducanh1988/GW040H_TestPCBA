@@ -8,6 +8,13 @@ using System.Windows.Media;
 
 namespace TestPCBAForGW040x.Functions {
 
+    public class gridContent {
+        public string ID { get; set; }
+        public string STEPCHECK { get; set; }
+        public string RESULT { get; set; }
+        public string ERROR { get; set; }
+    }
+
     public class mainLocation {
         public double top { get; set; }
         public double left { get; set; }
@@ -31,16 +38,71 @@ namespace TestPCBAForGW040x.Functions {
             Properties.Settings.Default.Save();
         }
 
+        #region Enable Test Case
+
+        public bool EnableUploadFirmware {
+            get { return Properties.Settings.Default.EnableUploadFW; }
+            set {
+                Properties.Settings.Default.EnableUploadFW = value;
+                OnPropertyChanged(nameof(EnableUploadFirmware));
+            }
+        }
+        public bool EnableCheckLAN {
+            get { return Properties.Settings.Default.EnableChkLAN; }
+            set {
+                Properties.Settings.Default.EnableChkLAN = value;
+                OnPropertyChanged(nameof(EnableCheckLAN));
+            }
+        }
+        public bool EnableCheckUSB {
+            get { return Properties.Settings.Default.EnableChkUSB; }
+            set {
+                Properties.Settings.Default.EnableChkUSB = value;
+                OnPropertyChanged(nameof(EnableCheckUSB));
+            }
+        }
+        public bool EnableCheckLED {
+            get { return Properties.Settings.Default.EnableChkLED; }
+            set {
+                Properties.Settings.Default.EnableChkLED = value;
+                OnPropertyChanged(nameof(EnableCheckLED));
+            }
+        }
+        public bool EnableCheckButton {
+            get { return Properties.Settings.Default.EnableChkButton; }
+            set {
+                Properties.Settings.Default.EnableChkButton = value;
+                OnPropertyChanged(nameof(EnableCheckButton));
+            }
+        }
+        public bool EnableWriteMAC {
+            get { return Properties.Settings.Default.EnableWriteMAC; }
+            set {
+                Properties.Settings.Default.EnableWriteMAC = value;
+                OnPropertyChanged(nameof(EnableWriteMAC));
+            }
+        }
+
+        #endregion
+
         public string StationNumber {
             get { return Properties.Settings.Default.StationNumber; }
             set {
-                Properties.Settings.Default.StationNumber = value;
+                Properties.Settings.Default.StationNumber = value;                
+                OnPropertyChanged(nameof(StationNumber));
+            }
+        }
+        public string JigNumber {
+            get { return Properties.Settings.Default.JigNumber; }
+            set {
+                Properties.Settings.Default.JigNumber = value;
                 try {
                     int n = int.Parse(value);
                     DutIPUploadFW = string.Format("192.168.1.{0}", 9 + n);
-                } catch { }
-                
-                OnPropertyChanged(nameof(StationNumber));
+                }
+                catch { }
+
+                OnPropertyChanged(nameof(JigNumber));
             }
         }
         public string DutMacF6digit {
@@ -133,6 +195,24 @@ namespace TestPCBAForGW040x.Functions {
             }
         }
 
+        bool _help;
+        public bool HELP {
+            get { return _help; }
+            set {
+                _help = value;
+                OnPropertyChanged(nameof(HELP));
+            }
+        }
+
+        int _developer;
+        public int DEVELOPER {
+            get { return _developer; }
+            set {
+                _developer = value;
+                OnPropertyChanged(nameof(DEVELOPER));
+            }
+        }
+
         string _user;
         public string USER {
             get { return _user; }
@@ -150,6 +230,7 @@ namespace TestPCBAForGW040x.Functions {
             }
         }
 
+        public string ERRORCODE { get; set; }
 
         #region layout
         double _width;
@@ -698,7 +779,7 @@ namespace TestPCBAForGW040x.Functions {
         }
         //---------------------------------------------------//
         #endregion
-
+      
         public TestingInfo() {
             Initialize();
         }
@@ -707,10 +788,10 @@ namespace TestPCBAForGW040x.Functions {
             TITLE = Titles.inputMAC;
             CONTENT = "--";
             MAC = "";
-            ELAPSEDTIME = "Time elapsed 00:00:00";
+            ELAPSEDTIME = "Thời gian kiểm tra: 00:00:00";
             LOGUART = "";
             DATAUART = "";
-            LOGSYSTEM = "> NHẬP ĐỊA CHỈ MAC:\n";
+            LOGSYSTEM = "> NHẬP ĐỊA CHỈ MAC:\r\n";
             LOGCOUNTER = "0";
             PROGRESSVALUE = 0;
             PROGRESSTOTAL = 6;
@@ -731,6 +812,8 @@ namespace TestPCBAForGW040x.Functions {
             LAN4LED = true;
             WPSLED = true;
             LOSLED = true;
+            HELP = false;
+            ERRORCODE = "";
         }
     }
 
@@ -877,7 +960,28 @@ namespace TestPCBAForGW040x.Functions {
                 st.WriteLine(_Contents());
                 st.Dispose();
             }
+        }
 
+        public void SaveSystemLog() {
+            string rootPath = System.AppDomain.CurrentDomain.BaseDirectory;
+            //Create folder log
+            if (!System.IO.Directory.Exists(rootPath + "LogDetail")) System.IO.Directory.CreateDirectory(rootPath + "LogDetail");
+            //Create log file
+            string file = string.Format("{0}LogDetail\\{1}.txt", rootPath, DateTime.Now.ToString("yyyyMMdd"));
+            System.IO.StreamWriter st = new System.IO.StreamWriter(file, true);
+            st.WriteLine(GlobalData.testingInfo.LOGSYSTEM);
+            st.Dispose();
+        }
+
+        public void SaveUARTLog() {
+            string rootPath = System.AppDomain.CurrentDomain.BaseDirectory;
+            //Create folder log
+            if (!System.IO.Directory.Exists(rootPath + "LogUART")) System.IO.Directory.CreateDirectory(rootPath + "LogUART");
+            //Create log file
+            string file = string.Format("{0}LogUART\\{1}.txt", rootPath, DateTime.Now.ToString("yyyyMMdd"));
+            System.IO.StreamWriter st = new System.IO.StreamWriter(file, true);
+            st.WriteLine(GlobalData.testingInfo.LOGUART);
+            st.Dispose();
         }
     }
 }

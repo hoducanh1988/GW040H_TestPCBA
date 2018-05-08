@@ -11,12 +11,12 @@ namespace TestPCBAForGW040x.Functions {
             try {
                 GlobalData.testingInfo.COLORUSB = backGroundColors.wait;
                 //~~~~~~~~~~~~~~~~ Confirm USB Port
-                GlobalData.testingInfo.LOGSYSTEM += "<1/1: Kiểm tra cổng USB...\n";
+                GlobalData.testingInfo.LOGSYSTEM += "<1/1: Kiểm tra cổng USB...\r\n";
                 if (!confirmUSBPort(out _error)) {
-                    GlobalData.testingInfo.LOGSYSTEM += _error + "\n";
-                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
+                    GlobalData.testingInfo.LOGSYSTEM += _error + "\r\n";
+                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
                     goto NG; }
-                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 //~~~~~~~~~~~~~~~~
                 goto OK;
             }
@@ -26,13 +26,13 @@ namespace TestPCBAForGW040x.Functions {
             OK:
             {
                 GlobalData.testingInfo.COLORUSB = backGroundColors.pass;
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Check USB thành công\n\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Check USB thành công\r\n\r\n");
                 return true;
             }
             NG:
             {
                 GlobalData.testingInfo.COLORUSB = backGroundColors.fail;
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Check USB thất bại\n\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Check USB thất bại\r\n\r\n");
                 _err = _error;
                 return false;
             }

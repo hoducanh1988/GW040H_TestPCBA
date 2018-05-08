@@ -19,18 +19,18 @@ namespace TestPCBAForGW040x.Functions
             //////////////////
             try {
                 //length of mac = 12 ???
-                GlobalData.testingInfo.LOGSYSTEM += "... KIỂM TRA\n";
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("<1/4: Chiều dài kí tự MAC\n");
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("- Tiêu chuẩn = 12\n- Thực tế = {0}\n", macAddr.Length);
+                GlobalData.testingInfo.LOGSYSTEM += "... KIỂM TRA\r\n";
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("<1/4: Chiều dài kí tự MAC\r\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("- Tiêu chuẩn = 12\r\n- Thực tế = {0}\r\n", macAddr.Length);
                 if (macAddr.Length != 12) {
-                    GlobalData.testingInfo.LOGSYSTEM += string.Format("=> FAIL>\n");
+                    GlobalData.testingInfo.LOGSYSTEM += string.Format("=> FAIL>\r\n");
                     goto NG; }
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("=> PASS>\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("=> PASS>\r\n");
 
                 //first 6 digits = A4F4C2 || A06518
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("<2/4: 6 kí tự đầu của MAC\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("<2/4: 6 kí tự đầu của MAC\r\n");
                 string sixDigits = macAddr.Substring(0, 6);
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("- Tiêu chuẩn = A4F4C2||A06518\n- Thực tế = {0}\n", sixDigits);
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("- Tiêu chuẩn = A4F4C2||A06518\r\n- Thực tế = {0}\r\n", sixDigits);
                 string substr = GlobalData.initSetting.DutMacF6digit;
                 if(substr.Contains(":")) {
                     string[] buffer = substr.Split(':');
@@ -39,37 +39,38 @@ namespace TestPCBAForGW040x.Functions
                         if (sixDigits == item) { isSame = true; break; }
                     }
                     if (!isSame) {
-                        GlobalData.testingInfo.LOGSYSTEM += string.Format("=> FAIL>\n");
+                        GlobalData.testingInfo.LOGSYSTEM += string.Format("=> FAIL>\r\n");
                         goto NG; } 
                 } else {
                     if (sixDigits != substr) {
-                        GlobalData.testingInfo.LOGSYSTEM += string.Format("=> FAIL>\n");
+                        GlobalData.testingInfo.LOGSYSTEM += string.Format("=> FAIL>\r\n");
                         goto NG; } 
                 }
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("=> PASS>\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("=> PASS>\r\n");
 
                 //Mac digit format is [0-9,A-F]
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("<3/4: Định dạng kí tự MAC\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("<3/4: Định dạng kí tự MAC\r\n");
                 string patterns="";
                 for (int i = 0; i < 12; i++) {
                     patterns += "[0-9,A-F]";
                 }
                 if (!Regex.IsMatch(macAddr, patterns)) {
-                    GlobalData.testingInfo.LOGSYSTEM += string.Format("- Tiêu chuẩn = [0-9,A-F]\n- Thực tế = {0}\n", "False");
-                    GlobalData.testingInfo.LOGSYSTEM += string.Format("=> FAIL>\n");
+                    GlobalData.testingInfo.LOGSYSTEM += string.Format("- Tiêu chuẩn = [0-9,A-F]\r\n- Thực tế = {0}\r\n", "False");
+                    GlobalData.testingInfo.LOGSYSTEM += string.Format("=> FAIL>\r\n");
                     goto NG; }
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("Tiêu chuẩn = [0-9,A-F]\n- Thực tế = {0}\n", "True");
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("=> PASS>\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("Tiêu chuẩn = [0-9,A-F]\r\n- Thực tế = {0}\r\n", "True");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("=> PASS>\r\n");
 
                 //Open comport
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("<4/4: Mở cổng COM\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("<4/4: Mở cổng COM\r\n");
                 string message = "";
                 if (!GlobalData.serialPort.openSerialPort(out message)) {
-                    GlobalData.testingInfo.LOGSYSTEM += string.Format("- Tiêu chuẩn = True\n- Thực tế = {0}\n", "False");
-                    GlobalData.testingInfo.LOGSYSTEM += string.Format("=> FAIL>\n");
-                    goto NG; }
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("- Tiêu chuẩn = True\n- Thực tế = {0}\n", "True");
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("=> PASS>\n");
+                    GlobalData.testingInfo.LOGSYSTEM += string.Format("- Tiêu chuẩn = True\r\n- Thực tế = {0}\r\n", "False");
+                    GlobalData.testingInfo.LOGSYSTEM += string.Format("=> FAIL>\r\n");
+                    goto NG;
+                }
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("- Tiêu chuẩn = True\r\n- Thực tế = {0}\r\n", "True");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("=> PASS>\r\n");
 
                 goto OK;
             } catch {
@@ -78,14 +79,14 @@ namespace TestPCBAForGW040x.Functions
             //////////////////
             OK:
             {
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Địa chỉ MAC hợp lệ\n\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Địa chỉ MAC hợp lệ\r\n\r\n");
                 GlobalData.testingInfo.MAC = this.macAddr;
                 return true;
             }
             //////////////////
             NG:
             {
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Lỗi\n\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Lỗi\r\n\r\n");
                 return false;
             }
         }
@@ -96,67 +97,74 @@ namespace TestPCBAForGW040x.Functions
             try {
                 GlobalData.testingInfo.COLORMAC = backGroundColors.wait;
                 //~~~~~~~~~~~~~~~~ Wait DUT boot completed
-                GlobalData.testingInfo.LOGSYSTEM += "<1/8: Đợi DUT boot complete...\n";
-                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: Please press Enter to activate this console\n";
+                GlobalData.testingInfo.LOGSYSTEM += "<1/8: Đợi DUT boot complete...\r\n";
+                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: Please press Enter to activate this console\r\n";
                 if (!wait_DUTBootComplete(out _error)) {
                     GlobalData.testingInfo.LOGSYSTEM += _error;
-                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
+                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
+                    GlobalData.testingInfo.ERRORCODE = "Pma0#0001";
                     goto NG; }
-                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 //~~~~~~~~~~~~~~~~ Login DUT
-                GlobalData.testingInfo.LOGSYSTEM += "<2/8: Login vào DUT...\n";
-                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: root login  on `console'\n";
+                GlobalData.testingInfo.LOGSYSTEM += "<2/8: Login vào DUT...\r\n";
+                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: root login  on `console'\r\n";
                 if (!login_toDUT(out _error)) {
                     GlobalData.testingInfo.LOGSYSTEM += _error;
-                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
+                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
+                    GlobalData.testingInfo.ERRORCODE = "Pma0#0002";
                     goto NG; }
-                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 //~~~~~~~~~~~~~~~~ Set GPON Serial Number
-                GlobalData.testingInfo.LOGSYSTEM += "<3/8: Ghi GPON serial cho DUT...\n";
-                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: writeflash: total write\n";
+                GlobalData.testingInfo.LOGSYSTEM += "<3/8: Ghi GPON serial cho DUT...\r\n";
+                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: writeflash: total write\r\n";
                 if (!setGPONSerialNumber(out _error)) {
                     GlobalData.testingInfo.LOGSYSTEM += _error;
-                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
+                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
                     GlobalData.loginfo.WriteGPON = "FAIL";
+                    GlobalData.testingInfo.ERRORCODE = "Pma0#0003";
                     goto NG; }
-                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 GlobalData.loginfo.WriteGPON = "PASS";
                 //~~~~~~~~~~~~~~~~ Set WPS Number (pending)
 
                 //~~~~~~~~~~~~~~~~ Set MAC Address
-                GlobalData.testingInfo.LOGSYSTEM += "<5/8: Ghi địa chỉ MAC cho DUT...\n";
-                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: new mac addr = {0}:{1}:{2}:{3}:{4}:{5}\n";
+                GlobalData.testingInfo.LOGSYSTEM += "<5/8: Ghi địa chỉ MAC cho DUT...\r\n";
+                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: new mac addr = {0}:{1}:{2}:{3}:{4}:{5}\r\n";
                 if (!setMac_forEthernet0(out _error)) {
                     GlobalData.testingInfo.LOGSYSTEM += _error;
-                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
+                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
+                    GlobalData.testingInfo.ERRORCODE = "Pma0#0005";
                     goto NG; }
-                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 GlobalData.testingInfo.LOGUART = "";
                 //~~~~~~~~~~~~~~~~ Wait DUT boot completed
-                GlobalData.testingInfo.LOGSYSTEM += "<6/8: Đợi DUT boot complete...\n";
-                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: Please press Enter to activate this console\n";
+                GlobalData.testingInfo.LOGSYSTEM += "<6/8: Đợi DUT boot complete...\r\n";
+                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: Please press Enter to activate this console\r\n";
                 if (!wait_DUTWifiBootComplete(out _error)) {
                     GlobalData.testingInfo.LOGSYSTEM += _error;
-                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
+                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
+                    GlobalData.testingInfo.ERRORCODE = "Pma0#0001";
                     goto NG; }
-                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 //~~~~~~~~~~~~~~~~ Login DUT
-                GlobalData.testingInfo.LOGSYSTEM += "<7/8: Login vào DUT...\n";
-                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: root login  on `console'\n";
+                GlobalData.testingInfo.LOGSYSTEM += "<7/8: Login vào DUT...\r\n";
+                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: root login  on `console'\r\n";
                 if (!login_toDUT(out _error)) {
                     GlobalData.testingInfo.LOGSYSTEM += _error;
-                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
+                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
+                    GlobalData.testingInfo.ERRORCODE = "Pma0#0002";
                     goto NG; }
-                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 //~~~~~~~~~~~~~~~~ Confirm MAC Address
-                GlobalData.testingInfo.LOGSYSTEM += "<8/8: Xác nhận địa chỉ MAC...\n";
-                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: Link encap:Ethernet  HWaddr {0}:{1}:{2}:{3}:{4}:{5}\n";
+                GlobalData.testingInfo.LOGSYSTEM += "<8/8: Xác nhận địa chỉ MAC...\r\n";
+                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: Link encap:Ethernet  HWaddr {0}:{1}:{2}:{3}:{4}:{5}\r\n";
                 if (!confirm_MacAddress(out _error)) {
                     GlobalData.testingInfo.LOGSYSTEM += _error;
-                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\n";
+                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
                     GlobalData.loginfo.WriteMAC = "FAIL";
+                    GlobalData.testingInfo.ERRORCODE = "Pma0#0006";
                     goto NG; }
-                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\n";
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 GlobalData.loginfo.WriteMAC = "PASS";
                 goto OK;
             }
@@ -167,13 +175,13 @@ namespace TestPCBAForGW040x.Functions
             OK:
             {
                 GlobalData.testingInfo.COLORMAC = backGroundColors.pass;
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Ghi MAC thành công\n\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Ghi MAC thành công\r\n\r\n");
                 return true;
             }
             NG:
             {
                 GlobalData.testingInfo.COLORMAC = backGroundColors.fail;
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Ghi MAC thất bại\n\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Ghi MAC thất bại\r\n\r\n");
                 _err = _error;
                 return false;
             }
