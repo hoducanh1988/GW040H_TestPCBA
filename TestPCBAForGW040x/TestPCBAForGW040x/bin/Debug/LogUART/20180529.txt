@@ -1,0 +1,299 @@
+
+BGA IC
+Xtal:1
+DDR3 init.
+DRAMC init done. 
+Calculate size.
+DRAM size=256MB
+Set new TRFC.
+ddr-1066
+
+7512DRAMC V1.2.2 (0)
+Set SPI Flash Clock to 25 Mhz
+
+
+EN751221 at Fri May 25 16:34:18 ICT 2018 version 1.1 free bootbase
+
+Memory size 256MB
+
+Set SPI Flash Clock to 25 Mhz
+spi_nand_probe: mfr_id=0xef, dev_id=0xaa
+Dected SPI NAND Flash : _SPI_NAND_DEVICE_ID_W25N01G, Flash Size=0x8000000
+bmt pool size: 81 
+BMT & BBT Init Success 
+
+Press any key in 3 secs to enter boot command mode.
+
+>>>> boot_info_addr: 75c0570; flag: 1
+.............
+bldr> ipaddr 192.168.1.11
+Change IP address to 192.168.1.11
+bldr> 
+filetype = TCLINUX
+
+Starting the TFTP download...
+.................................................................................................................................................................................................................................................................................................................................................
+Total 11033328 (0xA85AF0) bytes received
+Received file: tclinux.bin
+rcvdata_size = 11033328
+start = 0x80020000
+filetype = 2
+Real crc code: 39708691
+Check data success, prepare to upload
+...
+Write to flash from 0x80020000 to 0x20000 with A85AF0 bytes
+
+.............................................................................................................................................................................................................................................................................
+
+VNPTT-Upload firmware success.
+
+
+PASSWORD: 
+
+LOGIN INCORRECT
+TC LOGIN: TC LOGIN: 
+
+
+
+
+
+BGA IC
+Xtal:1
+DDR3 init.
+DRAMC init done. 
+Calculate size.
+DRAM size=256MB
+Set new TRFC.
+ddr-1066
+
+7512DRAMC V1.2.2 (0)
+Set SPI Flash Clock to 25 Mhz
+
+
+EN751221 at Fri May 25 16:34:18 ICT 2018 version 1.1 free bootbase
+
+Memory size 256MB
+
+Set SPI Flash Clock to 25 Mhz
+spi_nand_probe: mfr_id=0xef, dev_id=0xaa
+Dected SPI NAND Flash : _SPI_NAND_DEVICE_ID_W25N01G, Flash Size=0x8000000
+bmt pool size: 81 
+BMT & BBT Init Success 
+
+Press any key in 3 secs to enter boot command mode.
+
+>>>> boot_info_addr: 75c0570; flag: 1
+....
+bldr> ipaddr 192.168.1.11
+Change IP address to 192.168.1.11
+bldr> 
+filetype = TCLINUX
+
+Starting the TFTP download...
+.................................................................................................................................................................................................................................................................................................................................................
+Total 11033328 (0xA85AF0) bytes received
+Received file: tclinux.bin
+rcvdata_size = 11033328
+start = 0x80020000
+filetype = 2
+Real crc code: 39708691
+Check data success, prepare to upload
+...
+Write to flash from 0x80020000 to 0x20000 with A85AF0 bytes
+
+.............................................................................................................................................................................................................................................................................
+
+VNPTT-Upload firmware success.
+
+BGA IC
+Xtal:1
+DDR3 init.
+DRAMC init done. 
+Calculate size.
+DRAM size=256MB
+Set new TRFC.
+ddr-1066
+
+7512DRAMC V1.2.2 (0)
+Set SPI Flash Clock to 25 Mhz
+
+
+EN751221 at Fri May 25 16:34:18 ICT 2018 version 1.1 free bootbase
+
+Memory size 256MB
+
+Set SPI Flash Clock to 25 Mhz
+spi_nand_probe: mfr_id=0xef, dev_id=0xaa
+Dected SPI NAND Flash : _SPI_NAND_DEVICE_ID_W25N01G, Flash Size=0x8000000
+bmt pool size: 81 
+BMT & BBT Init Success 
+
+Press any key in 3 secs to enter boot command mode.
+
+>>>> boot_info_addr: 75c0570; flag: 1
+.............
+bldr> ipaddr 192.168.1.11
+Change IP address to 192.168.1.11
+bldr> 
+filetype = TCLINUX
+
+Starting the TFTP download...
+.................................................................................................................................................................................................................................................................................................................................................
+Total 11033328 (0xA85AF0) bytes received
+Received file: tclinux.bin
+rcvdata_size = 11033328
+start = 0x80020000
+filetype = 2
+Real crc code: 39708691
+Check data success, prepare to upload
+...
+Write to flash from 0x80020000 to 0x20000 with A85AF0 bytes
+
+.............................................................................................................................................................................................................................................................................
+
+VNPTT-Upload firmware success.
+
+BGA IC
+Xtal:1
+DDR3 init.
+DRAMC init done. 
+Calculate size.
+DRAM size=256MB
+Set new TRFC.
+ddr-1066
+
+7512DRAMC V1.2.2 (0)
+Set SPI Flash Clock to 25 Mhz
+
+
+EN751221 at Fri May 25 16:34:18 ICT 2018 version 1.1 free bootbase
+
+Memory size 256MB
+
+Set SPI Flash Clock to 25 Mhz
+spi_nand_probe: mfr_id=0xef, dev_id=0xaa
+Dected SPI NAND Flash : _SPI_NAND_DEVICE_ID_W25N01G, Flash Size=0x8000000
+bmt pool size: 81 
+BMT & BBT Init Success 
+
+Press any key in 3 secs to enter boot command mode.
+
+>>>> boot_info_addr: 75c0570; flag: 1
+........
+bldr> ipaddr 192.168.1.11
+Change IP address to 192.168.1.11
+bldr> 
+filetype = TCLINUX
+
+Starting the TFTP download...
+.................................................................................................................................................................................................................................................................................................................................................
+Total 11033328 (0xA85AF0) bytes received
+Received file: tclinux.bin
+rcvdata_size = 11033328
+start = 0x80020000
+filetype = 2
+Real crc code: 39708691
+Check data success, prepare to upload
+...
+Write to flash from 0x80020000 to 0x20000 with A85AF0 bytes
+
+.............................................................................................................................................................................................................................................................................
+
+VNPTT-Upload firmware success.
+
+BGA IC
+Xtal:1
+DDR3 init.
+DRAMC init done. 
+Calculate size.
+DRAM size=256MB
+Set new TRFC.
+ddr-1066
+
+7512DRAMC V1.2.2 (0)
+Set SPI Flash Clock to 25 Mhz
+
+
+EN751221 at Fri May 25 16:34:18 ICT 2018 version 1.1 free bootbase
+
+Memory size 256MB
+
+Set SPI Flash Clock to 25 Mhz
+spi_nand_probe: mfr_id=0xef, dev_id=0xaa
+Dected SPI NAND Flash : _SPI_NAND_DEVICE_ID_W25N01G, Flash Size=0x8000000
+bmt pool size: 81 
+BMT & BBT Init Success 
+
+Press any key in 3 secs to enter boot command mode.
+
+>>>> boot_info_addr: 75c0570; flag: 1
+..............
+bldr> ipaddr 192.168.1.11
+Change IP address to 192.168.1.11
+bldr> 
+filetype = TCLINUX
+
+Starting the TFTP download...
+.................................................................................................................................................................................................................................................................................................................................................
+Total 11033328 (0xA85AF0) bytes received
+Received file: tclinux.bin
+rcvdata_size = 11033328
+start = 0x80020000
+filetype = 2
+Real crc code: 39708691
+Check data success, prepare to upload
+...
+Write to flash from 0x80020000 to 0x20000 with A85AF0 bytes
+
+.............................................................................................................................................................................................................................................................................
+
+VNPTT-Upload firmware success.
+
+BGA IC
+Xtal:1
+DDR3 init.
+DRAMC init done. 
+Calculate size.
+DRAM size=256MB
+Set new TRFC.
+ddr-1066
+
+7512DRAMC V1.2.2 (0)
+Set SPI Flash Clock to 25 Mhz
+
+
+EN751221 at Fri May 25 16:34:18 ICT 2018 version 1.1 free bootbase
+
+Memory size 256MB
+
+Set SPI Flash Clock to 25 Mhz
+spi_nand_probe: mfr_id=0xef, dev_id=0xaa
+Dected SPI NAND Flash : _SPI_NAND_DEVICE_ID_W25N01G, Flash Size=0x8000000
+bmt pool size: 81 
+BMT & BBT Init Success 
+
+Press any key in 3 secs to enter boot command mode.
+
+>>>> boot_info_addr: 75c0570; flag: 1
+...................
+bldr> ipaddr 192.168.1.11
+Change IP address to 192.168.1.11
+bldr> 
+filetype = TCLINUX
+
+Starting the TFTP download...
+.................................................................................................................................................................................................................................................................................................................................................
+Total 11033328 (0xA85AF0) bytes received
+Received file: tclinux.bin
+rcvdata_size = 11033328
+start = 0x80020000
+filetype = 2
+Real crc code: 39708691
+Check data success, prepare to upload
+...
+Write to flash from 0x80020000 to 0x20000 with A85AF0 bytes
+
+.............................................................................................................................................................................................................................................................................
+
+VNPTT-Upload firmware success.
+

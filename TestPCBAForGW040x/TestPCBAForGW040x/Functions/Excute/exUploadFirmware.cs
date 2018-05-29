@@ -56,7 +56,7 @@ namespace TestPCBAForGW040x.Functions
                     GlobalData.testingInfo.ERRORCODE = "Pfw0#0005";
                     goto NG; }
                 GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
-                GlobalData.testingInfo.LOGUART = "";
+                //GlobalData.testingInfo.LOGUART = "";
                 //~~~~~~~~~~~~~~~~
                 //Thread.Sleep(1000);
                 //sendDataToDUT("\r");

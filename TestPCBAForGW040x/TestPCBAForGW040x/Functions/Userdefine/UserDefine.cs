@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -93,7 +94,15 @@ namespace TestPCBAForGW040x.Functions {
             }
         }
         public string JigNumber {
-            get { return Properties.Settings.Default.JigNumber; }
+          
+            get {
+                try {
+                    int n = int.Parse(Properties.Settings.Default.JigNumber);
+                    DutIPUploadFW = string.Format("192.168.1.{0}", 9 + n);
+                }
+                catch { }
+                return Properties.Settings.Default.JigNumber;
+            }
             set {
                 Properties.Settings.Default.JigNumber = value;
                 try {
@@ -101,7 +110,6 @@ namespace TestPCBAForGW040x.Functions {
                     DutIPUploadFW = string.Format("192.168.1.{0}", 9 + n);
                 }
                 catch { }
-
                 OnPropertyChanged(nameof(JigNumber));
             }
         }
@@ -965,7 +973,26 @@ namespace TestPCBAForGW040x.Functions {
         public void SaveSystemLog() {
             string rootPath = System.AppDomain.CurrentDomain.BaseDirectory;
             //Create folder log
+            string dir = rootPath + "LogDetail";
             if (!System.IO.Directory.Exists(rootPath + "LogDetail")) System.IO.Directory.CreateDirectory(rootPath + "LogDetail");
+            //If file count > 30. Delete oldest file.
+            DirectoryInfo dinfo = new DirectoryInfo(dir);
+            FileInfo[] Files = dinfo.GetFiles("*.txt");
+            var orderFiles = Files.OrderBy(f => f.LastWriteTime);
+            if (Files.Length > 30) {
+                foreach(var f in orderFiles) {
+                    string fname = f.Name.Replace(".txt", "");
+                    string _txt = "";
+                    if (fname.Length == 8) _txt = string.Format("{0},{1},{2}", fname.Substring(0,4), fname.Substring(4,2), fname.Substring(6,2));
+                    if (_txt != "") {
+                        DateTime _old;
+                        if (DateTime.TryParse(_txt, out _old)) {
+                            if (DateTime.Now.Subtract(_old).Days > 30) File.Delete(f.FullName);
+                        }
+                    }
+                }
+            }
+            
             //Create log file
             string file = string.Format("{0}LogDetail\\{1}.txt", rootPath, DateTime.Now.ToString("yyyyMMdd"));
             System.IO.StreamWriter st = new System.IO.StreamWriter(file, true);
@@ -976,7 +1003,26 @@ namespace TestPCBAForGW040x.Functions {
         public void SaveUARTLog() {
             string rootPath = System.AppDomain.CurrentDomain.BaseDirectory;
             //Create folder log
+            string dir = rootPath + "LogUART";
             if (!System.IO.Directory.Exists(rootPath + "LogUART")) System.IO.Directory.CreateDirectory(rootPath + "LogUART");
+            //If file count > 30. Delete oldest file.
+            DirectoryInfo dinfo = new DirectoryInfo(dir);
+            FileInfo[] Files = dinfo.GetFiles("*.txt");
+            var orderFiles = Files.OrderBy(f => f.LastWriteTime);
+            if (Files.Length > 30) {
+                foreach (var f in orderFiles) {
+                    string fname = f.Name.Replace(".txt", "");
+                    string _txt = "";
+                    if (fname.Length == 8) _txt = string.Format("{0},{1},{2}", fname.Substring(0, 4), fname.Substring(4, 2), fname.Substring(6, 2));
+                    if (_txt != "") {
+                        DateTime _old;
+                        if (DateTime.TryParse(_txt, out _old)) {
+                            if (DateTime.Now.Subtract(_old).Days > 30) File.Delete(f.FullName);
+                        }
+                    }
+                }
+            }
+
             //Create log file
             string file = string.Format("{0}LogUART\\{1}.txt", rootPath, DateTime.Now.ToString("yyyyMMdd"));
             System.IO.StreamWriter st = new System.IO.StreamWriter(file, true);

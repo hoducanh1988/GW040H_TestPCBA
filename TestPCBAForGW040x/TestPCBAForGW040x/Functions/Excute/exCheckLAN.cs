@@ -64,6 +64,11 @@ namespace TestPCBAForGW040x.Functions {
                 GlobalData.testingInfo.LOGSYSTEM += "<2/2: Kiểm tra cổng LAN...\r\n";
                 bool ret = ba.checkLANPorts(ref lan1, ref lan2, ref lan3, ref lan4, out _error);
 
+                GlobalData.loginfo.Lan1 = lan1 == true ? "PASS" : "FAIL";
+                GlobalData.loginfo.Lan2 = lan2 == true ? "PASS" : "FAIL";
+                GlobalData.loginfo.Lan3 = lan3 == true ? "PASS" : "FAIL";
+                GlobalData.loginfo.Lan4 = lan4 == true ? "PASS" : "FAIL";
+
                 GlobalData.testingInfo.LOGSYSTEM += _error + "\r\n";
                 GlobalData.testingInfo.LOGSYSTEM += lan1 == true ? "LAN 1 is passed.\r\n" : "LAN 1 is failed.\r\n";
                 GlobalData.testingInfo.LOGSYSTEM += lan2 == true ? "LAN 2 is passed.\r\n" : "LAN 2 is failed.\r\n";
