@@ -1,0 +1,453 @@
+
+mount -t usbfs usbfs /proc/bus/usb/
+# 
+# cat /proc/bus/usb/devices
+
+T:  Bus=02 Lev=00 Prnt=00 Port=00 Cnt=00 Dev#=  1 Spd=5000 MxCh= 1
+B:  Alloc=  0/800 us ( 0%), #Int=  0, #Iso=  0
+D:  Ver= 3.00 Cls=09(hub  ) Sub=00 Prot=03 MxPS= 9 #Cfgs=  1
+P:  Vendor=1d6b ProdID=0003 Rev= 2.06
+S:  Manufacturer=Linux 2.6.36 xhci-hcd
+S:  Product=xHCI Host Controller
+S:  SerialNumber=xhc_mtk
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=03(Int.) MxPS=   4 Ivl=256ms
+
+T:  Bus=02 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  2 Spd=5000 MxCh= 4
+D:  Ver= 3.00 Cls=09(hub  ) Sub=00 Prot=03 MxPS= 9 #Cfgs=  1
+P:  Vendor=2109 ProdID=0812 Rev= b.e1
+S:  Manufacturer=VIA Labs, Inc.         
+S:  Product=USB3.0 Hub             
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=13(Int.) MxPS=   2 Ivl=16ms
+
+T:  Bus=02 Lev=02 Prnt=02 Port=00 Cnt=01 Dev#=  3 Spd=5000 MxCh= 0
+D:  Ver= 3.10 Cls=00(>ifc ) Sub=00 Prot=00 MxPS= 9 #Cfgs=  1
+P:  Vendor=0951 ProdID=1666 Rev= 1.00
+S:  Manufacturer=Kingston
+S:  Product=DataTraveler 3.0
+S:  SerialNumber=60A44C3FAC18B230D967039E
+C:* #Ifs= 1 Cfg#= 1 Atr=80 MxPwr=126mA
+I:* If#= 0 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage
+E:  Ad=81(I) Atr=02(Bulk) MxPS=1024 Ivl=0ms
+E:  Ad=02(O) Atr=02(Bulk) MxPS=1024 Ivl=0ms
+
+T:  Bus=01 Lev=00 Prnt=00 Port=00 Cnt=00 Dev#=  1 Spd=480  MxCh= 2
+B:  Alloc=  0/800 us ( 0%), #Int=  0, #Iso=  0
+D:  Ver= 2.00 Cls=09(hub  ) Sub=00 Prot=01 MxPS=64 #Cfgs=  1
+P:  Vendor=1d6b ProdID=0002 Rev= 2.06
+S:  Manufacturer=Linux 2.6.36 xhci-hcd
+S:  Product=xHCI Host Controller
+S:  SerialNumber=xhc_mtk
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=03(Int.) MxPS=   4 Ivl=256ms
+
+T:  Bus=01 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  2 Spd=480  MxCh= 4
+D:  Ver= 2.10 Cls=09(hub  ) Sub=00 Prot=01 MxPS=64 #Cfgs=  1
+P:  Vendor=2109 ProdID=2812 Rev= b.e0
+S:  Manufacturer=VIA Labs, Inc.         
+S:  Product=USB2.0 Hub             
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=03(Int.) MxPS=   1 Ivl=256ms
+
+T:  Bus=01 Lev=02 Prnt=02 Port=01 Cnt=01 Dev#=  3 Spd=480  MxCh= 0
+D:  Ver= 2.00 Cls=00(>ifc ) Sub=00 Prot=00 MxPS=64 #Cfgs=  1
+P:  Vendor=125f ProdID=c96a Rev=11.00
+S:  Manufacturer=ADATA
+S:  Product=ADATA USB Flash Drive
+S:  SerialNumber=147041949220023C
+C:* #Ifs= 1 Cfg#= 1 Atr=80 MxPwr=300mA
+I:* If#= 0 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage
+E:  Ad=81(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=02(O) Atr=02(Bulk) MxPS= 512 Ivl=31875us
+# 
+# echo 1 > /proc/xpon/los_led
+# iwpriv ra0 set led_setting=00-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 00-00-00-00-00-00-00-00
+
+Set_Led_Proc
+00
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# echo 1 > proc/tc3162/led_wlan5g
+# iwpriv ra0 set led_setting=01-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 01-00-00-00-00-00-00-00
+
+Set_Led_Proc
+01
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# sys memwl bfbf0204 0x2
+echo "1 0" > proc/tc3162/led_internet
+# echo "1 0" > proc/tc3162/led_internet
+# echo "0 1" > proc/tc3162/led_internet
+# echo 1 > /proc/xpon/los_led
+# iwpriv ra0 set led_setting=00-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 00-00-00-00-00-00-00-00
+
+Set_Led_Proc
+00
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# echo 1 > proc/tc3162/led_wlan5g
+# iwpriv ra0 set led_setting=01-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 01-00-00-00-00-00-00-00
+
+Set_Led_Proc
+01
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# sys memwl bfbf0204 0x2
+# echo "1 0" > proc/tc3162/led_internet
+# BcnCheck: no bcn still occur within 9630 sec for band 1(rai0)!!
+echo "0 1" > proc/tc3162/led_internet
+# echo 1 > /proc/xpon/los_led
+# iwpriv ra0 set led_setting=00-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 00-00-00-00-00-00-00-00
+
+Set_Led_Proc
+00
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# echo 1 > proc/tc3162/led_wlan5g
+# iwpriv ra0 set led_setting=01-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 01-00-00-00-00-00-00-00
+
+Set_Led_Proc
+01
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# sys memwl bfbf0204 0x2
+# echo "1 0" > proc/tc3162/led_internet
+# echo "0 1" > proc/tc3162/led_internet
+# echo 1 > /proc/xpon/los_led
+# iwpriv ra0 set led_setting=00-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 00-00-00-00-00-00-00-00
+
+Set_Led_Proc
+00
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# echo 1 > proc/tc3162/led_wlan5g
+# iwpriv ra0 set led_setting=01-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 01-00-00-00-00-00-00-00
+
+Set_Led_Proc
+01
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# sys memwl bfbf0204 0x2
+# echo "1 0" > proc/tc3162/led_internet
+# echo "0 1" > proc/tc3162/led_internet
+# 
+echo 1 > /proc/xpon/los_led
+# iwpriv ra0 set led_setting=00-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 00-00-00-00-00-00-00-00
+
+Set_Led_Proc
+00
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# echo 1 > proc/tc3162/led_wlan5g
+# iwpriv ra0 set led_setting=01-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 01-00-00-00-00-00-00-00
+
+Set_Led_Proc
+01
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# sys memwl bfbf0204 0x2
+# echo "1 0" > proc/tc3162/led_internet
+# echo "0 1" > proc/tc3162/led_internet
+# BcnCheck: no bcn still occur within 10260 sec for band 1(rai0)!!
+echo 1 > /proc/xpon/los_led
+# iwpriv ra0 set led_setting=00-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 00-00-00-00-00-00-00-00
+
+Set_Led_Proc
+00
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# echo 1 > proc/tc3162/led_wlan5g
+# iwpriv ra0 set led_setting=01-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 01-00-00-00-00-00-00-00
+
+Set_Led_Proc
+01
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# sys memwl bfbf0204 0x2
+# echo "1 0" > proc/tc3162/led_internet
+# echo "0 1" > proc/tc3162/led_internet
+# echo 1 > /proc/xpon/los_led
+# iwpriv ra0 set led_setting=00-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 00-00-00-00-00-00-00-00
+
+Set_Led_Proc
+00
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# echo 1 > proc/tc3162/led_wlan5g
+# iwpriv ra0 set led_setting=01-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 01-00-00-00-00-00-00-00
+
+Set_Led_Proc
+01
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# sys memwl bfbf0204 0x2
+# echo "1 0" > proc/tc3162/led_internet
+# echo "0 1" > proc/tc3162/led_internet
+# echo 1 > /proc/xpon/los_led
+# iwpriv ra0 set led_setting=00-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 00-00-00-00-00-00-00-00
+
+Set_Led_Proc
+00
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# echo 1 > proc/tc3162/led_wlan5g
+# iwpriv ra0 set led_setting=01-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 01-00-00-00-00-00-00-00
+
+Set_Led_Proc
+01
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# sys memwl bfbf0204 0x2
+# echo "1 0" > proc/tc3162/led_internet
+# echo "0 1" > proc/tc3162/led_internet
+# echo 1 > /proc/xpon/los_led
+# iwpriv ra0 set led_setting=00-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 00-00-00-00-00-00-00-00
+
+Set_Led_Proc
+00
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# echo 1 > proc/tc3162/led_wlan5g
+# iwpriv ra0 set led_setting=01-00-00-00-00-00-00-00
+
+ Set_Led_Proc ==> arg = 01-00-00-00-00-00-00-00
+
+Set_Led_Proc
+01
+00
+00
+00
+00
+00
+00
+00
+AndesLedEnhanceOP: Success!
+# sys memwl bfbf0204 0x2
+# echo "1 0" > proc/tc3162/led_internet
+# echo "0 1" > proc/tc3162/led_internet
+# 
+[w][w][w]
+
+
+net_ratelimit: 42373 callbacks suppressed
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.4 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.4 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.4 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+net_ratelimit: 42040 callbacks suppressed
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+net_ratelimit: 42385 callbacks suppressed
+br0: received packet on eth0.4 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.4 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.4 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+
+ERROR: xmcs Event exceed max num,type 1 id 6 value 34
+net_ratelimit: 42074 callbacks suppressed
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.4 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.4 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+ERROR: xmcs Event exceed max num,type 1 id 6 value 34
+ERROR: xmcs Event exceed max num,type 1 id 6 value 34
+ERROR: xmcs Event exceed max num,type 1 id 6 value 34
+BcnCheck: no bcn still occur within 120 sec for band 1(rai0)!!
+ERROR: xmcs Event exceed max num,type 1 id 6 value 34
+ERROR: xmcs Event exceed max num,type 1 id 6 value 34
+net_ratelimit: 42416 callbacks suppressed
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.4 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+ERROR: xmcs Event exceed max num,type 1 id 6 value 34
+ERROR: xmcs Event exceed max num,type 1 id 6 value 34
+ERROR: xmcs Event exceed max num,type 1 id 6 value 34
+ERROR: xmcs Event exceed max num,type 1 id 6 value 34
+ERROR: xmcs Event exceed max num,type 1 id 6 value 34
+net_ratelimit: 42214 callbacks suppressed
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.4 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+?
+

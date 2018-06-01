@@ -1,0 +1,957 @@
+> NHẬP ĐỊA CHỈ MAC:
+... MAC="A4F4C2909090"
+... KIỂM TRA
+<1/4: Chiều dài kí tự MAC
+- Tiêu chuẩn = 12
+- Thực tế = 12
+=> PASS>
+<2/4: 6 kí tự đầu của MAC
+- Tiêu chuẩn = A4F4C2||A06518
+- Thực tế = A4F4C2
+=> PASS>
+<3/4: Định dạng kí tự MAC
+Tiêu chuẩn = [0-9,A-F]
+- Thực tế = True
+=> PASS>
+<4/4: Mở cổng COM
+- Tiêu chuẩn = True
+- Thực tế = True
+=> PASS>
+...Phán định: Địa chỉ MAC hợp lệ
+
+> CHECK CỔNG LAN-----------
+<1/2: Login vào ONT...
+=> PASS>
+<2/2: Kiểm tra cổng LAN...
+ethphxcmd eth0 media-type port 0
+auto, Auto-negotiation enabled.
+No common media type was autonegotiated!
+This is extremely unusual and typically indicates a configuration error.
+Perhaps the advertised capability set was intentionally limited.
+Link is down
+# 
+# ethphxcmd eth0 media-type port 1
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 2
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 3
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# 
+LAN 1 is failed.
+LAN 2 is passed.
+LAN 3 is passed.
+LAN 4 is passed.
+=> FAIL>
+<2/2: Kiểm tra cổng LAN...
+ethphxcmd eth0 media-type port 0
+auto, Auto-negotiation enabled.
+No common media type was autonegotiated!
+This is extremely unusual and typically indicates a configuration error.
+Perhaps the advertised capability set was intentionally limited.
+Link is down
+# 
+# ethphxcmd eth0 media-type port 1
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 2
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 3
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# 
+LAN 1 is failed.
+LAN 2 is passed.
+LAN 3 is passed.
+LAN 4 is passed.
+=> FAIL>
+<2/2: Kiểm tra cổng LAN...
+ethphxcmd eth0 media-type port 0
+auto, Auto-negotiation enabled.
+No common media type was autonegotiated!
+This is extremely unusual and typically indicates a configuration error.
+Perhaps the advertised capability set was intentionally limited.
+Link is down
+# 
+# ethphxcmd eth0 media-type port 1
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 2
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 3
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# 
+LAN 1 is failed.
+LAN 2 is passed.
+LAN 3 is passed.
+LAN 4 is passed.
+=> FAIL>
+...Phán định: Check LAN thất bại
+
+-----------------------
+=> Tổng phán định: FAIL
+
+> NHẬP ĐỊA CHỈ MAC:
+... MAC="A4F4C2909090"
+... KIỂM TRA
+<1/4: Chiều dài kí tự MAC
+- Tiêu chuẩn = 12
+- Thực tế = 12
+=> PASS>
+<2/4: 6 kí tự đầu của MAC
+- Tiêu chuẩn = A4F4C2||A06518
+- Thực tế = A4F4C2
+=> PASS>
+<3/4: Định dạng kí tự MAC
+Tiêu chuẩn = [0-9,A-F]
+- Thực tế = True
+=> PASS>
+<4/4: Mở cổng COM
+- Tiêu chuẩn = True
+- Thực tế = True
+=> PASS>
+...Phán định: Địa chỉ MAC hợp lệ
+
+> CHECK CỔNG LAN-----------
+<1/2: Login vào ONT...
+=> PASS>
+<2/2: Kiểm tra cổng LAN...
+ethphxcmd eth0 media-type port 0
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 1
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 2
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 3
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# 
+LAN 1 is passed.
+LAN 2 is passed.
+LAN 3 is passed.
+LAN 4 is passed.
+=> PASS>
+...Phán định: Check LAN thành công
+
+> CHECK CỔNG USB-----------
+<1/2: Login vào ONT...
+=> PASS>
+<2/2: Kiểm tra cổng USB...
+mount -t usbfs usbfs /proc/bus/usb/
+# 
+# cat /proc/bus/usb/devices
+
+T:  Bus=02 Lev=00 Prnt=00 Port=00 Cnt=00 Dev#=  1 Spd=5000 MxCh= 1
+B:  Alloc=  0/800 us ( 0%), #Int=  0, #Iso=  0
+D:  Ver= 3.00 Cls=09(hub  ) Sub=00 Prot=03 MxPS= 9 #Cfgs=  1
+P:  Vendor=1d6b ProdID=0003 Rev= 2.06
+S:  Manufacturer=Linux 2.6.36 xhci-hcd
+S:  Product=xHCI Host Controller
+S:  SerialNumber=xhc_mtk
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=03(Int.) MxPS=   4 Ivl=256ms
+
+T:  Bus=02 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  2 Spd=5000 MxCh= 4
+D:  Ver= 3.00 Cls=09(hub  ) Sub=00 Prot=03 MxPS= 9 #Cfgs=  1
+P:  Vendor=2109 ProdID=0812 Rev= b.e1
+S:  Manufacturer=VIA Labs, Inc.         
+S:  Product=USB3.0 Hub             
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=13(Int.) MxPS=   2 Ivl=16ms
+
+T:  Bus=02 Lev=02 Prnt=02 Port=00 Cnt=01 Dev#=  3 Spd=5000 MxCh= 0
+D:  Ver= 3.10 Cls=00(>ifc ) Sub=00 Prot=00 MxPS= 9 #Cfgs=  1
+P:  Vendor=0951 ProdID=1666 Rev= 1.00
+S:  Manufacturer=Kingston
+S:  Product=DataTraveler 3.0
+S:  SerialNumber=60A44C3FAC18B230D967039E
+C:* #Ifs= 1 Cfg#= 1 Atr=80 MxPwr=126mA
+I:* If#= 0 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage
+E:  Ad=81(I) Atr=02(Bulk) MxPS=1024 Ivl=0ms
+E:  Ad=02(O) Atr=02(Bulk) MxPS=1024 Ivl=0ms
+
+T:  Bus=01 Lev=00 Prnt=00 Port=00 Cnt=00 Dev#=  1 Spd=480  MxCh= 2
+B:  Alloc=  0/800 us ( 0%), #Int=  0, #Iso=  0
+D:  Ver= 2.00 Cls=09(hub  ) Sub=00 Prot=01 MxPS=64 #Cfgs=  1
+P:  Vendor=1d6b ProdID=0002 Rev= 2.06
+S:  Manufacturer=Linux 2.6.36 xhci-hcd
+S:  Product=xHCI Host Controller
+S:  SerialNumber=xhc_mtk
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=03(Int.) MxPS=   4 Ivl=256ms
+
+T:  Bus=01 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  2 Spd=480  MxCh= 4
+D:  Ver= 2.10 Cls=09(hub  ) Sub=00 Prot=01 MxPS=64 #Cfgs=  1
+P:  Vendor=2109 ProdID=2812 Rev= b.e0
+S:  Manufacturer=VIA Labs, Inc.         
+S:  Product=USB2.0 Hub             
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=03(Int.) MxPS=   1 Ivl=256ms
+
+T:  Bus=01 Lev=02 Prnt=02 Port=01 Cnt=01 Dev#=  3 Spd=480  MxCh= 0
+D:  Ver= 2.00 Cls=00(>ifc ) Sub=00 Prot=00 MxPS=64 #Cfgs=  1
+P:  Vendor=125f ProdID=c96a Rev=11.00
+S:  Manufacturer=ADATA
+S:  Product=ADATA USB Flash Drive
+S:  SerialNumber=147041949220023C
+C:* #Ifs= 1 Cfg#= 1 Atr=80 MxPwr=300mA
+I:* If#= 0 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage
+E:  Ad=81(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=02(O) Atr=02(Bulk) MxPS= 512 Ivl=31875us
+# 
+# 
+Usb2.0 is passed.
+Usb3.0 is passed.
+=> PASS>
+...Phán định: Check USB thành công
+
+> CHECK LEDS---------------
+<3/3: Kiểm tra LEDs...
+POWER LED = PASS
+PON LED = PASS
+INET LED = PASS
+WLAN 2G LED = PASS
+WLAN 5G LED = FAIL
+LAN1 LED = PASS
+LAN2 LED = PASS
+LAN3 LED = PASS
+LAN4 LED = PASS
+WPS LED = PASS
+LOS LED = PASS
+- Thời gian: 4sec/180sec
+
+=> FAIL>
+...Phán định: Check LED thất bại
+
+-----------------------
+=> Tổng phán định: FAIL
+
+> NHẬP ĐỊA CHỈ MAC:
+... MAC="A4F4C2909090"
+... KIỂM TRA
+<1/4: Chiều dài kí tự MAC
+- Tiêu chuẩn = 12
+- Thực tế = 12
+=> PASS>
+<2/4: 6 kí tự đầu của MAC
+- Tiêu chuẩn = A4F4C2||A06518
+- Thực tế = A4F4C2
+=> PASS>
+<3/4: Định dạng kí tự MAC
+Tiêu chuẩn = [0-9,A-F]
+- Thực tế = True
+=> PASS>
+<4/4: Mở cổng COM
+- Tiêu chuẩn = True
+- Thực tế = True
+=> PASS>
+...Phán định: Địa chỉ MAC hợp lệ
+
+> CHECK LEDS---------------
+<3/3: Kiểm tra LEDs...
+POWER LED = PASS
+PON LED = PASS
+INET LED = PASS
+WLAN 2G LED = FAIL
+WLAN 5G LED = PASS
+LAN1 LED = PASS
+LAN2 LED = PASS
+LAN3 LED = PASS
+LAN4 LED = PASS
+WPS LED = PASS
+LOS LED = PASS
+- Thời gian: 5sec/180sec
+
+=> FAIL>
+...Phán định: Check LED thất bại
+
+-----------------------
+=> Tổng phán định: FAIL
+
+> NHẬP ĐỊA CHỈ MAC:
+... MAC="A4F4C2909090"
+... KIỂM TRA
+<1/4: Chiều dài kí tự MAC
+- Tiêu chuẩn = 12
+- Thực tế = 12
+=> PASS>
+<2/4: 6 kí tự đầu của MAC
+- Tiêu chuẩn = A4F4C2||A06518
+- Thực tế = A4F4C2
+=> PASS>
+<3/4: Định dạng kí tự MAC
+Tiêu chuẩn = [0-9,A-F]
+- Thực tế = True
+=> PASS>
+<4/4: Mở cổng COM
+- Tiêu chuẩn = True
+- Thực tế = True
+=> PASS>
+...Phán định: Địa chỉ MAC hợp lệ
+
+> CHECK CỔNG LAN-----------
+<1/2: Login vào ONT...
+=> PASS>
+<2/2: Kiểm tra cổng LAN...
+ethphxcmd eth0 media-type port 0
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 1
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 2
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 3
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# 
+LAN 1 is passed.
+LAN 2 is passed.
+LAN 3 is passed.
+LAN 4 is passed.
+=> PASS>
+...Phán định: Check LAN thành công
+
+> CHECK CỔNG USB-----------
+<1/2: Login vào ONT...
+=> PASS>
+<2/2: Kiểm tra cổng USB...
+mount -t usbfs usbfs /proc/bus/usb/
+mount: Mounting usbfs on /proc/bus/usb failed: Device or resource busy
+# 
+# cat /proc/bus/usb/devices
+
+T:  Bus=02 Lev=00 Prnt=00 Port=00 Cnt=00 Dev#=  1 Spd=5000 MxCh= 1
+B:  Alloc=  0/800 us ( 0%), #Int=  0, #Iso=  0
+D:  Ver= 3.00 Cls=09(hub  ) Sub=00 Prot=03 MxPS= 9 #Cfgs=  1
+P:  Vendor=1d6b ProdID=0003 Rev= 2.06
+S:  Manufacturer=Linux 2.6.36 xhci-hcd
+S:  Product=xHCI Host Controller
+S:  SerialNumber=xhc_mtk
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=03(Int.) MxPS=   4 Ivl=256ms
+
+T:  Bus=02 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  2 Spd=5000 MxCh= 4
+D:  Ver= 3.00 Cls=09(hub  ) Sub=00 Prot=03 MxPS= 9 #Cfgs=  1
+P:  Vendor=2109 ProdID=0812 Rev= b.e1
+S:  Manufacturer=VIA Labs, Inc.         
+S:  Product=USB3.0 Hub             
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=13(Int.) MxPS=   2 Ivl=16ms
+
+T:  Bus=02 Lev=02 Prnt=02 Port=00 Cnt=01 Dev#=  3 Spd=5000 MxCh= 0
+D:  Ver= 3.10 Cls=00(>ifc ) Sub=00 Prot=00 MxPS= 9 #Cfgs=  1
+P:  Vendor=0951 ProdID=1666 Rev= 1.00
+S:  Manufacturer=Kingston
+S:  Product=DataTraveler 3.0
+S:  SerialNumber=60A44C3FAC18B230D967039E
+C:* #Ifs= 1 Cfg#= 1 Atr=80 MxPwr=126mA
+I:* If#= 0 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage
+E:  Ad=81(I) Atr=02(Bulk) MxPS=1024 Ivl=0ms
+E:  Ad=02(O) Atr=02(Bulk) MxPS=1024 Ivl=0ms
+
+T:  Bus=01 Lev=00 Prnt=00 Port=00 Cnt=00 Dev#=  1 Spd=480  MxCh= 2
+B:  Alloc=  0/800 us ( 0%), #Int=  0, #Iso=  0
+D:  Ver= 2.00 Cls=09(hub  ) Sub=00 Prot=01 MxPS=64 #Cfgs=  1
+P:  Vendor=1d6b ProdID=0002 Rev= 2.06
+S:  Manufacturer=Linux 2.6.36 xhci-hcd
+S:  Product=xHCI Host Controller
+S:  SerialNumber=xhc_mtk
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=03(Int.) MxPS=   4 Ivl=256ms
+
+T:  Bus=01 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  2 Spd=480  MxCh= 4
+D:  Ver= 2.10 Cls=09(hub  ) Sub=00 Prot=01 MxPS=64 #Cfgs=  1
+P:  Vendor=2109 ProdID=2812 Rev= b.e0
+S:  Manufacturer=VIA Labs, Inc.         
+S:  Product=USB2.0 Hub             
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=03(Int.) MxPS=   1 Ivl=256ms
+
+T:  Bus=01 Lev=02 Prnt=02 Port=01 Cnt=01 Dev#=  3 Spd=480  MxCh= 0
+D:  Ver= 2.00 Cls=00(>ifc ) Sub=00 Prot=00 MxPS=64 #Cfgs=  1
+P:  Vendor=125f ProdID=c96a Rev=11.00
+S:  Manufacturer=ADATA
+S:  Product=ADATA USB Flash Drive
+S:  SerialNumber=147041949220023C
+C:* #Ifs= 1 Cfg#= 1 Atr=80 MxPwr=300mA
+I:* If#= 0 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage
+E:  Ad=81(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=02(O) Atr=02(Bulk) MxPS= 512 Ivl=31875us
+# 
+# 
+Usb2.0 is passed.
+Usb3.0 is passed.
+=> PASS>
+...Phán định: Check USB thành công
+
+> CHECK LEDS---------------
+<3/3: Kiểm tra LEDs...
+POWER LED = PASS
+PON LED = PASS
+INET LED = PASS
+WLAN 2G LED = PASS
+WLAN 5G LED = PASS
+LAN1 LED = PASS
+LAN2 LED = PASS
+LAN3 LED = PASS
+LAN4 LED = PASS
+WPS LED = PASS
+LOS LED = PASS
+- Thời gian: 1sec/180sec
+=> PASS>
+...Phán định: Check LED thành công
+
+> GHI SN,GPON,WPS,MAC------
+<1/4: Login vào DUT...
+- Tiêu chuẩn: root login  on `console'
+=> PASS>
+<2/4: Ghi GPON serial cho DUT...
+- Tiêu chuẩn: writeflash: total write
+Generate GPON serial: VNPT01212121=> PASS>
+<4/4: Ghi địa chỉ MAC cho DUT...
+- Tiêu chuẩn: new mac addr = {0}:{1}:{2}:{3}:{4}:{5}
+=> PASS>
+...Phán định: Ghi MAC thành công
+
+-----------------------
+=> Tổng phán định: PASS
+
+> NHẬP ĐỊA CHỈ MAC:
+... MAC="A4F4C2909090"
+... KIỂM TRA
+<1/4: Chiều dài kí tự MAC
+- Tiêu chuẩn = 12
+- Thực tế = 12
+=> PASS>
+<2/4: 6 kí tự đầu của MAC
+- Tiêu chuẩn = A4F4C2||A06518
+- Thực tế = A4F4C2
+=> PASS>
+<3/4: Định dạng kí tự MAC
+Tiêu chuẩn = [0-9,A-F]
+- Thực tế = True
+=> PASS>
+<4/4: Mở cổng COM
+- Tiêu chuẩn = True
+- Thực tế = True
+=> PASS>
+...Phán định: Địa chỉ MAC hợp lệ
+
+> CHECK CỔNG LAN-----------
+<1/2: Login vào ONT...
+=> PASS>
+<2/2: Kiểm tra cổng LAN...
+net_ratelimit: 52802 callbacks suppressed
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.1 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.4 with own address as source address
+br0: received packet on eth0.1 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+ethphxcmd eth0 media-type port 0
+ethphxcmd eth0 media-type port 1
+ethphxcmd eth0 media-type port 2
+ethphxcmd eth0 media-type port 3
+
+LAN 1 is failed.
+LAN 2 is failed.
+LAN 3 is failed.
+LAN 4 is failed.
+=> FAIL>
+<2/2: Kiểm tra cổng LAN...
+ethphxcmd eth0 media-type port 0
+ethphxcmd eth0 media-type port 1
+ethphxcmd eth0 media-type port 2
+The remaining IMEM space cannot accommodate section .imem_text !!
+Remaining IMEM space: 7380 bytes	Section Size: 11200 bytes
+
+LAN 1 is failed.
+LAN 2 is failed.
+LAN 3 is failed.
+LAN 4 is failed.
+=> FAIL>
+<2/2: Kiểm tra cổng LAN...
+register rtpci
+PCI: Enabling device 0000:02:00.0 (0000 -> 0002)
+
+
+=== pAd = c2b82000, size = 2211024 ===
+
+<-- RTMPAllocAdapterBlock, Status=0
+get_wdev_by_idx: invalid idx(0)
+pAd->PciHif.CSRBaseAddress =0xc2a80000, csr_addr=0xc2a80000!
+get_wdev_by_idx: invalid idx(0)
+RTMPInitPCIeDevice():device_id=0x7615
+DriverOwn()::Try to Clear FW Own...
+DriverOwn()::Success to clear FW Own
+mt_pci_chip_cfg(): HWVer=0x8a10, FWVer=0x8a10, pAd->ChipID=0x7615
+mt_pci_chip_cfg(): HIF_SYS_REV=0x76150001
+RtmpChipOpsHook(493): Not support for HIF_MT yet! MACVersion=0x0
+mt7615_init()-->
+Use the default ePAeLNA bin image!
+Use the default /etc/Wireless/RT2860AP_AC/RT30xxEEPROM.bin bin image!
+<--mt7615_init()
+ChipOpsMCUHook
+cut_through_token_list_init(): TokenList inited done!id_head/tail=0/4096
+cut_through_token_list_init(): 8dabee08,8dabee08
+cut_through_token_list_init(): TokenList inited done!id_head/tail=0/4096
+cut_through_token_list_init(): 8dabee18,8dabee18
+<-- RTMPAllocTxRxRingMemory, Status=0
+get_wdev_by_idx: invalid idx(0)
+get_wdev_by_idx: invalid idx(0)
+get_wdev_by_idx: invalid idx(0)
+get_wdev_by_idx: invalid idx(0)
+get_wdev_by_idx: invalid idx(0)
+get_wdev_by_idx: invalid idx(0)
+get_wdev_by_idx: invalid idx(0)
+pci probe count=1
+ethphxcmd eth0 media-type port 3
+ethphxcmd eth0 media-type port 0
+ethphxcmd eth0 media-type port 1
+ethphxcmd eth0 media-type port 2
+get_wdev_by_idx: invalid idx(0)
+ethphxcmd eth0 media-type port 3
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 1
+get_wdev_by_idx: invalid idx(0)
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 2
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 3
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 0
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 1
+
+LAN 1 is failed.
+LAN 2 is failed.
+LAN 3 is failed.
+LAN 4 is passed.
+=> FAIL>
+...Phán định: Check LAN thất bại
+
+-----------------------
+=> Tổng phán định: FAIL
+
+> NHẬP ĐỊA CHỈ MAC:
+... MAC="A4F4C2909090"
+... KIỂM TRA
+<1/4: Chiều dài kí tự MAC
+- Tiêu chuẩn = 12
+- Thực tế = 12
+=> PASS>
+<2/4: 6 kí tự đầu của MAC
+- Tiêu chuẩn = A4F4C2||A06518
+- Thực tế = A4F4C2
+=> PASS>
+<3/4: Định dạng kí tự MAC
+Tiêu chuẩn = [0-9,A-F]
+- Thực tế = True
+=> PASS>
+<4/4: Mở cổng COM
+- Tiêu chuẩn = True
+- Thực tế = True
+=> PASS>
+...Phán định: Địa chỉ MAC hợp lệ
+
+> CHECK CỔNG LAN-----------
+<1/2: Login vào ONT...
+=> PASS>
+<2/2: Kiểm tra cổng LAN...
+ethphxcmd eth0 media-type port 0
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 1
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 2
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 3
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# 
+LAN 1 is passed.
+LAN 2 is passed.
+LAN 3 is passed.
+LAN 4 is passed.
+=> PASS>
+...Phán định: Check LAN thành công
+
+> CHECK CỔNG USB-----------
+<1/2: Login vào ONT...
+=> PASS>
+<2/2: Kiểm tra cổng USB...
+mount -t usbfs usbfs /proc/bus/usb/
+# 
+# cat /proc/bus/usb/devices
+
+T:  Bus=02 Lev=00 Prnt=00 Port=00 Cnt=00 Dev#=  1 Spd=5000 MxCh= 1
+B:  Alloc=  0/800 us ( 0%), #Int=  0, #Iso=  0
+D:  Ver= 3.00 Cls=09(hub  ) Sub=00 Prot=03 MxPS= 9 #Cfgs=  1
+P:  Vendor=1d6b ProdID=0003 Rev= 2.06
+S:  Manufacturer=Linux 2.6.36 xhci-hcd
+S:  Product=xHCI Host Controller
+S:  SerialNumber=xhc_mtk
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=03(Int.) MxPS=   4 Ivl=256ms
+
+T:  Bus=02 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  2 Spd=5000 MxCh= 4
+D:  Ver= 3.00 Cls=09(hub  ) Sub=00 Prot=03 MxPS= 9 #Cfgs=  1
+P:  Vendor=2109 ProdID=0812 Rev= b.e1
+S:  Manufacturer=VIA Labs, Inc.         
+S:  Product=USB3.0 Hub             
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=13(Int.) MxPS=   2 Ivl=16ms
+
+T:  Bus=02 Lev=02 Prnt=02 Port=00 Cnt=01 Dev#=  3 Spd=5000 MxCh= 0
+D:  Ver= 3.10 Cls=00(>ifc ) Sub=00 Prot=00 MxPS= 9 #Cfgs=  1
+P:  Vendor=0951 ProdID=1666 Rev= 1.00
+S:  Manufacturer=Kingston
+S:  Product=DataTraveler 3.0
+S:  SerialNumber=60A44C3FAC18B230D967039E
+C:* #Ifs= 1 Cfg#= 1 Atr=80 MxPwr=126mA
+I:* If#= 0 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage
+E:  Ad=81(I) Atr=02(Bulk) MxPS=1024 Ivl=0ms
+E:  Ad=02(O) Atr=02(Bulk) MxPS=1024 Ivl=0ms
+
+T:  Bus=01 Lev=00 Prnt=00 Port=00 Cnt=00 Dev#=  1 Spd=480  MxCh= 2
+B:  Alloc=  0/800 us ( 0%), #Int=  0, #Iso=  0
+D:  Ver= 2.00 Cls=09(hub  ) Sub=00 Prot=01 MxPS=64 #Cfgs=  1
+P:  Vendor=1d6b ProdID=0002 Rev= 2.06
+S:  Manufacturer=Linux 2.6.36 xhci-hcd
+S:  Product=xHCI Host Controller
+S:  SerialNumber=xhc_mtk
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=03(Int.) MxPS=   4 Ivl=256ms
+
+T:  Bus=01 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  2 Spd=480  MxCh= 4
+D:  Ver= 2.10 Cls=09(hub  ) Sub=00 Prot=01 MxPS=64 #Cfgs=  1
+P:  Vendor=2109 ProdID=2812 Rev= b.e0
+S:  Manufacturer=VIA Labs, Inc.         
+S:  Product=USB2.0 Hub             
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
+E:  Ad=81(I) Atr=03(Int.) MxPS=   1 Ivl=256ms
+
+T:  Bus=01 Lev=02 Prnt=02 Port=01 Cnt=01 Dev#=  3 Spd=480  MxCh= 0
+D:  Ver= 2.00 Cls=00(>ifc ) Sub=00 Prot=00 MxPS=64 #Cfgs=  1
+P:  Vendor=125f ProdID=c96a Rev=11.00
+S:  Manufacturer=ADATA
+S:  Product=ADATA USB Flash Drive
+S:  SerialNumber=147041949220023C
+C:* #Ifs= 1 Cfg#= 1 Atr=80 MxPwr=300mA
+I:* If#= 0 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage
+E:  Ad=81(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=02(O) Atr=02(Bulk) MxPS= 512 Ivl=31875us
+# 
+# BcnCheck: no bcn occurs within 10 sec for band 1(rai0)!!
+debug info dump as below:
+
+net_ratelimit: 45026 callbacks suppressed
+br0: received packet on eth0.1 with own address as source address
+br0: received packet on eth0.1 with own address as source address
+br0: received packet on eth0.1 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.4 with own address as source address
+br0: received packet on eth0.2 with own address as source address
+br0: received packet on eth0.4 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+br0: received packet on eth0.4 with own address as source address
+br0: received packet on eth0.3 with own address as source address
+
+Usb2.0 is passed.
+Usb3.0 is passed.
+=> PASS>
+...Phán định: Check USB thành công
+
+> CHECK LEDS---------------
+<3/3: Kiểm tra LEDs...
+POWER LED = PASS
+PON LED = PASS
+INET LED = PASS
+WLAN 2G LED = PASS
+WLAN 5G LED = PASS
+LAN1 LED = PASS
+LAN2 LED = PASS
+LAN3 LED = PASS
+LAN4 LED = PASS
+WPS LED = PASS
+LOS LED = PASS
+- Thời gian: 12sec/180sec
+=> PASS>
+...Phán định: Check LED thành công
+
+> GHI SN,GPON,WPS,MAC------
+<1/4: Login vào DUT...
+- Tiêu chuẩn: root login  on `console'
+=> PASS>
+<2/4: Ghi GPON serial cho DUT...
+- Tiêu chuẩn: writeflash: total write
+Generate GPON serial: VNPT01212121=> PASS>
+<4/4: Ghi địa chỉ MAC cho DUT...
+- Tiêu chuẩn: new mac addr = {0}:{1}:{2}:{3}:{4}:{5}
+=> PASS>
+...Phán định: Ghi MAC thành công
+
+-----------------------
+=> Tổng phán định: PASS
+
+> NHẬP ĐỊA CHỈ MAC:
+... MAC="A4F4C2909090"
+... KIỂM TRA
+<1/4: Chiều dài kí tự MAC
+- Tiêu chuẩn = 12
+- Thực tế = 12
+=> PASS>
+<2/4: 6 kí tự đầu của MAC
+- Tiêu chuẩn = A4F4C2||A06518
+- Thực tế = A4F4C2
+=> PASS>
+<3/4: Định dạng kí tự MAC
+Tiêu chuẩn = [0-9,A-F]
+- Thực tế = True
+=> PASS>
+<4/4: Mở cổng COM
+- Tiêu chuẩn = True
+- Thực tế = True
+=> PASS>
+...Phán định: Địa chỉ MAC hợp lệ
+
+> CHECK CỔNG LAN-----------
+<1/2: Login vào ONT...
+Request time out
+=> FAIL>
+...Phán định: Check LAN thất bại
+
+-----------------------
+=> Tổng phán định: FAIL
+
+> NHẬP ĐỊA CHỈ MAC:
+... MAC="A4F4C2909090"
+... KIỂM TRA
+<1/4: Chiều dài kí tự MAC
+- Tiêu chuẩn = 12
+- Thực tế = 12
+=> PASS>
+<2/4: 6 kí tự đầu của MAC
+- Tiêu chuẩn = A4F4C2||A06518
+- Thực tế = A4F4C2
+=> PASS>
+<3/4: Định dạng kí tự MAC
+Tiêu chuẩn = [0-9,A-F]
+- Thực tế = True
+=> PASS>
+<4/4: Mở cổng COM
+- Tiêu chuẩn = True
+- Thực tế = True
+=> PASS>
+...Phán định: Địa chỉ MAC hợp lệ
+
+> CHECK CỔNG LAN-----------
+<1/2: Login vào ONT...
+Request time out
+=> FAIL>
+...Phán định: Check LAN thất bại
+
+-----------------------
+=> Tổng phán định: FAIL
+
+> NHẬP ĐỊA CHỈ MAC:
+... MAC="A4F4C2909090"
+... KIỂM TRA
+<1/4: Chiều dài kí tự MAC
+- Tiêu chuẩn = 12
+- Thực tế = 12
+=> PASS>
+<2/4: 6 kí tự đầu của MAC
+- Tiêu chuẩn = A4F4C2||A06518
+- Thực tế = A4F4C2
+=> PASS>
+<3/4: Định dạng kí tự MAC
+Tiêu chuẩn = [0-9,A-F]
+- Thực tế = True
+=> PASS>
+<4/4: Mở cổng COM
+- Tiêu chuẩn = True
+- Thực tế = True
+=> PASS>
+...Phán định: Địa chỉ MAC hợp lệ
+
+> CHECK CỔNG LAN-----------
+<1/2: Login vào ONT...
+=> PASS>
+<2/2: Kiểm tra cổng LAN...
+ethphxcmd eth0 media-type port 0
+auto, Auto-negotiation enabled.
+No common media type was autonegotiated!
+This is extremely unusual and typically indicates a configuration error.
+Perhaps the advertised capability set was intentionally limited.
+Link is down
+# 
+# ethphxcmd eth0 media-type port 1
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 2
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 3
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# 
+LAN 1 is failed.
+LAN 2 is passed.
+LAN 3 is passed.
+LAN 4 is passed.
+=> FAIL>
+<2/2: Kiểm tra cổng LAN...
+ethphxcmd eth0 media-type port 0
+auto, Auto-negotiation enabled.
+No common media type was autonegotiated!
+This is extremely unusual and typically indicates a configuration error.
+Perhaps the advertised capability set was intentionally limited.
+Link is down
+# 
+# ethphxcmd eth0 media-type port 1
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 2
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 3
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# 
+LAN 1 is failed.
+LAN 2 is passed.
+LAN 3 is passed.
+LAN 4 is passed.
+=> FAIL>
+<2/2: Kiểm tra cổng LAN...
+ethphxcmd eth0 media-type port 0
+auto, Auto-negotiation enabled.
+No common media type was autonegotiated!
+This is extremely unusual and typically indicates a configuration error.
+Perhaps the advertised capability set was intentionally limited.
+Link is down
+# 
+# ethphxcmd eth0 media-type port 1
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 2
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# ethphxcmd eth0 media-type port 3
+auto, Auto-negotiation enabled.
+The autonegotiated media type is 100baseTx-FD.
+Link is up
+# 
+# 
+LAN 1 is failed.
+LAN 2 is passed.
+LAN 3 is passed.
+LAN 4 is passed.
+=> FAIL>
+...Phán định: Check LAN thất bại
+
+-----------------------
+=> Tổng phán định: FAIL
+

@@ -123,7 +123,7 @@
                 </Border>
                 <Border Margin="0,0,5,0" Grid.Row="5" Grid.Column="1">
                     <Grid>
-                        <Label x:Name="led5G" MouseDown="Label_MouseDown" Content="{Binding Path=WLANCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=WLANBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label x:Name="led5G" MouseDown="Label_MouseDown" Content="{Binding Path=WLAN5GCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=WLAN5GBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
                         <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED WLAN 5G</Label>
                     </Grid>
                 </Border>
