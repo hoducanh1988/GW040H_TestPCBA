@@ -48,6 +48,10 @@ namespace TestPCBAForGW040x.SubControls {
                         GlobalData.testingInfo.WLANLED = !GlobalData.testingInfo.WLANLED;
                         break;
                     }
+                case "led5G": {
+                        GlobalData.testingInfo.WLAN5GLED = !GlobalData.testingInfo.WLAN5GLED;
+                        break;
+                    }
                 case "ledLan1": {
                         GlobalData.testingInfo.LAN1LED = !GlobalData.testingInfo.LAN1LED;
                         break;
@@ -81,6 +85,7 @@ namespace TestPCBAForGW040x.SubControls {
                        GlobalData.testingInfo.PONLED &&
                        GlobalData.testingInfo.INETLED &&
                        GlobalData.testingInfo.WLANLED &&
+                       GlobalData.testingInfo.WLAN5GLED &&
                        GlobalData.testingInfo.LAN1LED &&
                        GlobalData.testingInfo.LAN2LED &&
                        GlobalData.testingInfo.LAN3LED &&
@@ -93,6 +98,7 @@ namespace TestPCBAForGW040x.SubControls {
             GlobalData.loginfo.LedPon = GlobalData.testingInfo.PONLED == true ? "PASS" : "FAIL";
             GlobalData.loginfo.LedInet = GlobalData.testingInfo.INETLED == true ? "PASS" : "FAIL";
             GlobalData.loginfo.LedWlan = GlobalData.testingInfo.WLANLED == true ? "PASS" : "FAIL";
+            GlobalData.loginfo.Led5G = GlobalData.testingInfo.WLAN5GLED == true ? "PASS" : "FAIL";
             GlobalData.loginfo.LedLan1 = GlobalData.testingInfo.LAN1LED == true ? "PASS" : "FAIL";
             GlobalData.loginfo.LedLan2 = GlobalData.testingInfo.LAN2LED == true ? "PASS" : "FAIL";
             GlobalData.loginfo.LedLan3 = GlobalData.testingInfo.LAN3LED == true ? "PASS" : "FAIL";

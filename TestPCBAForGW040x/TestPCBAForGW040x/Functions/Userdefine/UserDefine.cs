@@ -578,6 +578,41 @@ namespace TestPCBAForGW040x.Functions {
         //---------------------------------------------------//
 
         //---------------------------------------------------//
+        bool _wlan5gled;
+        string _wlan5gcontent;
+        SolidColorBrush _wlan5gbackground;
+        public bool WLAN5GLED {
+            get { return _wlan5gled; }
+            set {
+                _wlan5gled = value;
+                if (value) {
+                    WLAN5GCONTENT = "OK";
+                    WLAN5GBACKGROUND = Brushes.Lime;
+                }
+                else {
+                    WLAN5GCONTENT = "NG";
+                    WLAN5GBACKGROUND = Brushes.Red;
+                }
+                OnPropertyChanged(nameof(WLAN5GLED));
+            }
+        }
+        public string WLAN5GCONTENT {
+            get { return _wlan5gcontent; }
+            set {
+                _wlan5gcontent = value;
+                OnPropertyChanged(nameof(WLAN5GCONTENT));
+            }
+        }
+        public SolidColorBrush WLAN5GBACKGROUND {
+            get { return _wlan5gbackground; }
+            set {
+                _wlan5gbackground = value;
+                OnPropertyChanged(nameof(WLAN5GBACKGROUND));
+            }
+        }
+        //---------------------------------------------------//
+
+        //---------------------------------------------------//
         bool _lan1led;
         string _lan1content;
         SolidColorBrush _lan1background;
@@ -814,6 +849,7 @@ namespace TestPCBAForGW040x.Functions {
             PONLED = true;
             INETLED = true;
             WLANLED = true;
+            WLAN5GLED = true;
             LAN1LED = true;
             LAN2LED = true;
             LAN3LED = true;
@@ -832,7 +868,6 @@ namespace TestPCBAForGW040x.Functions {
         public string MacAddress { get; set; }
         public string UploadFW { get; set; }
         public string WriteGPON { get; set; }
-        public string WriteWPS { get; set; }
         public string WriteMAC { get; set; }
         public string Lan1 { get; set; }
         public string Lan2 { get; set; }
@@ -846,6 +881,7 @@ namespace TestPCBAForGW040x.Functions {
         public string LedPon { get; set; }
         public string LedInet { get; set; }
         public string LedWlan { get; set; }
+        public string Led5G { get; set; }
         public string LedLan1 { get; set; }
         public string LedLan2 { get; set; }
         public string LedLan3 { get; set; }
@@ -861,7 +897,6 @@ namespace TestPCBAForGW040x.Functions {
             this.MacAddress = "--";
             this.UploadFW = "--";
             this.WriteGPON = "--";
-            this.WriteWPS = "--";
             this.WriteMAC = "--";
             this.Lan1 = "--";
             this.Lan2 = "--";
@@ -875,6 +910,7 @@ namespace TestPCBAForGW040x.Functions {
             this.LedPon = "--";
             this.LedInet = "--";
             this.LedWlan = "--";
+            this.Led5G = "--";
             this.LedLan1 = "--";
             this.LedLan2 = "--";
             this.LedLan3 = "--";
@@ -892,7 +928,6 @@ namespace TestPCBAForGW040x.Functions {
                                  "MACADDRESS",
                                  "UPLOADFW_RESULT",
                                  "WRITEGPON_RESULT",
-                                 "WRITEWPS_RESULT",
                                  "WRITEMAC_RESULT",
                                  "LANPORT1_RESULT",
                                  "LANPORT2_RESULT",
@@ -906,6 +941,7 @@ namespace TestPCBAForGW040x.Functions {
                                  "LEDPON_RESULT",
                                  "LEDINET_RESULT",
                                  "LEDWLAN_RESULT",
+                                 "LED5G_RESULT",
                                  "LEDLAN1_RESULT",
                                  "LEDLAN2_RESULT",
                                  "LEDLAN3_RESULT",
@@ -922,7 +958,6 @@ namespace TestPCBAForGW040x.Functions {
                                   this.MacAddress,
                                   this.UploadFW,
                                   this.WriteGPON,
-                                  this.WriteWPS,
                                   this.WriteMAC,
                                   this.Lan1,
                                   this.Lan2,
@@ -936,6 +971,7 @@ namespace TestPCBAForGW040x.Functions {
                                   this.LedPon,
                                   this.LedInet,
                                   this.LedWlan,
+                                  this.Led5G,
                                   this.LedLan1,
                                   this.LedLan2,
                                   this.LedLan3,
@@ -973,25 +1009,8 @@ namespace TestPCBAForGW040x.Functions {
         public void SaveSystemLog() {
             string rootPath = System.AppDomain.CurrentDomain.BaseDirectory;
             //Create folder log
-            string dir = rootPath + "LogDetail";
+            //string dir = rootPath + "LogDetail";
             if (!System.IO.Directory.Exists(rootPath + "LogDetail")) System.IO.Directory.CreateDirectory(rootPath + "LogDetail");
-            //If file count > 30. Delete oldest file.
-            DirectoryInfo dinfo = new DirectoryInfo(dir);
-            FileInfo[] Files = dinfo.GetFiles("*.txt");
-            var orderFiles = Files.OrderBy(f => f.LastWriteTime);
-            if (Files.Length > 30) {
-                foreach(var f in orderFiles) {
-                    string fname = f.Name.Replace(".txt", "");
-                    string _txt = "";
-                    if (fname.Length == 8) _txt = string.Format("{0},{1},{2}", fname.Substring(0,4), fname.Substring(4,2), fname.Substring(6,2));
-                    if (_txt != "") {
-                        DateTime _old;
-                        if (DateTime.TryParse(_txt, out _old)) {
-                            if (DateTime.Now.Subtract(_old).Days > 30) File.Delete(f.FullName);
-                        }
-                    }
-                }
-            }
             
             //Create log file
             string file = string.Format("{0}LogDetail\\{1}.txt", rootPath, DateTime.Now.ToString("yyyyMMdd"));
@@ -1003,25 +1022,8 @@ namespace TestPCBAForGW040x.Functions {
         public void SaveUARTLog() {
             string rootPath = System.AppDomain.CurrentDomain.BaseDirectory;
             //Create folder log
-            string dir = rootPath + "LogUART";
+            //string dir = rootPath + "LogUART";
             if (!System.IO.Directory.Exists(rootPath + "LogUART")) System.IO.Directory.CreateDirectory(rootPath + "LogUART");
-            //If file count > 30. Delete oldest file.
-            DirectoryInfo dinfo = new DirectoryInfo(dir);
-            FileInfo[] Files = dinfo.GetFiles("*.txt");
-            var orderFiles = Files.OrderBy(f => f.LastWriteTime);
-            if (Files.Length > 30) {
-                foreach (var f in orderFiles) {
-                    string fname = f.Name.Replace(".txt", "");
-                    string _txt = "";
-                    if (fname.Length == 8) _txt = string.Format("{0},{1},{2}", fname.Substring(0, 4), fname.Substring(4, 2), fname.Substring(6, 2));
-                    if (_txt != "") {
-                        DateTime _old;
-                        if (DateTime.TryParse(_txt, out _old)) {
-                            if (DateTime.Now.Subtract(_old).Days > 30) File.Delete(f.FullName);
-                        }
-                    }
-                }
-            }
 
             //Create log file
             string file = string.Format("{0}LogUART\\{1}.txt", rootPath, DateTime.Now.ToString("yyyyMMdd"));

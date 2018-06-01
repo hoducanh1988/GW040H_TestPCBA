@@ -55,6 +55,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -66,22 +67,16 @@
                         <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED POWER</Label>
                     </Grid>
                 </Border>
-                <Border Margin="0,0,5,0" Grid.Row="0" Grid.Column="1" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
+                <Border Margin="0,0,5,0" Grid.Row="1" Grid.Column="0" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
                     <Grid>
                         <Label x:Name="ledPon" MouseDown="Label_MouseDown" Content="{Binding Path=PONCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=PONBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
                         <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED PON</Label>
                     </Grid>
                 </Border>
-                <Border Margin="0,0,5,0" Grid.Row="1" Grid.Column="0" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
+                <Border Margin="0,0,5,0" Grid.Row="1" Grid.Column="1" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
                     <Grid>
                         <Label x:Name="ledInet" MouseDown="Label_MouseDown" Content="{Binding Path=INETCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=INETBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
                         <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED INET</Label>
-                    </Grid>
-                </Border>
-                <Border Margin="0,0,5,0" Grid.Row="1" Grid.Column="1" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
-                    <Grid>
-                        <Label x:Name="ledWlan" MouseDown="Label_MouseDown" Content="{Binding Path=WLANCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=WLANBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
-                        <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED WLAN</Label>
                     </Grid>
                 </Border>
                 <Border Margin="0,0,5,0" Grid.Row="2" Grid.Column="0" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
@@ -108,16 +103,28 @@
                         <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED LAN4</Label>
                     </Grid>
                 </Border>
-                <Border Margin="0,0,5,0" Grid.Row="4" Grid.Column="0">
+                <Border Margin="0,0,5,0" Grid.Row="4" Grid.Column="0" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
                     <Grid>
                         <Label x:Name="ledWps" MouseDown="Label_MouseDown" Content="{Binding Path=WPSCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=WPSBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
                         <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED WPS</Label>
                     </Grid>
                 </Border>
-                <Border Margin="0,0,5,0" Grid.Row="4" Grid.Column="1">
+                <Border Margin="0,0,5,0" Grid.Row="4" Grid.Column="1" BorderBrush="{StaticResource colorBorder}" BorderThickness="0,0,0,1">
                     <Grid>
                         <Label x:Name="ledLos" MouseDown="Label_MouseDown" Content="{Binding Path=LOSCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=LOSBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
                         <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED LOS</Label>
+                    </Grid>
+                </Border>
+                <Border Margin="0,0,5,0" Grid.Row="5" Grid.Column="0">
+                    <Grid>
+                        <Label x:Name="ledWlan" MouseDown="Label_MouseDown" Content="{Binding Path=WLANCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=WLANBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED WLAN 2G</Label>
+                    </Grid>
+                </Border>
+                <Border Margin="0,0,5,0" Grid.Row="5" Grid.Column="1">
+                    <Grid>
+                        <Label x:Name="led5G" MouseDown="Label_MouseDown" Content="{Binding Path=WLANCONTENT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource circleLabel}" Height="30" Width="30" Background="{Binding Path=WLANBACKGROUND, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label VerticalAlignment="Center" Margin="30,0,0,0" FontWeight="Bold">LED WLAN 5G</Label>
                     </Grid>
                 </Border>
             </Grid>

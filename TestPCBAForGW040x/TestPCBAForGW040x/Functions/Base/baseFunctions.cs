@@ -946,6 +946,9 @@ namespace TestPCBAForGW040x.Functions {
                 //bat den WLAN
                 GlobalData.serialPort.Port.WriteLine("iwpriv ra0 set led_setting=00-00-00-00-00-00-00-00");
                 Thread.Sleep(100);
+                //bat den WLAN 5G
+                GlobalData.serialPort.Port.WriteLine("echo 1 > proc/tc3162/led_wlan5g");
+                Thread.Sleep(100);
                 //bat den WPS
                 GlobalData.serialPort.Port.WriteLine("iwpriv ra0 set led_setting=01-00-00-00-00-00-00-00");
                 Thread.Sleep(100);
@@ -988,7 +991,8 @@ namespace TestPCBAForGW040x.Functions {
                 GlobalData.testingInfo.LOGSYSTEM += string.Format("POWER LED = {0}\r\n", GlobalData.testingInfo.POWERLED == true ? "PASS" : "FAIL");
                 GlobalData.testingInfo.LOGSYSTEM += string.Format("PON LED = {0}\r\n", GlobalData.testingInfo.PONLED == true ? "PASS" : "FAIL");
                 GlobalData.testingInfo.LOGSYSTEM += string.Format("INET LED = {0}\r\n", GlobalData.testingInfo.INETLED == true ? "PASS" : "FAIL");
-                GlobalData.testingInfo.LOGSYSTEM += string.Format("WLAN LED = {0}\r\n", GlobalData.testingInfo.WLANLED == true ? "PASS" : "FAIL");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("WLAN 2G LED = {0}\r\n", GlobalData.testingInfo.WLANLED == true ? "PASS" : "FAIL");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("WLAN 5G LED = {0}\r\n", GlobalData.testingInfo.WLAN5GLED == true ? "PASS" : "FAIL");
                 GlobalData.testingInfo.LOGSYSTEM += string.Format("LAN1 LED = {0}\r\n", GlobalData.testingInfo.LAN1LED == true ? "PASS" : "FAIL");
                 GlobalData.testingInfo.LOGSYSTEM += string.Format("LAN2 LED = {0}\r\n", GlobalData.testingInfo.LAN2LED == true ? "PASS" : "FAIL");
                 GlobalData.testingInfo.LOGSYSTEM += string.Format("LAN3 LED = {0}\r\n", GlobalData.testingInfo.LAN3LED == true ? "PASS" : "FAIL");
@@ -1003,6 +1007,7 @@ namespace TestPCBAForGW040x.Functions {
                                                                                            GlobalData.testingInfo.LAN2LED,
                                                                                            GlobalData.testingInfo.LAN1LED,
                                                                                            GlobalData.testingInfo.WLANLED,
+                                                                                           GlobalData.testingInfo.WLAN5GLED,
                                                                                            GlobalData.testingInfo.INETLED,
                                                                                            GlobalData.testingInfo.PONLED,
                                                                                            GlobalData.testingInfo.POWERLED));
