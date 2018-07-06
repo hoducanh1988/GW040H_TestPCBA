@@ -670,7 +670,6 @@ C:\Users\Acer4738Z\Desktop\VNPT-Softs\GitHub\GW040H_TestPCBA\TestPCBAForGW040x\T
 C:\Users\anhho\source\repos\GitHub\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAForGW040x\bin\Debug\TestPCBAForGW040x.exe.config
 C:\Users\anhho\source\repos\GitHub\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAForGW040x\bin\Debug\TestPCBAForGW040x.exe
 C:\Users\anhho\source\repos\GitHub\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAForGW040x\bin\Debug\TestPCBAForGW040x.pdb
-C:\Users\anhho\source\repos\GitHub\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAForGW040x\obj\Debug\TestPCBAForGW040x.csprojResolveAssemblyReference.cache
 C:\Users\anhho\source\repos\GitHub\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAForGW040x\obj\Debug\Assets\Resources\Button.baml
 C:\Users\anhho\source\repos\GitHub\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAForGW040x\obj\Debug\Assets\Resources\CheckBox.baml
 C:\Users\anhho\source\repos\GitHub\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAForGW040x\obj\Debug\Assets\Resources\Combobox.baml
@@ -709,3 +708,4 @@ C:\Users\anhho\source\repos\GitHub\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAFor
 C:\Users\anhho\source\repos\GitHub\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAForGW040x\obj\Debug\TestPCBAForGW040x.csproj.CopyComplete
 C:\Users\anhho\source\repos\GitHub\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAForGW040x\obj\Debug\TestPCBAForGW040x.exe
 C:\Users\anhho\source\repos\GitHub\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAForGW040x\obj\Debug\TestPCBAForGW040x.pdb
+C:\Users\anhho\source\repos\GitHub\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAForGW040x\obj\Debug\TestPCBAForGW040x.csprojAssemblyReference.cache

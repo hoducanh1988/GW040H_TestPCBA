@@ -61,6 +61,8 @@
                             <ComboBox x:Name="cbbStation" FontSize="13" FontWeight="Bold" Text="{Binding Path=StationNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
                             <Label Content="Jig test" FontSize="13"></Label>
                             <ComboBox x:Name="cbbJig" FontSize="13" FontWeight="Bold" Text="{Binding Path=JigNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
+                            <Label Content="Hardware Version" FontSize="13"></Label>
+                            <ComboBox x:Name="cbbHW" FontSize="13" FontWeight="Bold" Text="{Binding Path=DutHWVersion, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ></ComboBox>
                             <Label Content="6 kí tự đầu tiên của địa chỉ MAC" FontSize="13"></Label>
                             <TextBox CharacterCasing="Upper" FontSize="13" FontWeight="Bold" Text="{Binding Path=DutMacF6digit, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ></TextBox>
                             <Label Content="Đường dẫn file Firmware (tclinux.bin)" FontSize="13"></Label>

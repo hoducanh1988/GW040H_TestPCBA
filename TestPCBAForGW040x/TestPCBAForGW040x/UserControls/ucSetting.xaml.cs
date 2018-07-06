@@ -17,6 +17,7 @@ namespace TestPCBAForGW040x.UserControls {
             cbbBarcodeType.ItemsSource = initParameters.listBarcodeType;
             cbbBRPort.ItemsSource = initParameters.listUARTPort;
             cbbBRBaudRate.ItemsSource = initParameters.listBaudRate;
+            cbbHW.ItemsSource = initParameters.listHWVersion;
         }
 
         public ucSetting() {
@@ -39,6 +40,7 @@ namespace TestPCBAForGW040x.UserControls {
                         break;
                     }
                 case "Lưu cài đặt": {
+                        //JigFile.set(GlobalData.initSetting.JigNumber);
                         GlobalData.initSetting.Save();
                         GlobalData.AddTestCase();
                         MessageBox.Show("Thành công.", string.Format("Lưu cài đặt-[DUT{0}]", GlobalData.initSetting.StationNumber), MessageBoxButton.OK, MessageBoxImage.Information);

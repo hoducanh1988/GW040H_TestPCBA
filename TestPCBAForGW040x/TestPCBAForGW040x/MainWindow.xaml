@@ -6,9 +6,11 @@
         xmlns:local="clr-namespace:TestPCBAForGW040x"
         xmlns:uc="clr-namespace:TestPCBAForGW040x.UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="400" WindowStartupLocation="Manual" Style="{StaticResource customWindow}">
+        Title="MainWindow" Height="600" Width="400" WindowStartupLocation="Manual" Style="{StaticResource customWindow}"
+        
+        >
     
-    <Border CornerRadius="5,5,5,5" Background="#FF333333" BorderBrush="{StaticResource colorBorder}" BorderThickness="0.5" MouseDown="Border_MouseDown">
+    <Border x:Name="mainborder" CornerRadius="5,5,5,5" Background="#FF333333" BorderBrush="{StaticResource colorBorder}" BorderThickness="0.5" MouseDown="Border_MouseDown">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -42,12 +44,12 @@
                     </TextBox.Style>
                 </TextBox>
                 <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <Label MouseDown="Label_MouseDown" Content="Version 1.0.0.1" FontSize="12" Foreground="{StaticResource colorTextTitle}" VerticalAlignment="Center"></Label>
+                    <Label MouseDown="Label_MouseDown" Content="Version 1.0.0.3" FontSize="12" Foreground="{StaticResource colorTextTitle}" VerticalAlignment="Center"></Label>
                     <Label MouseDown="Label_MouseDown" Margin="10,0,0,0" Width="20" HorizontalContentAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="20" FontWeight="Bold" ToolTipService.ToolTip="Help" Padding="0,-5,0,0">?</Label>
                     <Label MouseDown="Label_MouseDown" Margin="10,0,5,0" Width="20" HorizontalContentAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="20" FontWeight="Bold" ToolTipService.ToolTip="Đóng ứng dụng" Padding="0,-5,0,0">X</Label>
                 </WrapPanel>
             </Grid>
-            <Label Grid.Row="1" VerticalAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="24">Tool test PCBA GW040E/AC</Label>
+            <Label Grid.Row="1" VerticalAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="24">Tool test PCBA GW040H</Label>
             <Grid Grid.Row="2" Margin="5,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="90"/>

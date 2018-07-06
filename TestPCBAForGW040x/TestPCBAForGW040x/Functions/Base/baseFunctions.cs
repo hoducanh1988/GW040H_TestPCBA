@@ -463,14 +463,15 @@ namespace TestPCBAForGW040x.Functions {
                 int index = 0;
                 while (!_flag) {
                     this.sendDataToDUT(string.Format("sys mac {0}\n", GlobalData.testingInfo.MAC));
-                    string st = string.Format("new mac addr = {0}:{1}:{2}:{3}:{4}:{5}",
-                        GlobalData.testingInfo.MAC.Substring(0, 2).ToLower(),
-                        GlobalData.testingInfo.MAC.Substring(2, 2).ToLower(),
-                        GlobalData.testingInfo.MAC.Substring(4, 2).ToLower(),
-                        GlobalData.testingInfo.MAC.Substring(6, 2).ToLower(),
-                        GlobalData.testingInfo.MAC.Substring(8, 2).ToLower(),
-                        GlobalData.testingInfo.MAC.Substring(10, 2).ToLower()
-                        );
+                    //string st = string.Format("new mac addr = {0}:{1}:{2}:{3}:{4}:{5}",
+                    //    GlobalData.testingInfo.MAC.Substring(0, 2).ToLower(),
+                    //    GlobalData.testingInfo.MAC.Substring(2, 2).ToLower(),
+                    //    GlobalData.testingInfo.MAC.Substring(4, 2).ToLower(),
+                    //    GlobalData.testingInfo.MAC.Substring(6, 2).ToLower(),
+                    //    GlobalData.testingInfo.MAC.Substring(8, 2).ToLower(),
+                    //    GlobalData.testingInfo.MAC.Substring(10, 2).ToLower()
+                    //    );
+                    string st = "BMT & BBT Init Success";
                     while (!GlobalData.testingInfo.LOGUART.Contains(st)) {
                         Thread.Sleep(1000);
                         if (index >= Timeouts.verylongtime) break;
@@ -1023,6 +1024,74 @@ namespace TestPCBAForGW040x.Functions {
             END:
             {
                 return _flag;
+            }
+        }
+
+        protected bool writeHWVersion(out string _error) {
+            _error = "";
+            try {
+                GlobalData.testingInfo.TITLE = Titles.writeHW;
+                GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.normaltime);
+                bool _flag = false;
+                try {
+                    //int index = 0;
+
+                    this.sendDataToDUT("echo '#!/bin/sh' > /tmp/write_hardwarever.sh\n");
+                    Thread.Sleep(100);
+                    this.sendDataToDUT("echo 'if [ \"$1\" -gt 0 ] && [ \"$1\" -lt 100 ]; then' >> /tmp/write_hardwarever.sh\n");
+                    Thread.Sleep(100);
+                    this.sendDataToDUT("echo ' echo $1 > /tmp/userdata/hardwareversion' >> /tmp/write_hardwarever.sh\n");
+                    Thread.Sleep(100);
+                    this.sendDataToDUT("echo ' echo \"Write hardware version success.\"' >> /tmp/write_hardwarever.sh\n");
+                    Thread.Sleep(100);
+                    this.sendDataToDUT("echo 'else' >> /tmp/write_hardwarever.sh\n");
+                    Thread.Sleep(100);
+                    this.sendDataToDUT("echo ' echo \"Hardware version must be number.\"' >> /tmp/write_hardwarever.sh\n");
+                    Thread.Sleep(100);
+                    this.sendDataToDUT("echo 'fi' >> /tmp/write_hardwarever.sh\n");
+                    Thread.Sleep(100);
+                    this.sendDataToDUT("chmod -R 777 /tmp/write_hardwarever.sh\n");
+                    Thread.Sleep(100);
+                    this.sendDataToDUT(string.Format("./tmp/write_hardwarever.sh {0}\n", GlobalData.initSetting.DutHWVersion));
+                    Thread.Sleep(100);
+                    _flag = true;
+                    //while (!_flag) {
+                    //    this.sendDataToDUT(string.Format("sys mac {0}\n", GlobalData.testingInfo.MAC));
+                    //    string st = string.Format("new mac addr = {0}:{1}:{2}:{3}:{4}:{5}",
+                    //        GlobalData.testingInfo.MAC.Substring(0, 2).ToLower(),
+                    //        GlobalData.testingInfo.MAC.Substring(2, 2).ToLower(),
+                    //        GlobalData.testingInfo.MAC.Substring(4, 2).ToLower(),
+                    //        GlobalData.testingInfo.MAC.Substring(6, 2).ToLower(),
+                    //        GlobalData.testingInfo.MAC.Substring(8, 2).ToLower(),
+                    //        GlobalData.testingInfo.MAC.Substring(10, 2).ToLower()
+                    //        );
+                    //    while (!GlobalData.testingInfo.LOGUART.Contains(st)) {
+                    //        Thread.Sleep(1000);
+                    //        if (index >= Timeouts.normaltime) break;
+                    //        else index++;
+                    //        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.normaltime - index);
+                    //    }
+                    //    if (index >= Timeouts.normaltime) {
+                    //        _error = "Request time out";
+                    //        break;
+                    //    }
+                    //    else {
+                    //        _flag = true;
+                    //    }
+                    //}
+                    goto END;
+                }
+                catch (Exception ex) {
+                    _error = ex.ToString();
+                    goto END;
+                }
+
+                END:
+                {
+                    return _flag;
+                }
+            } catch {
+                return false;
             }
         }
 

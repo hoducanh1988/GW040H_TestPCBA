@@ -40,6 +40,7 @@ namespace TestPCBAForGW040x.Functions {
         public static string writeGPON = "GHI GPON SERIAL";
         public static string writeWPS = "GHI MÃ WPS";
         public static string writeMAC = "GHI ĐỊA CHỈ MAC";
+        public static string writeHW = "GHI HW VERSION";
         public static string confirmMAC = "XÁC NHẬN LẠI MAC";
         //Check LAN
         public static string checkLAN = "KIỂM TRA CỔNG LAN";
@@ -92,11 +93,16 @@ namespace TestPCBAForGW040x.Functions {
                                                                        "19200","28800","38400","57600","76800",
                                                                        "115200","230400","460800","576000","921600"};
         public static List<string> listBarcodeType = new List<string>() { "USB", "UART" };
+        public static List<string> listHWVersion = new List<string>();
 
         static initParameters() {
             listUARTPort.Add("-");
             for (int i = 1; i < 100; i++) {
                 listUARTPort.Add(string.Format("COM{0}", i));
+            }
+          
+            for (int i = 0; i < 100; i++) {
+                listHWVersion.Add(i.ToString());
             }
         }
     }

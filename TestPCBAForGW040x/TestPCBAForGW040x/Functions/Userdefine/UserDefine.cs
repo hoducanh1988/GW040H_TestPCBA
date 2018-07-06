@@ -93,24 +93,36 @@ namespace TestPCBAForGW040x.Functions {
                 OnPropertyChanged(nameof(StationNumber));
             }
         }
+        string _jignumber;
         public string JigNumber {
           
             get {
+                string _data = JigFile.get();
                 try {
-                    int n = int.Parse(Properties.Settings.Default.JigNumber);
+                    //int n = int.Parse(Properties.Settings.Default.JigNumber);
+                    int n = int.Parse(_data);
                     DutIPUploadFW = string.Format("192.168.1.{0}", 9 + n);
                 }
                 catch { }
-                return Properties.Settings.Default.JigNumber;
+                //return Properties.Settings.Default.JigNumber;
+                return _data;
             }
             set {
-                Properties.Settings.Default.JigNumber = value;
+                JigFile.set(value);
+                //Properties.Settings.Default.JigNumber = value;
                 try {
                     int n = int.Parse(value);
                     DutIPUploadFW = string.Format("192.168.1.{0}", 9 + n);
                 }
                 catch { }
                 OnPropertyChanged(nameof(JigNumber));
+            }
+        }
+        public string DutHWVersion {
+            get { return Properties.Settings.Default.HWVersion; }
+            set {
+                Properties.Settings.Default.HWVersion = value;
+                OnPropertyChanged(nameof(DutHWVersion));
             }
         }
         public string DutMacF6digit {
@@ -868,6 +880,7 @@ namespace TestPCBAForGW040x.Functions {
         public string MacAddress { get; set; }
         public string UploadFW { get; set; }
         public string WriteGPON { get; set; }
+        public string WriteHW { get; set; }
         public string WriteMAC { get; set; }
         public string Lan1 { get; set; }
         public string Lan2 { get; set; }
@@ -897,6 +910,7 @@ namespace TestPCBAForGW040x.Functions {
             this.MacAddress = "--";
             this.UploadFW = "--";
             this.WriteGPON = "--";
+            this.WriteHW = "--";
             this.WriteMAC = "--";
             this.Lan1 = "--";
             this.Lan2 = "--";
@@ -922,12 +936,13 @@ namespace TestPCBAForGW040x.Functions {
         }
 
         private string _Titles() {
-            return string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26}",
+            return string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}",
                                  "DATETIME",
                                  "PCNAME",
                                  "MACADDRESS",
                                  "UPLOADFW_RESULT",
                                  "WRITEGPON_RESULT",
+                                 "WRITEHW_RESULT",
                                  "WRITEMAC_RESULT",
                                  "LANPORT1_RESULT",
                                  "LANPORT2_RESULT",
@@ -952,12 +967,13 @@ namespace TestPCBAForGW040x.Functions {
                                  "TOTAL_RESULT");
         }
         private string _Contents() {
-            return string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26}",
+            return string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}",
                                   this.dateTime,
                                   this.PCName,
                                   this.MacAddress,
                                   this.UploadFW,
                                   this.WriteGPON,
+                                  this.WriteHW,
                                   this.WriteMAC,
                                   this.Lan1,
                                   this.Lan2,

@@ -1,1 +1,1 @@
-tftp -i 192.168.1.11 put C:\Users\Acer4738Z\Desktop\VNPT-Softs\040MP\tclinux.bin
+tftp -i 192.168.1.11 put C:\Users\anhho\Desktop\G040DEVN00T001_MP\tclinux.bin

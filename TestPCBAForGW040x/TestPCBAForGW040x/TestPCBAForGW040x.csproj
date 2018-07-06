@@ -68,6 +68,7 @@
     <Compile Include="Functions\Excute\exCheckUSB.cs" />
     <Compile Include="Functions\Excute\exUploadFirmware.cs" />
     <Compile Include="Functions\Excute\exWriteMAC.cs" />
+    <Compile Include="Functions\IO\JigFile.cs" />
     <Compile Include="Functions\Protocol\RS232.cs" />
     <Compile Include="Functions\Userdefine\UserDefine.cs" />
     <Compile Include="SubControls\LED.xaml.cs">

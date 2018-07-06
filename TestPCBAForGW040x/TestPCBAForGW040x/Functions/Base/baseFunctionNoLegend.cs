@@ -255,14 +255,15 @@ namespace TestPCBAForGW040x.Functions {
                 GlobalData.testingInfo.LOGUART = "";
                 while (!_flag) {
                     this.sendDataToDUT(string.Format("sys mac {0}\n", mac));
-                    string st = string.Format("new mac addr = {0}:{1}:{2}:{3}:{4}:{5}",
-                        mac.Substring(0, 2).ToLower(),
-                        mac.Substring(2, 2).ToLower(),
-                        mac.Substring(4, 2).ToLower(),
-                        mac.Substring(6, 2).ToLower(),
-                        mac.Substring(8, 2).ToLower(),
-                       mac.Substring(10, 2).ToLower()
-                        );
+                    //string st = string.Format("new mac addr = {0}:{1}:{2}:{3}:{4}:{5}",
+                    //    mac.Substring(0, 2).ToLower(),
+                    //    mac.Substring(2, 2).ToLower(),
+                    //    mac.Substring(4, 2).ToLower(),
+                    //    mac.Substring(6, 2).ToLower(),
+                    //    mac.Substring(8, 2).ToLower(),
+                    //   mac.Substring(10, 2).ToLower()
+                    //    );
+                    string st = "BMT & BBT Init Success";
                     while (!GlobalData.testingInfo.LOGUART.Contains(st)) {
                         Thread.Sleep(1000);
                         if (index >= Timeouts.normaltime) break;
@@ -833,20 +834,34 @@ namespace TestPCBAForGW040x.Functions {
                 getStr = GlobalData.testingInfo.LOGUART;
                 _error += getStr;
                 //-------------------------------------------//
+                string _usb2text = "", _usb3text = "";
+                bool _format1 = getStr.Contains("Product=USB3.0 Hub") || getStr.Contains("Product=USB2.0 Hub");
+                bool _format2 = getStr.Contains("Product=4-Port USB 3.0 Hub") || getStr.Contains("Product=4-Port USB 2.0 Hub");
+
+                if (_format1 == true) {
+                    _usb2text = "Product=USB2.0 Hub";
+                    _usb3text = "Product=USB3.0 Hub";
+                }
+                if (_format2 == true) {
+                    _usb2text = "Product=4-Port USB 2.0 Hub";
+                    _usb3text = "Product=4-Port USB 3.0 Hub";
+                }
+
                 //Không có USB hub
-                bool ret = getStr.Contains("Product=USB3.0 Hub") || getStr.Contains("Product=USB2.0 Hub");
+                bool ret = _format1 || _format2;
                 if (ret == false) {
                     usb2 = false; usb3 = false;
                 }
                 //Có USB HUB
                 string[] buffer = null;
                 string u2 = null, u3 = null;
-                int IndexofUsb3 = getStr.IndexOf("Product=USB3.0 Hub");
-                int IndexofUsb2 = getStr.IndexOf("Product=USB2.0 Hub");
+                
+                int IndexofUsb3 = getStr.IndexOf(_usb3text);
+                int IndexofUsb2 = getStr.IndexOf(_usb2text);
                 if (IndexofUsb3 < IndexofUsb2) {
-                    buffer = getStr.Split(new string[] { "Product=USB3.0 Hub" }, StringSplitOptions.None);
+                    buffer = getStr.Split(new string[] { _usb3text }, StringSplitOptions.None);
                     getStr = buffer[1];
-                    buffer = getStr.Split(new string[] { "Product=USB2.0 Hub" }, StringSplitOptions.None);
+                    buffer = getStr.Split(new string[] { _usb2text }, StringSplitOptions.None);
                     u3 = buffer[0];
                     u2 = buffer[1];
                     //Kiểm tra có USB3.0 hay không?
@@ -857,9 +872,9 @@ namespace TestPCBAForGW040x.Functions {
                     usb2 = u2.Contains("SerialNumber=");
                 }
                 else {
-                    buffer = getStr.Split(new string[] { "Product=USB2.0 Hub" }, StringSplitOptions.None);
+                    buffer = getStr.Split(new string[] { _usb2text }, StringSplitOptions.None);
                     getStr = buffer[1];
-                    buffer = getStr.Split(new string[] { "Product=USB3.0 Hub" }, StringSplitOptions.None);
+                    buffer = getStr.Split(new string[] { _usb3text }, StringSplitOptions.None);
                     u2 = buffer[0];
                     u3 = buffer[1];
                     //Kiểm tra có USB2.0 hay không?

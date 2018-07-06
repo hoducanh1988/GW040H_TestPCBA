@@ -59,5 +59,8 @@
     <Setting Name="EnableWriteMAC" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="HWVersion" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -262,5 +262,6 @@ namespace TestPCBAForGW040x.UserControls {
         private void datagrid_LostFocus(object sender, RoutedEventArgs e) {
             this.datagrid.UnselectAllCells();
         }
+
     }
 }

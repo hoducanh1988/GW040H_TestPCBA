@@ -116,6 +116,7 @@ namespace TestPCBAForGW040x.Functions
                     GlobalData.testingInfo.ERRORCODE = "Pma0#0002";
                     goto NG; }
                 GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
+
                 //~~~~~~~~~~~~~~~~ Set GPON Serial Number
                 GlobalData.testingInfo.LOGSYSTEM += "<3/8: Ghi GPON serial cho DUT...\r\n";
                 GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: writeflash: total write\r\n";
@@ -127,7 +128,19 @@ namespace TestPCBAForGW040x.Functions
                     goto NG; }
                 GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 GlobalData.loginfo.WriteGPON = "PASS";
-                //~~~~~~~~~~~~~~~~ Set WPS Number (pending)
+
+                //~~~~~~~~~~~~~~~~ Set HW Version
+                GlobalData.testingInfo.LOGSYSTEM += "<4/8: Ghi HWVersion cho DUT...\r\n";
+                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: --\r\n";
+                if (!writeHWVersion(out _error)) {
+                    GlobalData.testingInfo.LOGSYSTEM += _error;
+                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
+                    GlobalData.loginfo.WriteHW = "FAIL";
+                    GlobalData.testingInfo.ERRORCODE = "Pma0#0004";
+                    goto NG;
+                }
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
+                GlobalData.loginfo.WriteHW = "PASS";
 
                 //~~~~~~~~~~~~~~~~ Set MAC Address
                 GlobalData.testingInfo.LOGSYSTEM += "<5/8: Ghi địa chỉ MAC cho DUT...\r\n";
@@ -139,6 +152,7 @@ namespace TestPCBAForGW040x.Functions
                     goto NG; }
                 GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 GlobalData.testingInfo.LOGUART = "";
+
                 //~~~~~~~~~~~~~~~~ Wait DUT boot completed
                 GlobalData.testingInfo.LOGSYSTEM += "<6/8: Đợi DUT boot complete...\r\n";
                 GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: Please press Enter to activate this console\r\n";
@@ -148,6 +162,7 @@ namespace TestPCBAForGW040x.Functions
                     GlobalData.testingInfo.ERRORCODE = "Pma0#0001";
                     goto NG; }
                 GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
+
                 //~~~~~~~~~~~~~~~~ Login DUT
                 GlobalData.testingInfo.LOGSYSTEM += "<7/8: Login vào DUT...\r\n";
                 GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: root login  on `console'\r\n";
@@ -157,6 +172,7 @@ namespace TestPCBAForGW040x.Functions
                     GlobalData.testingInfo.ERRORCODE = "Pma0#0002";
                     goto NG; }
                 GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
+
                 //~~~~~~~~~~~~~~~~ Confirm MAC Address
                 GlobalData.testingInfo.LOGSYSTEM += "<8/8: Xác nhận địa chỉ MAC...\r\n";
                 GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: Link encap:Ethernet  HWaddr {0}:{1}:{2}:{3}:{4}:{5}\r\n";
@@ -207,6 +223,7 @@ namespace TestPCBAForGW040x.Functions
                     goto NG;
                 }
                 GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
+
                 //~~~~~~~~~~~~~~~~ Set GPON Serial Number
                 GlobalData.testingInfo.TITLE = Titles.writeGPON;
                 GlobalData.testingInfo.LOGSYSTEM += "<2/4: Ghi GPON serial cho DUT...\r\n";
@@ -220,8 +237,20 @@ namespace TestPCBAForGW040x.Functions
                 }
                 GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
                 GlobalData.loginfo.WriteGPON = "PASS";
-                //~~~~~~~~~~~~~~~~ Set WPS Number (pending)
-                GlobalData.testingInfo.TITLE = Titles.writeWPS;
+
+                //~~~~~~~~~~~~~~~~ Set HW version (pending)
+                GlobalData.testingInfo.TITLE = Titles.writeHW;
+                GlobalData.testingInfo.LOGSYSTEM += "<3/4: Ghi HWVersion cho DUT...\r\n";
+                GlobalData.testingInfo.LOGSYSTEM += "- Tiêu chuẩn: --\r\n";
+                if (!writeHWVersion(out _error)) {
+                    GlobalData.testingInfo.LOGSYSTEM += _error;
+                    GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";
+                    GlobalData.loginfo.WriteHW = "FAIL";
+                    GlobalData.testingInfo.ERRORCODE = "Pma0#0004";
+                    goto NG;
+                }
+                GlobalData.testingInfo.LOGSYSTEM += "=> PASS>\r\n";
+                GlobalData.loginfo.WriteHW = "PASS";
 
                 //~~~~~~~~~~~~~~~~ Set MAC Address
                 GlobalData.testingInfo.TITLE = Titles.writeMAC;

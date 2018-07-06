@@ -133,6 +133,7 @@ namespace TestPCBAForGW040x {
         }
 
 
+
         //private void Label_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e) {
         //    MessageBox.Show("w");
         //    this._calStartupLocation();
