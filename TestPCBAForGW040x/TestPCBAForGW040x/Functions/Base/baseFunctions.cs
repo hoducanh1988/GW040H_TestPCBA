@@ -16,7 +16,7 @@ namespace TestPCBAForGW040x.Functions {
         private bool accessDUT(out string message) {
             message = "";
             try {
-                GlobalData.serialPort.Port.Write("b");
+                GlobalData.serialPort.Port.Write("\n");
                 Thread.Sleep(100);
                 return GlobalData.testingInfo.LOGUART.Contains("bldr>") == true ? true : false;
             }
@@ -225,14 +225,14 @@ namespace TestPCBAForGW040x.Functions {
 
         protected bool pingToIPAddress(string IP, out string _error) {
             GlobalData.testingInfo.TITLE = string.Format("PING TO {0}", IP);
-            GlobalData.testingInfo.CONTENT = string.Format("Retry: {0}", 10);
+            GlobalData.testingInfo.CONTENT = string.Format("Retry: {0}", 30);
             _error = "";
             bool _flag = false;
             int index = 0;
             while (!_flag) {
                 try {
                     index++;
-                    GlobalData.testingInfo.CONTENT = string.Format("Retry: {0}", 10 - index);
+                    GlobalData.testingInfo.CONTENT = string.Format("Retry: {0}", 30 - index);
                     Ping pingSender = new Ping();
                     IPAddress address = IPAddress.Parse(IP);
                     PingReply reply = pingSender.Send(address);
@@ -242,13 +242,13 @@ namespace TestPCBAForGW040x.Functions {
                     }
                     else {
                         _error = reply.Status.ToString();
-                        if (index >= 10) break;
+                        if (index >= 30) break;
                     }
                 }
                 catch (Exception ex) {
                     Thread.Sleep(500);
                     _error = ex.ToString();
-                    if (index >= 10) break;
+                    if (index >= 30) break;
                 }
             }
             return _flag;
@@ -870,7 +870,7 @@ namespace TestPCBAForGW040x.Functions {
 
         protected bool access_toUboot(out string _error) {
             GlobalData.testingInfo.TITLE = Titles.accessUboot;
-            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.shorttime);
+            GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.normaltime);
             _error = "";
             bool _flag = false;
             try {
@@ -878,12 +878,12 @@ namespace TestPCBAForGW040x.Functions {
                 while (!_flag) {
                     while (!GlobalData.testingInfo.LOGUART.Contains("Press any key in 3 secs to enter boot command mode.")) {
                         Thread.Sleep(1000);
-                        if (index >= Timeouts.shorttime) { _error = "Request time out."; break; }
+                        if (index >= Timeouts.normaltime) { _error = "Request time out."; break; }
                         else index++;
-                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.shorttime - index);
+                        GlobalData.testingInfo.CONTENT = string.Format("Timeout: {0}s", Timeouts.normaltime - index);
                     }
                     GlobalData.testingInfo.LOGSYSTEM += "Press any key in 3 secs to enter boot command mode\r\n";
-                    GlobalData.testingInfo.LOGSYSTEM += string.Format("- Thời gian: {0}sec/{1}sec\r\n", index, Timeouts.shorttime);
+                    GlobalData.testingInfo.LOGSYSTEM += string.Format("- Thời gian: {0}sec/{1}sec\r\n", index, Timeouts.normaltime);
                     int rep = 0;
                     REPEAT:
                     if (!this.accessDUT(out _error)) {

@@ -16,5 +16,5 @@ C:\Users\anhho\source\repos\GitHub\GW040H_TestPCBA\TestPCBAForGW040x\TestPCBAFor
 14-1116819249
 Assets\Resources\Button.xaml;Assets\Resources\CheckBox.xaml;Assets\Resources\Combobox.xaml;Assets\Resources\customWindow.xaml;Assets\Resources\DataGrid.xaml;Assets\Resources\Label.xaml;Assets\Resources\Listbox.xaml;Assets\Resources\RadioButton.xaml;Assets\Resources\Slider.xaml;Assets\Resources\TabControl.xaml;Assets\Resources\Textbox.xaml;Assets\Resources\ToggleButton.xaml;MainWindow.xaml;SubControls\LED.xaml;SubControls\LOGIN.xaml;UserControls\ucLogin.xaml;UserControls\ucSetting.xaml;UserControls\ucStep.xaml;UserControls\ucTesting.xaml;
 
-True
+False
 
