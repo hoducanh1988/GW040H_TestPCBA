@@ -821,7 +821,7 @@ namespace TestPCBAForGW040x.Functions {
             }
         }
 
-        public bool checkUSBPorts(ref bool usb2, ref bool usb3, out string _error) {
+        public bool checkUSBPorts(out string _error) {
             _error = "";
             try {
                 GlobalData.testingInfo.LOGUART = "";
@@ -834,61 +834,83 @@ namespace TestPCBAForGW040x.Functions {
                 getStr = GlobalData.testingInfo.LOGUART;
                 _error += getStr;
                 //-------------------------------------------//
-                string _usb2text = "", _usb3text = "";
-                bool _format1 = getStr.Contains("Product=USB3.0 Hub") || getStr.Contains("Product=USB2.0 Hub");
-                bool _format2 = getStr.Contains("Product=4-Port USB 3.0 Hub") || getStr.Contains("Product=4-Port USB 2.0 Hub");
-
-                if (_format1 == true) {
-                    _usb2text = "Product=USB2.0 Hub";
-                    _usb3text = "Product=USB3.0 Hub";
-                }
-                if (_format2 == true) {
-                    _usb2text = "Product=4-Port USB 2.0 Hub";
-                    _usb3text = "Product=4-Port USB 3.0 Hub";
-                }
-
-                //Không có USB hub
-                bool ret = _format1 || _format2;
-                if (ret == false) {
-                    usb2 = false; usb3 = false;
-                }
-                //Có USB HUB
-                string[] buffer = null;
-                string u2 = null, u3 = null;
-                
-                int IndexofUsb3 = getStr.IndexOf(_usb3text);
-                int IndexofUsb2 = getStr.IndexOf(_usb2text);
-                if (IndexofUsb3 < IndexofUsb2) {
-                    buffer = getStr.Split(new string[] { _usb3text }, StringSplitOptions.None);
-                    getStr = buffer[1];
-                    buffer = getStr.Split(new string[] { _usb2text }, StringSplitOptions.None);
-                    u3 = buffer[0];
-                    u2 = buffer[1];
-                    //Kiểm tra có USB3.0 hay không?
-                    buffer = u3.Split(new string[] { "SerialNumber=xhc_mtk" }, StringSplitOptions.None);
-                    u3 = buffer[0];
-                    usb3 = u3.Contains("SerialNumber=");
-                    //Kiểm tra có USB2.0 hay không?
-                    usb2 = u2.Contains("SerialNumber=");
-                }
-                else {
-                    buffer = getStr.Split(new string[] { _usb2text }, StringSplitOptions.None);
-                    getStr = buffer[1];
-                    buffer = getStr.Split(new string[] { _usb3text }, StringSplitOptions.None);
-                    u2 = buffer[0];
-                    u3 = buffer[1];
-                    //Kiểm tra có USB2.0 hay không?
-                    buffer = u2.Split(new string[] { "SerialNumber=xhc_mtk" }, StringSplitOptions.None);
-                    u2 = buffer[0];
-                    usb2 = u2.Contains("SerialNumber=");
-                    //Kiểm tra có USB3.0 hay không?
-                    usb3 = u3.Contains("SerialNumber=");
-                }
-                return usb2 && usb3;
-            } catch (Exception ex) {
+                int _serialNumberAppearTime = Regex.Matches(getStr, "SerialNumber=").Count;
+                return _serialNumberAppearTime == 3 ? true : false;
+            }
+            catch (Exception ex) {
                 _error = ex.ToString();
                 return false;
             }
         }
+
+        //public bool checkUSBPorts(ref bool usb2, ref bool usb3, out string _error) {
+        //    _error = "";
+        //    try {
+        //        GlobalData.testingInfo.LOGUART = "";
+        //        string getStr = "";
+        //        //-------------------------------------------//
+        //        this.sendDataToDUT("mount -t usbfs usbfs /proc/bus/usb/\r\n");
+        //        Thread.Sleep(1000);
+        //        this.sendDataToDUT("cat /proc/bus/usb/devices\r\n");
+        //        Thread.Sleep(2000);
+        //        getStr = GlobalData.testingInfo.LOGUART;
+        //        _error += getStr;
+        //        //-------------------------------------------//
+        //        string _usb2text = "", _usb3text = "";
+        //        bool _format1 = getStr.Contains("Product=USB3.0 Hub") || getStr.Contains("Product=USB2.0 Hub");
+        //        bool _format2 = getStr.Contains("Product=4-Port USB 3.0 Hub") || getStr.Contains("Product=4-Port USB 2.0 Hub");
+
+        //        if (_format1 == true) {
+        //            _usb2text = "Product=USB2.0 Hub";
+        //            _usb3text = "Product=USB3.0 Hub";
+        //        }
+        //        if (_format2 == true) {
+        //            _usb2text = "Product=4-Port USB 2.0 Hub";
+        //            _usb3text = "Product=4-Port USB 3.0 Hub";
+        //        }
+
+        //        //Không có USB hub
+        //        bool ret = _format1 || _format2;
+        //        if (ret == false) {
+        //            usb2 = false; usb3 = false;
+        //        }
+        //        //Có USB HUB
+        //        string[] buffer = null;
+        //        string u2 = null, u3 = null;
+                
+        //        int IndexofUsb3 = getStr.IndexOf(_usb3text);
+        //        int IndexofUsb2 = getStr.IndexOf(_usb2text);
+        //        if (IndexofUsb3 < IndexofUsb2) {
+        //            buffer = getStr.Split(new string[] { _usb3text }, StringSplitOptions.None);
+        //            getStr = buffer[1];
+        //            buffer = getStr.Split(new string[] { _usb2text }, StringSplitOptions.None);
+        //            u3 = buffer[0];
+        //            u2 = buffer[1];
+        //            //Kiểm tra có USB3.0 hay không?
+        //            buffer = u3.Split(new string[] { "SerialNumber=xhc_mtk" }, StringSplitOptions.None);
+        //            u3 = buffer[0];
+        //            usb3 = u3.Contains("SerialNumber=");
+        //            //Kiểm tra có USB2.0 hay không?
+        //            usb2 = u2.Contains("SerialNumber=");
+        //        }
+        //        else {
+        //            buffer = getStr.Split(new string[] { _usb2text }, StringSplitOptions.None);
+        //            getStr = buffer[1];
+        //            buffer = getStr.Split(new string[] { _usb3text }, StringSplitOptions.None);
+        //            u2 = buffer[0];
+        //            u3 = buffer[1];
+        //            //Kiểm tra có USB2.0 hay không?
+        //            buffer = u2.Split(new string[] { "SerialNumber=xhc_mtk" }, StringSplitOptions.None);
+        //            u2 = buffer[0];
+        //            usb2 = u2.Contains("SerialNumber=");
+        //            //Kiểm tra có USB3.0 hay không?
+        //            usb3 = u3.Contains("SerialNumber=");
+        //        }
+        //        return usb2 && usb3;
+        //    } catch (Exception ex) {
+        //        _error = ex.ToString();
+        //        return false;
+        //    }
+        //}
     }
 }

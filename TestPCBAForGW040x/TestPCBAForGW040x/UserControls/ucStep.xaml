@@ -525,52 +525,6 @@
                         <Label Foreground="{StaticResource colorTextNG}" Margin="0,5,0,0" FontWeight="SemiBold" Content="Kết quả kiểm tra cổng USB:"/>
                         <StackPanel Margin="0,5,0,0">
                             <WrapPanel>
-                                <Label FontSize="15" FontWeight="Bold">PORT USB2.0:</Label>
-                                <Label x:Name="lblUSB2" FontSize="15" FontWeight="Bold">
-                                    <Label.Style>
-                                        <Style TargetType="Label">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ElementName=lblUSB2, Path=Content}" Value="PASS">
-                                                    <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding ElementName=lblUSB2, Path=Content}" Value="FAIL">
-                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding ElementName=lblUSB2, Path=Content}" Value="--">
-                                                    <Setter Property="Foreground" Value="Black"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding ElementName=lblUSB2, Path=Content}" Value="Waiting">
-                                                    <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Label.Style>
-                                </Label>
-                            </WrapPanel>
-                            <WrapPanel>
-                                <Label FontSize="15" FontWeight="Bold">PORT USB3.0:</Label>
-                                <Label x:Name="lblUSB3" FontSize="15" FontWeight="Bold">
-                                    <Label.Style>
-                                        <Style TargetType="Label">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ElementName=lblUSB3, Path=Content}" Value="PASS">
-                                                    <Setter Property="Foreground" Value="{StaticResource colorTextOK}"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding ElementName=lblUSB3, Path=Content}" Value="FAIL">
-                                                    <Setter Property="Foreground" Value="{StaticResource colorTextNG}"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding ElementName=lblUSB3, Path=Content}" Value="--">
-                                                    <Setter Property="Foreground" Value="Black"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding ElementName=lblUSB3, Path=Content}" Value="Waiting">
-                                                    <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Label.Style>
-                                </Label>
-                            </WrapPanel>
-                            <WrapPanel>
                                 <Label FontSize="15" FontWeight="Bold">PHÁN ĐỊNH TỔNG:</Label>
                                 <Label x:Name="lblUSBTotal" FontSize="15" FontWeight="Bold">
                                     <Label.Style>

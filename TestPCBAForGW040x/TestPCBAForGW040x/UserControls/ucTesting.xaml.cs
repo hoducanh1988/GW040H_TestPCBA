@@ -75,7 +75,7 @@ namespace TestPCBAForGW040x.UserControls {
                 if (subStr == string.Empty || subStr == "") {
                     GlobalData.testingInfo.LOGSYSTEM += string.Format("=> Phán định: FAIL\r\n", subStr);
                 } else {
-                    bool ret = new exWriteMAC(subStr).IsValid();
+                    bool ret = GlobalData.initSetting.EnableCheckMAC == false ? new exWriteMAC(subStr).IsValid() : new exWriteMAC(subStr).IsValid() && new exWriteMAC(subStr).lastByteOfMacIsEvenNumber();
                     if (ret) {
                         txtMAC.IsEnabled = false;
                         GlobalData.loginfo = new LogInfomation();
@@ -232,6 +232,12 @@ namespace TestPCBAForGW040x.UserControls {
                         t.Start();
                     }
                     else {
+                        string _msg = "";
+                        GlobalData.testingInfo.TITLE = string.Format("MAC: {0}", subStr);
+                        GlobalData.testingInfo.CONTENT = "Không hợp lệ";
+                        GlobalData.serialPort.closeSerialPort(out _msg);
+                        GlobalData.testingInfo.STATUS = Statuses.fail;
+                        GlobalData.testingInfo.LOGSYSTEM += "-----------------------\r\n";
                         GlobalData.testingInfo.LOGSYSTEM += string.Format("=> Phán định: FAIL\r\n\r\n", subStr);
                         txtMAC.Clear();
                     }

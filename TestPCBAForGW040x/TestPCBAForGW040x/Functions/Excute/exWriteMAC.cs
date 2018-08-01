@@ -16,6 +16,35 @@ namespace TestPCBAForGW040x.Functions
             this.macAddr = _mac.ToUpper().Replace(":","");
         }
 
+        //Kiem tra dia chi MAC la so chan 
+        public bool lastByteOfMacIsEvenNumber() {
+            //////////////////
+            try {
+                GlobalData.testingInfo.LOGSYSTEM += "... KIỂM TRA ĐỊA CHỈ MAC LÀ SỐ CHẴN/LẺ\r\n";
+                string _pattern = "02468ACE";
+                string _lastByteOfMac = macAddr.Substring(11, 1);
+                if (_pattern.Contains(_lastByteOfMac) == true) goto OK;
+                else goto NG;
+            }catch {
+                goto NG;
+            }
+            //////////////////
+            OK:
+            {
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("- Tiêu chuẩn = CHẴN\r\n- Thực tế = CHẴN\r\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Địa chỉ MAC hợp lệ\r\n\r\n");
+                GlobalData.testingInfo.MAC = this.macAddr;
+                return true;
+            }
+            //////////////////
+            NG:
+            {
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("- Tiêu chuẩn = CHẴN\r\n- Thực tế = LẺ\r\n");
+                GlobalData.testingInfo.LOGSYSTEM += string.Format("...Phán định: Lỗi\r\n\r\n");
+                return false;
+            }
+        }
+
         //check MAC Address
         public bool IsValid() {
             //////////////////

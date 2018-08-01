@@ -1,0 +1,11 @@
+DATETIME,PCNAME,MACADDRESS,UPLOADFW_RESULT,WRITEGPON_RESULT,WRITEHW_RESULT,WRITEMAC_RESULT,LANPORT1_RESULT,LANPORT2_RESULT,LANPORT3_RESULT,LANPORT4_RESULT,USB2_RESULT,USB3_RESULT,BUTTON_WPS_RESULT,BUTTON_RESET_RESULT,LEDPOWER_RESULT,LEDPON_RESULT,LEDINET_RESULT,LEDWLAN_RESULT,LED5G_RESULT,LEDLAN1_RESULT,LEDLAN2_RESULT,LEDLAN3_RESULT,LEDLAN4_RESULT,LEDWPS_RESULT,LEDLOS_RESULT,MESSAGE,TOTAL_RESULT
+2018/08/01 09:42:33,ACER4738Z-PC,A4F4C2909090,--,--,--,--,--,--,--,--,-,PASS,--,--,--,--,--,--,--,--,--,--,--,--,--,--,PASS
+2018/08/01 09:45:43,ACER4738Z-PC,A4F4C2909090,--,--,--,--,--,--,--,--,-,PASS,--,--,--,--,--,--,--,--,--,--,--,--,--,--,PASS
+2018/08/01 09:59:34,ACER4738Z-PC,A4F4C2909090,--,--,--,--,--,--,--,--,-,PASS,--,--,--,--,--,--,--,--,--,--,--,--,--,--,PASS
+2018/08/01 10:00:04,ACER4738Z-PC,A4F4C2909092,--,--,--,--,--,--,--,--,-,PASS,--,--,--,--,--,--,--,--,--,--,--,--,--,--,PASS
+2018/08/01 10:00:15,ACER4738Z-PC,A4F4C2909095,--,--,--,--,--,--,--,--,-,PASS,--,--,--,--,--,--,--,--,--,--,--,--,--,--,PASS
+2018/08/01 10:10:07,ACER4738Z-PC,A4F4C2909090,--,--,--,--,--,--,--,--,-,PASS,--,--,--,--,--,--,--,--,--,--,--,--,--,--,PASS
+2018/08/01 10:11:46,ACER4738Z-PC,A4F4C2909090,--,--,--,--,--,--,--,--,-,PASS,--,--,--,--,--,--,--,--,--,--,--,--,--,--,PASS
+2018/08/01 10:19:03,ACER4738Z-PC,A4F4C2909092,--,--,--,--,--,--,--,--,-,PASS,--,--,--,--,--,--,--,--,--,--,--,--,--,--,PASS
+2018/08/01 10:19:18,ACER4738Z-PC,A4F4C2909091,--,--,--,--,--,--,--,--,-,PASS,--,--,--,--,--,--,--,--,--,--,--,--,--,--,PASS
+2018/08/01 10:19:55,ACER4738Z-PC,A4F4C2909090,--,PASS,PASS,PASS,--,--,--,--,-,PASS,--,--,--,--,--,--,--,--,--,--,--,--,--,--,PASS

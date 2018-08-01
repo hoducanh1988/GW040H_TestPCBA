@@ -42,7 +42,6 @@ namespace TestPCBAForGW040x.Functions {
 
         public bool Excute1(ref string _err) {
             string _error = "";
-            bool usb2 = false, usb3 = false;
 
             try {
                 GlobalData.testingInfo.COLORUSB = backGroundColors.wait;
@@ -63,15 +62,14 @@ namespace TestPCBAForGW040x.Functions {
                 GlobalData.testingInfo.CONTENT = string.Format("Retry: {0}", Retries.retry - index);
                 index++;
                 GlobalData.testingInfo.LOGSYSTEM += "<2/2: Kiểm tra cổng USB...\r\n";
-                bool ret = ba.checkUSBPorts(ref usb2, ref usb3, out _error);
+                bool ret = ba.checkUSBPorts(out _error);
 
-                GlobalData.loginfo.Usb2 = usb2 == true ? "PASS" : "FAIL";
-                GlobalData.loginfo.Usb3 = usb3 == true ? "PASS" : "FAIL";
+                GlobalData.loginfo.Usb2 = "-";
+                GlobalData.loginfo.Usb3 = ret == true ? "PASS" : "FAIL";
 
                 GlobalData.testingInfo.LOGSYSTEM += _error + "\r\n";
-                GlobalData.testingInfo.LOGSYSTEM += usb2 == true ? "Usb2.0 is passed.\r\n" : "Usb2.0 is failed.\r\n";
-                GlobalData.testingInfo.LOGSYSTEM += usb3 == true ? "Usb3.0 is passed.\r\n" : "Usb3.0 is failed.\r\n";
-                GlobalData.testingInfo.ERRORCODE = string.Format("Pus1#{0}", GEN_ERRORCODE(usb2, usb3));
+                GlobalData.testingInfo.LOGSYSTEM += ret == true ? "USB is passed.\r\n" : "USB is failed.\r\n";
+                GlobalData.testingInfo.ERRORCODE = string.Format("Pus1#01");
 
                 if (!ret) {
                     GlobalData.testingInfo.LOGSYSTEM += "=> FAIL>\r\n";

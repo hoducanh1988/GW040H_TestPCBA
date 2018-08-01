@@ -83,6 +83,13 @@ namespace TestPCBAForGW040x.Functions {
                 OnPropertyChanged(nameof(EnableWriteMAC));
             }
         }
+        public bool EnableCheckMAC {
+            get { return Properties.Settings.Default.EnableCheckMAC; }
+            set {
+                Properties.Settings.Default.EnableCheckMAC = value;
+                OnPropertyChanged(nameof(EnableCheckMAC));
+            }
+        }
 
         #endregion
 

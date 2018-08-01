@@ -671,8 +671,6 @@ namespace TestPCBAForGW040x.UserControls {
 
         void ClearUSBContent() {
             rtbUSB.Document.Blocks.Clear();
-            lblUSB2.Content = "--";
-            lblUSB3.Content = "--";
             lblUSBTotal.Content = "--";
         }
 
@@ -684,8 +682,6 @@ namespace TestPCBAForGW040x.UserControls {
             //-----------------------------------//
             string message = "";
             rtbUSB.Document.Blocks.Clear();
-            lblUSB2.Content = "Waiting";
-            lblUSB3.Content = "Waiting";
             lblUSBTotal.Content = "Waiting";
             b.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#3aed1e");
             rtb = rtbUSB;
@@ -713,13 +709,13 @@ namespace TestPCBAForGW040x.UserControls {
                 debugWriteResult(true);
                 //Kiem tra cong USB
                 debugWriteStep("KIỂM TRA CỔNG USB");
-                bool usb2 = false, usb3 = false;
-                bool ret = ba.checkUSBPorts(ref usb2, ref usb3, out message);
+
+                //bool ret = true;
+                bool ret = ba.checkUSBPorts(out message);
+
                 debugWriteLine(message);
                 debugWriteResult(true);
                 Dispatcher.Invoke(new Action(() => {
-                    lblUSB2.Content = usb2 == true ? "PASS" : "FAIL";
-                    lblUSB3.Content = usb3 == true ? "PASS" : "FAIL";
                     lblUSBTotal.Content = ret == true ? "PASS" : "FAIL";
                 }));
                 goto OK;
@@ -729,11 +725,6 @@ namespace TestPCBAForGW040x.UserControls {
                         b.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#333333");
                         b.Content = "Kiểm tra cổng USB";
                         debugWriteLine("<");
-                        if (lblUSB2.Content.ToString() == "Waiting") {
-                            lblUSB2.Content = "FAIL";
-                            lblUSB3.Content = "FAIL";
-                            lblUSBTotal.Content = "FAIL";
-                        }
                     }));
                     MessageBox.Show(message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     //Đóng cổng COM
