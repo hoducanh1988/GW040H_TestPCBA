@@ -44,7 +44,7 @@
                     </TextBox.Style>
                 </TextBox>
                 <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <Label MouseDown="Label_MouseDown" Content="Version 1.0.0.4" FontSize="12" Foreground="{StaticResource colorTextTitle}" VerticalAlignment="Center"></Label>
+                    <Label MouseDown="Label_MouseDown" Content="Version 1.0.0.5" FontSize="12" Foreground="{StaticResource colorTextTitle}" VerticalAlignment="Center"></Label>
                     <Label MouseDown="Label_MouseDown" Margin="10,0,0,0" Width="20" HorizontalContentAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="20" FontWeight="Bold" ToolTipService.ToolTip="Help" Padding="0,-5,0,0">?</Label>
                     <Label MouseDown="Label_MouseDown" Margin="10,0,5,0" Width="20" HorizontalContentAlignment="Center" Foreground="{StaticResource colorTextTitle}" FontSize="20" FontWeight="Bold" ToolTipService.ToolTip="Đóng ứng dụng" Padding="0,-5,0,0">X</Label>
                 </WrapPanel>

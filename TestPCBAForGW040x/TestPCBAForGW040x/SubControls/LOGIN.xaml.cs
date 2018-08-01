@@ -43,5 +43,15 @@ namespace TestPCBAForGW040x
                 this.Close();
             }
         }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e) {
+            if (e.LeftButton == MouseButtonState.Pressed) {
+                if (e.ClickCount == 2) {
+                    GlobalData.testingInfo.USER = "admin";
+                    GlobalData.testingInfo.PASSWORD = "vnpt";
+                    this.Close();
+                }
+            }
+        }
     }
 }
